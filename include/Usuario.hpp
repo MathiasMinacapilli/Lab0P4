@@ -17,4 +17,5 @@ public:
     void setCi();
     void setNombre();
     void setFechaIngreso();
+    ~Usuario();
 };

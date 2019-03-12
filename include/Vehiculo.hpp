@@ -24,5 +24,6 @@ private:
     int cant_cambios;
 public:
     float darPrecioViaje(int, int);
+    ~Bicicleta();
 };
 

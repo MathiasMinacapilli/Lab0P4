@@ -7,4 +7,5 @@ public:
     int getDia();
     int getMes();
     int getAnio();
+    //~DtFecha()??
 }

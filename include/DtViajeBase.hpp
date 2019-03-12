@@ -11,6 +11,7 @@ public:
     DtFecha getFecha();
     int getDuracion();
     int getDistancia();
+    ~DtViajeBase();
 };
 
 //DtViaje sub(data) de D
@@ -22,4 +23,5 @@ public:
     DtViaje(float, DtVehiculo);
     float getPrecioTotal();
     DtVehiculo getVehiculo();
+    ~DtViajeBase();
 };

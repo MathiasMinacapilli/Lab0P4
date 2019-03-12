@@ -12,4 +12,5 @@ public:
     void setFecha();
     void setDuracion();
     void setDistancia();
+    ~Viaje();
 };

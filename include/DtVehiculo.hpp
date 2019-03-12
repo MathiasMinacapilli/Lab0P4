@@ -10,6 +10,7 @@ public:
     int getNroSerie();
     float getPorcentaje();
     float getPrecioBase();
+    //~DtVehiculo()??
 } 
 
 //DtMonopatin 
@@ -19,6 +20,7 @@ private:
 public:
     DtMonopatin(bool=false);
     bool getTieneLuces();
+    //~DtMonopatin()??
 }
 
 //DtBicicleta 
@@ -30,4 +32,5 @@ public:
     DtBicicleta();
     TipoBici getTipo();
     int getCantCambios();
+    //~DtBicicleta()??
 }

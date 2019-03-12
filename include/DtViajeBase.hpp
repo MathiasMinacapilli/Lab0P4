@@ -7,14 +7,19 @@ private:
     DtFecha fecha;
     int duracion, distancia;
 public:
-    //getters
+    DtViajeBase(DtFecha, int, int);
+    DtFecha getFecha();
+    int getDuracion();
+    int getDistancia();
 };
 
 //DtViaje sub(data) de D
-class DtViaje {
+class DtViaje: public DtViajeBase {
 private:
     float precio_total;
     DtVehiculo vehiculo;
 public:
-    //getters
+    DtViaje(float, DtVehiculo);
+    float getPrecioTotal();
+    DtVehiculo getVehiculo();
 };

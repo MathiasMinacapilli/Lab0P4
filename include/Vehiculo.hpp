@@ -1,4 +1,6 @@
 
+#include "TipoBici.hpp"
+
 class Vehiculo {
 private:
     int nro_serie;
@@ -6,7 +8,6 @@ private:
 public:
     virtual float darPrecioViaje(int, int) = 0;
 };
-
 
 // Monopatin es subclase de Vehiculo
 class Monopatin: public Vehiculo {
@@ -16,7 +17,6 @@ public:
     float darPrecioViaje(int, int);
 };
 
-enum TipoBici {Paseo, Montaña};
 // Bicicleta subclase de Vehiculo
 class Bicicleta: public Vehiculo {
 private:

@@ -1,0 +1,2 @@
+
+enum TipoBici {Paseo, Montaña}; 

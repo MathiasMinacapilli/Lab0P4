@@ -1,16 +1,20 @@
 
+#include "DtFecha.hpp"
+#include "Viaje.hpp"
+
+#include <string>
+
 class Usuario {
 private:
-    /* data */
+    std::string ci, nombre;
+    DtFecha fecha_ingreso;
+    int cant_viajes; //tope del arreglo viajes[100]
+    Viaje viajes[100];
 public:
-    Usuario(/* args */);
-    ~Usuario();
+    std::string getCi();
+    std::string getNombre();
+    DtFecha getFechaIngreso();
+    void setCi();
+    void setNombre();
+    void setFechaIngreso();
 };
-
-Usuario::Usuario(/* args */) {
-
-}
-
-Usuario::~Usuario() {
-    
-}

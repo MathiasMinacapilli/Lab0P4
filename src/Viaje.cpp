@@ -1,2 +1,2 @@
 
-#include "include/Viaje.hpp"
+#include "../include/Viaje.hpp"

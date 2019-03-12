@@ -1,14 +1,15 @@
 
+#include "DtFecha.hpp"
+
 class Viaje {
 private:
-    /* data */
+    DtFecha fecha;
+    int duracion, distancia;
 public:
-    Viaje(/* args */);
-    ~Viaje();
+    DtFecha getFecha();
+    int getDuracion();
+    int getDistancia();
+    void setFecha();
+    void setDuracion();
+    void setDistancia();
 };
-
-Viaje::Viaje(/* args */) {
-}
-
-Viaje::~Viaje() {
-}

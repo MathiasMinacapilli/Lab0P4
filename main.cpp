@@ -1,10 +1,12 @@
 /*** Laboratorio 0 de Programacion 4 ***/
 
+#include "include/DtFecha.hpp"
+#include "include/DtVehiculo.hpp"
+#include "include/DtViajeBase"
+#include "include/TipoBici.hpp"
 #include "include/Usuario.hpp"
-#include "include/Viaje.hpp"
 #include "include/Vehiculo.hpp"
-#include "include/Monopatin.hpp"
-#include "include/Bicicleta.hpp"
+#include "include/Viaje.hpp"
 
 #include <iostream>
 #include <stdio.h>

@@ -22,17 +22,6 @@ bool DtMonopatin::getTieneLuces() {
 }
 
 //<<DataType>> DtBicicleta, heredero de DtVehiculo
-class DtBicicleta: public DtVehiculo {
-private:
-    TipoBici tipo;
-    int cant_cambios;
-public:
-    DtBicicleta();
-    TipoBici getTipo();
-    int getCantCambios();
-    //~DtBicicleta()??
-}
-
 DtBicicleta::DtBicicleta() {
   //??
 }
@@ -44,3 +33,5 @@ TipoBici DtBicicleta::getTipo() {
 int DtBicicleta::getCantCambios() {
   return cant_cambios;
 }
+
+//~DtBicicleta()??

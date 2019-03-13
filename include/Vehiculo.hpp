@@ -14,7 +14,9 @@ class Monopatin: public Vehiculo {
 private:
     bool tieneLuces;
 public:
+	Monopatin(bool=false);
     float darPrecioViaje(int, int);
+    ~Monopatin();
 };
 
 // Bicicleta subclase de Vehiculo
@@ -23,6 +25,7 @@ private:
     TipoBici tipo;
     int cant_cambios;
 public:
+	Bicicleta(TipoBici,int=0);
     float darPrecioViaje(int, int);
     ~Bicicleta();
 };

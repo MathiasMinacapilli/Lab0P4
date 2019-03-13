@@ -6,6 +6,9 @@ private:
     int nro_serie;
     float porcentaje_bateria, precio_base;
 public:
+	void set_nro_serie(int);
+	void set_porcentaje_bateria(float);
+	void set_precio_base(float);
     virtual float darPrecioViaje(int, int) = 0;
 };
 
@@ -14,7 +17,7 @@ class Monopatin: public Vehiculo {
 private:
     bool tieneLuces;
 public:
-	Monopatin(bool=false);
+	Monopatin(int, float, float, bool=false);
     float darPrecioViaje(int, int);
     ~Monopatin();
 };
@@ -25,7 +28,7 @@ private:
     TipoBici tipo;
     int cant_cambios;
 public:
-	Bicicleta(TipoBici,int=0);
+	Bicicleta(int, float, float, TipoBici, int);
     float darPrecioViaje(int, int);
     ~Bicicleta();
 };

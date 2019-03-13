@@ -11,9 +11,9 @@ public:
     float getPorcentaje();
     float getPrecioBase();
     //~DtVehiculo()??
-} 
+};
 
-//DtMonopatin 
+//DtMonopatin, heredero de DtVehiculo
 class DtMonopatin: public DtVehiculo {
 private:
     bool tieneLuces;
@@ -21,9 +21,9 @@ public:
     DtMonopatin(bool=false);
     bool getTieneLuces();
     //~DtMonopatin()??
-}
+};
 
-//DtBicicleta 
+//DtBicicleta, heredero de DtVehiculo
 class DtBicicleta: public DtVehiculo {
 private:
     TipoBici tipo;
@@ -33,4 +33,4 @@ public:
     TipoBici getTipo();
     int getCantCambios();
     //~DtBicicleta()??
-}
+};

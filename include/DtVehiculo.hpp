@@ -1,5 +1,6 @@
 
 #include "TipoBici.hpp"
+#include //ostream iostream??
 
 class DtVehiculo {
 private:
@@ -10,8 +11,10 @@ public:
     int getNroSerie();
     float getPorcentaje();
     float getPrecioBase();
-    //~DtVehiculo()??
+    ~DtVehiculo();
 };
+
+ostream &operator<< (ostream&, DtVehiculo);//?? con o sin virtual
 
 //DtMonopatin, subclase de DtVehiculo
 class DtMonopatin: public DtVehiculo {
@@ -19,8 +22,11 @@ private:
     bool tieneLuces;
 public:
     bool getTieneLuces();
-    //~DtMonopatin()??
+    DtMonopatin operator<<();
+    ~DtMonopatin();
 };
+
+ostream &operator<< (ostream&, DtMonopatin);
 
 //DtBicicleta, subclase de DtVehiculo
 class DtBicicleta: public DtVehiculo {
@@ -31,5 +37,8 @@ public:
     DtBicicleta(TipoBici , int);
     TipoBici getTipo();
     int getCantCambios();
-    //~DtBicicleta()??
+    DtBicicleta operator<<();
+    ~DtBicicleta();
 };
+
+ostream &operator<< (ostream&, DtBicicleta);

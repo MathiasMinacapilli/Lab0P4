@@ -11,6 +11,9 @@
 #include <iostream>
 #include <stdio.h>
 
+#define MAX_USUARIOS ... //AGREGAR NUMERO
+#define MAX_VEHICULOS ... //AGREGAR NUMERO
+
 void registrarUsuario(std::string ci, std::string nombre) {
 
 }
@@ -35,6 +38,16 @@ DtVehiculo** obtenerVehiculos(int& cantVehiculos) {
 
 // main
 int main() {
-    /* code */
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     return 0;
 }

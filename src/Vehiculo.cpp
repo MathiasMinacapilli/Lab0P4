@@ -55,6 +55,9 @@ float Monopatin::darPrecioViaje(int duracion, int distancia){
 		return distancia*get_precio_base();
 }
 
+//destructor
+Monopatin::~Monopatin(){}
+
 //clase Bicicleta
 
 //constructor con parametros
@@ -80,3 +83,5 @@ float Bicicleta::darPrecioViaje(int duracion, int distancia){
 }
 
 
+//destructor 
+Bicicleta::~Bicicleta() {}

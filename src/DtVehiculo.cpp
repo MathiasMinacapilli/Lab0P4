@@ -1,7 +1,15 @@
 #include "../include/DtVehiculo.hpp"
 #include "../include/TipoBici.hpp"
 
-//<<DataType>> DtVehiculo
+//DtVehiculo
+
+DtVehiculo ::DtVehiculo(int nro_serie, float porcentaje, float precio_base) {
+    this -> nro_serie = nro_serie;
+    this -> porcentaje = porcentaje;
+    this -> precio_base = precio_base;
+    
+}
+
 int DtVehiculo::getNroSerie() {
   return nro_serie;
 }
@@ -14,16 +22,22 @@ float DtVehiculo::getPrecioBase() {
   return precio_base;
 }
 
-//~DtVehiculo()??
+DtVehiculo::~DtVehiculo() {
+}
 
-//<<DataType>> DtMonopatin, heredero de DtVehiculo
+//DtMonopatin, subclase de DtVehiculo
+DtMonopatin::DtMonopatin(bool tieneLuces) {
+    this -> tieneLuces = tieneLuces;
+}
+
 bool DtMonopatin::getTieneLuces() {
   return tieneLuces;
 }
 
-//<<DataType>> DtBicicleta, heredero de DtVehiculo
-DtBicicleta::DtBicicleta() {
-  //??
+//DtBicicleta, subclase de DtVehiculo
+DtBicicleta::DtBicicleta(int nro_serie, float porcentaje, float precio_base, TipoBici tipo, int cant_cambios) {
+  DtVehiculo(nro_serie, porcentaje, precio_base);
+  this -> tipo = tipo;
 }
 
 TipoBici DtBicicleta::getTipo() {
@@ -34,4 +48,6 @@ int DtBicicleta::getCantCambios() {
   return cant_cambios;
 }
 
-//~DtBicicleta()??
+
+DtBicicleta::~DtBicicleta() {
+}

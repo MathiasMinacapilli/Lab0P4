@@ -13,23 +13,22 @@ public:
     //~DtVehiculo()??
 };
 
-//DtMonopatin, heredero de DtVehiculo
+//DtMonopatin, subclase de DtVehiculo
 class DtMonopatin: public DtVehiculo {
 private:
     bool tieneLuces;
 public:
-    DtMonopatin(bool=false);
     bool getTieneLuces();
     //~DtMonopatin()??
 };
 
-//DtBicicleta, heredero de DtVehiculo
+//DtBicicleta, subclase de DtVehiculo
 class DtBicicleta: public DtVehiculo {
 private:
     TipoBici tipo;
     int cant_cambios;
 public:
-    DtBicicleta();
+    DtBicicleta(TipoBici , int);
     TipoBici getTipo();
     int getCantCambios();
     //~DtBicicleta()??

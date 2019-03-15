@@ -24,7 +24,7 @@ public:
     ClaseB* getB();
     
     //Constructor y Destructor
-    ClaseC(int, ClaseA*, ClaseB*);
+    ClaseC(int=0, ClaseA*=nullptr, ClaseB*=nullptr);
     ~ClaseC();
 };
 

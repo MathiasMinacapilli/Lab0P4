@@ -26,7 +26,7 @@ DtVehiculo::~DtVehiculo() {
 }
 
 /*ostream &operator<< (ostream& o, DtVehiculo dtv) {
-    o << '- Numero Serie: ' << dtv.getNroSerie() << '/n' << '- Porcentaje Bateria: ' << dtv.getPorcentaje << '/n' << '- Precio Base: $' << dtv.getPrecioBase << '.' << '/n';
+    o << '- Numero Serie: ' << dtv.getNroSerie() << '/n' << '- Porcentaje Bateria: ' << dtv.getPorcentaje() << '/n' << '- Precio Base: $' << dtv.getPrecioBase() << '.' << '/n';
 }*/
 
 
@@ -48,7 +48,7 @@ ostream &operator<< (ostream& o, DtMonopatin dtm) {
         luces = 'Si';
     else
         luces = 'No';
-    o << '- Numero Serie: ' << dtm.getNroSerie() << '/n' << '- Porcentaje Bateria: ' << dtm.getPorcentaje << '/n' << '- Precio Base: $' << dtm.getPrecioBase << '.' << '/n' << '- Tiene luces: ' << luces;
+    o << '- Numero Serie: ' << dtm.getNroSerie() << '/n' << '- Porcentaje Bateria: ' << dtm.getPorcentaje() << '/n' << '- Precio Base: $' << dtm.getPrecioBase() << '.' << '/n' << '- Tiene luces: ' << luces;
 }
 
 //DtBicicleta, subclase de DtVehiculo
@@ -75,7 +75,7 @@ ostream &operator<< (ostream& o, DtBicicleta dtb) {
         tipo = 'Paseo';
     else
         tipo = 'Montaña';
-    o << '- Numero Serie: ' << dtb.getNroSerie() << '/n' << '- Porcentaje Bateria: ' << dtb.getPorcentaje << '/n' << '- Precio Base: $' << dtb.getPrecioBase << '.' << '/n' << '- Tipo de Bicicleta: ' << tipo << '/n' << '- Cantidad de cambios: ' << dtb.getCantCambios;
+    o << '- Numero Serie: ' << dtb.getNroSerie() << '/n' << '- Porcentaje Bateria: ' << dtb.getPorcentaje() << '/n' << '- Precio Base: $' << dtb.getPrecioBase() << '.' << '/n' << '- Tipo de Bicicleta: ' << tipo << '/n' << '- Cantidad de cambios: ' << dtb.getCantCambios();
 }
 
 

@@ -23,5 +23,9 @@ public:
     ClaseB* getB();
     ClaseC* getC();
     
+    //Constructor y Destructor
+    ClaseA(int, ClaseB*, ClaseC*);
+    ~ClaseA();
     
+    void Imprimir(ClaseA);
 };

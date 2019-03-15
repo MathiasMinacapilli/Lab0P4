@@ -12,12 +12,12 @@ private:
     int cant_viajes; //tope del arreglo viajes[100]
     std::vector<Viaje> viajes[100];
 public:
-    //Setters
+    //Getters
     std::string getCi();
     std::string getNombre();
     DtFecha getFechaIngreso();
 
-    //Getters
+    //Setters
     void setCi(std::string);
     void setNombre(std::string);
     void setFechaIngreso(DtFecha);

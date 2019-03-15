@@ -32,6 +32,8 @@ ClaseC* ClaseA::getC() {
     return this->C;
 }
 
+//ClaseA::ClaseA(){}
+
 ClaseA::ClaseA(int a, ClaseB* B, ClaseC* C) {
     this->a = a;
     this->B = B;

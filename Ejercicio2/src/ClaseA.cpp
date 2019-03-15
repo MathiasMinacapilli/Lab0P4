@@ -30,5 +30,14 @@ ClaseC* ClaseA::getC() {
     return this->C;
 }
 
-ClaseA::
+ClaseA::ClaseA(int a, ClaseB* B, Clase*C C) {
+    this->a = a;
+    this->B = B;
+    this->C = C;
+}
 
+ClaseA::~ClaseA() {}
+
+ostream &operator <<(ostream& o, ClaseA A) {
+    o << 'El nombre de la clase es: ClaseA y el valor del atributo es: ' << A.geta(); 
+}

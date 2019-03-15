@@ -38,7 +38,40 @@ DtVehiculo** obtenerVehiculos(int& cantVehiculos) {
 
 // main
 int main() {
-    
+    int i = 0;
+    bool salir = false;
+    while(!salir) {
+        std::cout << "Bienvenido. Elija la opción deseada. \n"
+            << "1) Registrar un Usuario \n"
+            << "2) Agregar un Vehiculo \n"
+            << "3) Agregar un Viaje \n"
+            << "4) Ver viajes de un Usuario \n"
+            << "5) Eliminar viajes de un Usuario \n"
+            << "6) Cambiar bateria de un Vehiculo \n"
+            << "7) Obtener Vehiculos \n"
+            << "0) Salir \n"
+            << "Opción: ";
+        std::cin >> i;
+        switch(i) {
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        case 6:
+            break;
+        case 7:
+            break;
+        case 0:
+            salir = true;
+            break;
+        }
+    }
     
     
     

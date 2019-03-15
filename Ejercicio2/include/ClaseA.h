@@ -1,8 +1,15 @@
+
+#ifndef _CLASEA_H_
+#define _CLASEA_H_
+
+
 #include <iostream>
 #include <stdio.h>
 
-#include "ClaseB.hpp"
-#include "ClaseC.hpp"
+#include "ClaseB.h"
+#include "ClaseC.h"
+using namespace std;
+
 
 class ClaseB;
 class ClaseC;
@@ -27,5 +34,6 @@ public:
     ClaseA(int=0, ClaseB* =nullptr, ClaseC* =nullptr);
     ~ClaseA();
 };
-
 ostream &operator <<(ostream &, ClaseA);
+
+#endif

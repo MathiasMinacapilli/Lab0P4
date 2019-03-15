@@ -1,8 +1,12 @@
+
+
+#ifndef _CLASEB_H_
+#define _CLASEB_H_
+
 #include <iostream>
 #include <stdio.h>
 
-#include "ClaseB.hpp"
-#include "ClaseC.hpp"
+using namespace std;
 
 class ClaseA;
 class ClaseC;
@@ -29,3 +33,9 @@ public:
 };
 
 ostream &operator <<(ostream &, ClaseB);
+
+#include "ClaseA.h"
+#include "ClaseC.h"
+
+
+#endif

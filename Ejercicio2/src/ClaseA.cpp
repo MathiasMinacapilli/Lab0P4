@@ -1,10 +1,12 @@
-#include "../include/ClaseA.hpp"
-#include "../include/ClaseB.hpp"
-#include "../include/ClaseC.hpp"
+#include "../include/ClaseA.h"
+#include "../include/ClaseB.h"
+#include "../include/ClaseC.h"
 
 
 #include <iostream>
 #include <stdio.h>
+
+using namespace std;
 
 void ClaseA::seta(int a) {
     this->a = a;
@@ -30,7 +32,7 @@ ClaseC* ClaseA::getC() {
     return this->C;
 }
 
-ClaseA::ClaseA(int a, ClaseB* B, Clase*C C) {
+ClaseA::ClaseA(int a, ClaseB* B, ClaseC* C) {
     this->a = a;
     this->B = B;
     this->C = C;
@@ -38,6 +40,7 @@ ClaseA::ClaseA(int a, ClaseB* B, Clase*C C) {
 
 ClaseA::~ClaseA() {}
 
-ostream &operator <<(ostream& o, ClaseA A) {
-    o << 'El nombre de la clase es: ClaseA y el valor del atributo es: ' << A.geta(); 
+ostream &operator <<(ostream &o, ClaseA A) {
+    o << "El nombre de la clase es: ClaseA y el valor del atributo es: " << A.geta();
+    return o;
 }

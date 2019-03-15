@@ -1,10 +1,12 @@
-#include "../include/ClaseA.hpp"
-#include "../include/ClaseB.hpp"
-#include "../include/ClaseC.hpp"
+#include "../include/ClaseA.h"
+#include "../include/ClaseB.h"
+#include "../include/ClaseC.h"
 
 
 #include <iostream>
 #include <stdio.h>
+
+using namespace std;
 
 //setters
 
@@ -43,3 +45,7 @@ ClaseB::ClaseB(int b, ClaseA *A, ClaseC *C){
 }
 ClaseB::~ClaseB() {}
 
+ostream &operator <<(ostream& o, ClaseB B) {
+    o << "El nombre de la clase es: ClaseB y el valor del atributo es: " << B.getb();
+    return o;
+}

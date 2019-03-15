@@ -1,6 +1,6 @@
-#include "../include/ClaseA.hpp"
-#include "../include/ClaseB.hpp"
-#include "../include/ClaseC.hpp"
+#include "../include/ClaseA.h"
+#include "../include/ClaseB.h"
+#include "../include/ClaseC.h"
 
 
 #include <iostream>
@@ -40,7 +40,8 @@ ClaseC::~ClaseC() {
 }
 
 ostream &operator <<(ostream &o , ClaseC C) {
-    o << 'El nombre de la clase es: ClaseC  y el valor del atributo es: ' << C.getc();
+    o << "El nombre de la clase es: ClaseC  y el valor del atributo es: " << C.getc();
+    return o;
 }
 
 

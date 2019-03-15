@@ -1,9 +1,11 @@
+
+#ifndef _CLASEC_H_
+#define _CLASEC_H_
+
 #include <iostream>
 #include <stdio.h>
 
-#include "ClaseA.hpp"
-#include "ClaseB.hpp"
-
+using namespace std;
 class ClaseA;
 class ClaseB;
 
@@ -24,8 +26,13 @@ public:
     ClaseB* getB();
     
     //Constructor y Destructor
-    ClaseC(int=0, ClaseA*=nullptr, ClaseB*=nullptr);
+    ClaseC(int=0, ClaseA* =nullptr, ClaseB* =nullptr);
     ~ClaseC();
 };
 
 ostream &operator <<(ostream &, ClaseC);
+
+#include "ClaseA.h"
+#include "ClaseB.h"
+
+#endif

@@ -8,6 +8,7 @@
 #include <stdio.h>
 
 using namespace std;
+
 int main(){
     
     //Construimos por defecto un objeto de cada clase 
@@ -15,49 +16,54 @@ int main(){
     ClaseB obB1;
     ClaseC obC1;
     
-    //Se debe imprimir que el valor de A1 es 0
-    
-    cout << obA1 << "\n";
-    
-    //creamos punteros a objetos
+    //Creamos punteros a objetos
+    ClaseA* punteroA1 = &obA1;
     ClaseB* punteroB1 = &obB1;
     ClaseC* punteroC1 = &obC1;
-    ClaseA* punteroA1 = &obA1;
     
-    //probamos setters
+    //Probamos setters
     obA1.setB(punteroB1);
     obA1.setC(punteroC1);
-    obA1.seta(5);
+    obA1.seta(1);
     
     obB1.setA(punteroA1);
     obB1.setC(punteroC1);
-    obB1.setb(22);
+    obB1.setb(2);
     
     obC1.setA(punteroA1);
     obC1.setB(punteroB1);
-    obC1.setc(13);
+    obC1.setc(3);
     
-    //usamos Constructor por parametros para crear objeto de claseA 
+    //Usamos constructor por parametros para crear objeto de ClaseA 
+    ClaseA obA2(4, punteroB1, &obC1);
     
-    ClaseA obA2(71, punteroB1, &obC1);
+    ///Probamos links
+    int b1 = obA1.getB() -> getb();
+    int b2 = obA2.getB() -> getb();
+    int c1 = obA1.getC() -> getc();
+    int c2 = obA2.getB() -> getC() -> getc();
+   
+
+    //Imprimir
+    
+    cout << "Los valores del camino (A-B-C-A) son: " << obA1.geta() 
+    << "-" << obA1.getB() -> getb() 
+    << "-" << obA1.getB() -> getC() -> getc() 
+    << "-" << obA1.getB() -> getC() -> getA() -> geta() << "\n";
+    
+    cout << "Los valores del camino (A-C-B-A) son: " << obA1.geta() 
+    << "-" << obA1.getC() -> getc() 
+    << "-" << obA1.getC() -> getB() -> getb() 
+    << "-" << obA1.getC() -> getB() -> getA() -> geta() << "\n";
     
     
-    ///probamos links
-    int b = obA2.getB()->getb();
-    int c = obA2.getC()->getc();
-    int b1 = obA1.getB()->getb();
-    int c1 = obA1.getB()->getC()->getc();
+    cout << "El valor de B1 desde A1 es: " << b1 << "\n";
+    cout << "El valor de B1 desde A2 es: " << b2 << "\n";
+    cout << "El valor de C1 desde A1 es: " << c1 << "\n";
+    cout << "El valor de C1 desde A2 es: " << c2 << "\n";
     
-    //imprimir
-    
-    cout << b << "\n";
-    cout << c << "\n";
-    cout << "El valor de B1 es: " << b1 << "\n";
-    cout << "El valor de C1 es: " << c1 << "\n";
-    cout << obA1;
-    cout<<"\n";
-    cout<< obB1 << "\n";
-    cout << obA2 <<"\n";
+    //Probamos la sobrecarga del operador <<
+    cout << obA2 << "\n";
     
     return 0;
 }

@@ -26,6 +26,6 @@ public:
     //Constructor y Destructor
     ClaseB(int, ClaseA*, ClaseC*);
     ~ClaseB();
-    
-    void Imprimir(ClaseB);
 };
+
+ostream &operator <<(ostream &, ClaseB);

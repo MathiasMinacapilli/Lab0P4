@@ -26,10 +26,16 @@ class Monopatin: public Vehiculo {
 private:
     bool tieneLuces;
 public:
+	//constructor y destructor
 	Monopatin(int, float, float, bool=false);
+	~Monopatin();
+	//getter
 	bool get_luces();
+	//setter
+	void set_tieneLuces(bool);
+
     float darPrecioViaje(int, int);
-    ~Monopatin();
+    
 };
 
 // Bicicleta subclase de Vehiculo
@@ -47,7 +53,7 @@ public:
 	//setters
 	void set_tipo(TipoBici);
 	void set_cant_cambios(int);
-	
+
     float darPrecioViaje(int, int);
     
 };

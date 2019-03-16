@@ -15,6 +15,10 @@
 #define MAX_USUARIOS ... //AGREGAR NUMERO
 #define MAX_VEHICULOS ... //AGREGAR NUMERO
 
+Usuario arreglo_usuarios[MAX_USUARIOS];
+//arreglo de punteros a vehiculos?
+Vehiculo* arreglo_vehiculos[MAX_VEHICULOS];
+
 void registrarUsuario(std::string ci, std::string nombre) {
 
 }

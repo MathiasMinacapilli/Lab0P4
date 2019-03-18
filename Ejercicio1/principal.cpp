@@ -46,11 +46,11 @@ Busca si existe el vehiculo con numserie en el arreglo_vehiculos.
 Si existe, devuelve el numero de posicion de ese vehiculo.
 Sino, devuelve -1.
 */
-static int buscar_vehiculo(string numserie) {
+static int buscar_vehiculo(int numserie) {
     bool encontre = false; 
     int i=0; 
     while (!encontre && i<tope_vehiculo){
-        if (arreglo_vehiculos[i]->nro_serie.compare(numserie)==0)
+        if (arreglo_vehiculod[i]->nro_serie == numserie)
             encontre = true;
         else i++;
     }
@@ -76,7 +76,7 @@ void registrarUsuario(std::string ci, std::string nombre) {
     arreglo_usuarios[tope_usuario] = new Usuario(ci, nombre, fecha /*, 0*/);
     tope_usuario++;
   }
-  else //??
+  else //excepcion
 }
 
 /*
@@ -88,6 +88,10 @@ Controlar que se cumplen:
 De no ser así, se levanta una excepción std::invalid_argument.
 */
 void agregarVehiculo(const DtVehiculo& vehiculo) {
+    if ((buscar_vehiculo(vehiculo.getNroSerie()) == -1) && (0 <= vehiculo.getPorcentaje()) && (vehiculo.getPorcentaje() <= 100) && (vehiculo.getPrecioBase() >= 0)) {
+        arreglo_vehiculos[tope_vehiculo] = new Vehiculo(
+            //como agrego si en realidad no puedo instanciarlo??
+    }
 
 }
 
@@ -109,7 +113,7 @@ void ingresarViaje(string ci, int nroSerieVehiculo, const DtViajeBase& viaje) {
         Viaje trip(viaje.getFecha(), viaje.getDuracion(), viaje.getDistancia(), arreglo_vehiculos[posicion_vehiculo]);
         arreglo_usuarios[posicion_usuario] -> agregarViaje(trip);
   }
-  else //??
+  else //excepcion
 }
 
 
@@ -147,6 +151,10 @@ En caso de que el vehículo no exista,
 o la carga ingresada no se encuentre entre 0 y 100 se levanta una excepción std::invalid_argument.
 */
 void cambiarBateriaVehiculo(int nroSerieVehiculo, float cargaVehiculo) {
+    int posicion_vehiculo = buscar_vehiculo(nroSerieVehiculo);
+    if ((posicion_vehiculo != -1) && (0 <= cargaVehiculo) && (cargaVehiculo <= 100))
+        arreglo_vehiculos[posicion_vehiculo].set_porcentaje_bateria(cargaVehiculo);
+    else //excepcion
 
 }
 

@@ -24,7 +24,7 @@ Usuario *arreglo_usuarios[MAX_USUARIOS];
 Vehiculo* arreglo_vehiculos[MAX_VEHICULOS];
 
 /*
-Busca si existe la cedula ci en el arreglo_usuarios.
+Busca si existe la cedula cid en el arreglo_usuarios.
 Si existe, devuelve el numero de posicion del arreglo.
 Sino, devuelve -1.
 */
@@ -42,7 +42,7 @@ static int buscar_usuario(string cid) {
 }
 
 /*
-Busca si existe el vehiculo con nroSerieVehiculo en el arreglo_vehiculos.
+Busca si existe el vehiculo con numserie en el arreglo_vehiculos.
 Si existe, devuelve el numero de posicion de ese vehiculo.
 Sino, devuelve -1.
 */
@@ -132,7 +132,13 @@ Si no existe un usuario registrado con esa cédula,
 se levanta una excepción std::invalid_argument.
 */
 void eliminarViajes(string ci, const DtFecha& fecha) {
+    int pos_usuario = buscar_usuario(ci);
+    if (pos_usario!=-1){
+        int total_viajes = arreglo_usuarios[pos_usuario]->cant_viajes; 
 
+    }
+    else //excepcion
+    {}
 }
 
 /*
@@ -150,7 +156,18 @@ cantVehiculos es un parámetro de salida donde se
 devuelve la cantidad de vehículos (corresponde a la cantidad de valores DtVehiculo que se devuelven).
 */
 DtVehiculo** obtenerVehiculos(int& cantVehiculos) {
-    return nullptr;
+    if (tope_vehiculo>0){
+        DtVehiculo* arreglo_dtv = new DtVehiculo[tope_vehiculo]
+        //creo puntero al arreglo de DTVehiculos 
+        DtVehiculo** puntero_dtv =  &arreglo_dtv;
+        for (int i=0; i<tope_vehiculo; i++){
+            
+            *arreglo_dtv[i]->DtVehiculo()
+        }
+    
+    }
+    else 
+        return nullptr;
 }
 
 // main

@@ -27,5 +27,11 @@ public:
 
     /* ¿Getter y setter de viajes y cant_viajes? */
 
+    /*
+    Agrega un viaje al usuario. De tener 100 viajes, no hace nada.
+    */
+    void agregarViaje(Viaje);
+
+
     ~Usuario();
 };

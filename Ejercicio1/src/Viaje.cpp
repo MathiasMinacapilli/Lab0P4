@@ -1,6 +1,14 @@
 
 #include "../include/Viaje.hpp"
 
+//constructor
+Viaje::Viaje(DtFecha fecha, int duracion, int distancia, Vehiculo vehiculo){
+    this->fecha = fecha;
+    this->duracion = duracion;
+    this->distancia = distancia;
+    this->vehiculo = vehiculo;
+}
+
 
 DtFecha Viaje::getFecha() {
     /* Retorna la fecha del Viaje */

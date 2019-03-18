@@ -1,14 +1,16 @@
 
 #include "DtFecha.hpp"
-#include "DtVehiculo.hpp"
+#include "Vehiculo.hpp"
 
 class Viaje {
 private:
     DtFecha fecha;
     int duracion, distancia;
-    DtVehiculo vehiculo; //porque Vehiculo no es instanciable
+    Vehiculo vehiculo; //porque Vehiculo no es instanciable
     //Obs: ver como linkear con un tipo de vehiculo determinado
 public:
+    //constructor
+    Viaje(DtFecha, int, int, Vehiculo);
     //Setters
     DtFecha getFecha();
     int getDuracion();

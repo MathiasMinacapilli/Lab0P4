@@ -20,7 +20,7 @@ Usuario arreglo_usuarios[MAX_USUARIOS];
 Vehiculo* arreglo_vehiculos[MAX_VEHICULOS];
 
 void registrarUsuario(std::string ci, std::string nombre) {
-//
+
 }
 void agregarVehiculo(const DtVehiculo& vehiculo) {
 
@@ -77,15 +77,15 @@ int main() {
             break;
         }
     }
-
-
-
-
-
-
-
-
-
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     return 0;
 }

@@ -12,6 +12,9 @@ private:
     int cant_viajes; //tope del arreglo viajes[100]
     std::vector<Viaje> viajes[100];
 public:
+    //Constructos
+    Usuario(string, string, DtFecha, int = 0);
+
     //Getters
     std::string getCi();
     std::string getNombre();

@@ -10,22 +10,41 @@
 #include "include/Viaje.hpp"
 
 #include <iostream>
+#include <ctime>
 #include <stdio.h>
+
+using namespace std;
 
 #define MAX_USUARIOS ... //AGREGAR NUMERO
 #define MAX_VEHICULOS ... //AGREGAR NUMERO
 
-Usuario arreglo_usuarios[MAX_USUARIOS];
+int tope_usuario, tope_vehiculo;
+Usuario *arreglo_usuarios[MAX_USUARIOS];
 //arreglo de punteros a vehiculos?
 Vehiculo* arreglo_vehiculos[MAX_VEHICULOS];
 
 /*
+Busca si existe la cedula ci en el arreglo Usuario
+*/
+static bool existe_usuario(string ci) {
+
+}
+
+/*
 Registra un en el sistema.
 La fecha de ingreso se obtiene del reloj de la máquina.
-Si existe un usuario registrado con la misma cédula, se levanta una excepción std::invalid_argument.
+Si existe un usuario registrado con la misma cédula,
+se levanta una excepción std::invalid_argument.
 */
 void registrarUsuario(std::string ci, std::string nombre) {
-
+  if (!existe_usuario(ci)) {
+    time_t t = time(0); //Se obtiene la fecha del momento
+    tm* now = localtime(&t);
+    DtFecha fecha(now->tm_mday, now->tm_mon + 1, now->tm_year + 1900);
+    arreglo_usuarios[tope_usuario] = new Usuario(ci, nombre, fecha /*, 0*/);
+    tope_usuario++;
+  }
+  else //??
 }
 
 /*
@@ -96,6 +115,8 @@ DtVehiculo** obtenerVehiculos(int& cantVehiculos) {
 
 // main
 int main() {
+    tope_usuario = 0;
+    tope_vehiculo = 0;
     int i = 0;
     bool salir = false;
     while(!salir) {

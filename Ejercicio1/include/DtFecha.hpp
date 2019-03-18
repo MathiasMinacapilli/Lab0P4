@@ -12,4 +12,7 @@ public:
     int getAnio();
 
     //~DtFecha()??
-}
+};
+
+//Sobrecarga el operador >=
+bool operator>= (DtFecha, DtFecha);

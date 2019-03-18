@@ -28,8 +28,17 @@ Busca si existe la cedula ci en el arreglo_usuarios.
 Si existe, devuelve el numero de posicion del arreglo.
 Sino, devuelve -1.
 */
-static int existe_usuario(string ci) {
-
+static int buscar_usuario(string cid) {
+    bool encontre = false; 
+    int i=0; 
+    while (!encontre && i<tope_usuario){
+        if (arreglo_usuarios[i]->ci.compare(cid)==0)
+            encontre = true;
+        else i++;
+    }
+    if (encontre)
+        return i;
+    else return -1;
 }
 
 /*
@@ -37,7 +46,17 @@ Busca si existe el vehiculo con nroSerieVehiculo en el arreglo_vehiculos.
 Si existe, devuelve el numero de posicion de ese vehiculo.
 Sino, devuelve -1.
 */
-static int existe_vehiculo(string ci) {
+static int buscar_vehiculo(string numserie) {
+    bool encontre = false; 
+    int i=0; 
+    while (!encontre && i<tope_vehiculo){
+        if (arreglo_vehiculos[i]->nro_serie.compare(numserie)==0)
+            encontre = true;
+        else i++;
+    }
+    if (encontre)
+        return i;
+    else return -1;
 
 }
 
@@ -50,7 +69,7 @@ Si existe un usuario registrado con la misma cédula,
 se levanta una excepción std::invalid_argument.
 */
 void registrarUsuario(std::string ci, std::string nombre) {
-  if (existe_usuario(ci) == -1) {
+  if (buscar_usuario(ci) == -1) {
     time_t t = time(0); //Se obtiene la fecha del momento
     tm* now = localtime(&t);
     DtFecha fecha(now->tm_mday, now->tm_mon + 1, now->tm_year + 1900);
@@ -82,8 +101,8 @@ Controlar que se cumplen:
 De no ser así, se levanta una excepción std::invalid_argument.
 */
 void ingresarViaje(string ci, int nroSerieVehiculo, const DtViajeBase& viaje) {
-  int posicion_usuario = existe_usuario(ci);
-  int posicion_vehiculo = existe_vehiculo(nroSerieVehiculo);
+  int posicion_usuario = buscar_usuario(ci);
+  int posicion_vehiculo = buscar_vehiculo(nroSerieVehiculo);
   if ((posicion_usuario != -1) && (posicion_vehiculo != -1) &&
       (viaje.getDuracion() > 0) && (viaje.getDistancia() > 0) &&
       (viaje.getFecha() >= arreglo_usuarios[posicion_usuario] -> getFechaIngreso())) {

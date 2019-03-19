@@ -185,19 +185,24 @@ int main() {
     int i = 0;
     bool salir = false;
     while(!salir) {
-        std::cout << 'Bienvenido. Elija la opción deseada. \n'
-            << '1) Registrar un Usuario \n'
-            << '2) Agregar un Vehiculo \n'
-            << '3) Agregar un Viaje \n'
-            << '4) Ver viajes de un Usuario \n'
-            << '5) Eliminar viajes de un Usuario \n'
-            << '6) Cambiar bateria de un Vehiculo \n'
-            << '7) Obtener Vehiculos \n'
-            << '0) Salir \n'
-            << 'Opción: ';
-        std::cin >> i;
+        cout << "Bienvenido. Elija la opción deseada. \n"
+            << "1) Registrar un Usuario \n"
+            << "2) Agregar un Vehiculo \n"
+            << "3) Agregar un Viaje \n"
+            << "4) Ver viajes de un Usuario \n"
+            << "5) Eliminar viajes de un Usuario \n"
+            << "6) Cambiar bateria de un Vehiculo \n"
+            << "7) Obtener Vehiculos \n"
+            << "0) Salir \n"
+            << "Opción: ";
+        cin >> i;
         switch(i) {
         case 1:
+            cout << "Introduzca el nombre del Usuario: \n "
+                    << "Nombre: ";
+            string nombre; 
+            cin << nombre;
+            cout << "
             break;
         case 2:
             break;

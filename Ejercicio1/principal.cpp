@@ -76,7 +76,8 @@ void registrarUsuario(std::string ci, std::string nombre) {
     arreglo_usuarios[tope_usuario] = new Usuario(ci, nombre, fecha /*, 0*/);
     tope_usuario++;
   }
-  else //excepcion
+  else
+      throw new invalid_argument ("Ya existe usuario con esa ci");
 }
 
 /*
@@ -113,7 +114,8 @@ void ingresarViaje(string ci, int nroSerieVehiculo, const DtViajeBase& viaje) {
         Viaje trip(viaje.getFecha(), viaje.getDuracion(), viaje.getDistancia(), arreglo_vehiculos[posicion_vehiculo]);
         arreglo_usuarios[posicion_usuario] -> agregarViaje(trip);
   }
-  else //excepcion
+  else 
+      throw new invalid_argument ("No se pudo ingresar el viaje");
 }
 
 
@@ -141,8 +143,8 @@ void eliminarViajes(string ci, const DtFecha& fecha) {
         int total_viajes = arreglo_usuarios[pos_usuario]->cant_viajes; 
 
     }
-    else //excepcion
-    {}
+    else 
+        throw new invalid_argument ("No existe el usuario ingresado");
 }
 
 /*
@@ -154,7 +156,8 @@ void cambiarBateriaVehiculo(int nroSerieVehiculo, float cargaVehiculo) {
     int posicion_vehiculo = buscar_vehiculo(nroSerieVehiculo);
     if ((posicion_vehiculo != -1) && (0 <= cargaVehiculo) && (cargaVehiculo <= 100))
         arreglo_vehiculos[posicion_vehiculo].set_porcentaje_bateria(cargaVehiculo);
-    else //excepcion
+    else
+        throw new invalid_argument ("No se pudo cambiar la bateria del vehiculo");
 
 }
 
@@ -200,7 +203,7 @@ int main() {
         case 1:
             cout << "Introduzca el nombre del Usuario: \n "
                     << "Nombre: ";
-            string nombre; 
+            string nombre;
             cin << nombre;
             cout << "
             break;

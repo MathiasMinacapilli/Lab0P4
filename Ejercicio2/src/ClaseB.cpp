@@ -1,6 +1,6 @@
-#include "../include/ClaseA.h"
-#include "../include/ClaseB.h"
-#include "../include/ClaseC.h"
+#include "../include/ClaseA.hpp"
+#include "../include/ClaseB.hpp"
+#include "../include/ClaseC.hpp"
 
 
 #include <iostream>

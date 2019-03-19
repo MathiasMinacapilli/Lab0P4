@@ -1,7 +1,7 @@
 
 
-#ifndef _CLASEB_H_
-#define _CLASEB_H_
+#ifndef _CLASEB_HPP_
+#define _CLASEB_HPP_
 
 #include <iostream>
 #include <stdio.h>
@@ -34,8 +34,8 @@ public:
 
 ostream &operator <<(ostream &, ClaseB);
 
-#include "ClaseA.h"
-#include "ClaseC.h"
+#include "ClaseA.hpp"
+#include "ClaseC.hpp"
 
 
 #endif

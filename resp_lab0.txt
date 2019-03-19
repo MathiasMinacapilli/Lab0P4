@@ -2,7 +2,7 @@
 
 Respuestas:
 
-a) 
+a) Hay tres dependencias circulares distintas: A depende de B y B de A, B depende de C y C de B, y C depende de A y A de C. Las resolvimos usando forward declarations en los archivos ClaseB.hpp y ClaseC.hpp
 
 
 b) Cuando se tienen dos (o más) clases relacionadas entre si, hay que incluir la declaración de una en la otra y viceversa (esto sería incluir el nombre_clase.h de una en el de la otra). Esto genera una dependencia circular, y para solucionarlo se deben usar las forward declarations. Por ejemplo, si las clases A y B están relacionadas entre si, se debe incluir claseA.h en claseB.h y viceversa. Para lograr que esto funcione correctamente, una de estas inclusiones se debe hacer con forward declaration: antes de declarar la clase B, se declara (en claseB.h) class claseA; , y luego de definir la clase B, se incluye el archivo claseA.h (#include claseA.h). De aquí el término forward declaration: se le indica al compilador la existencia de la claseA antes de pasarle su definición completa.

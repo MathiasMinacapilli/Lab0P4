@@ -1,13 +1,13 @@
 
-#ifndef _CLASEA_H_
-#define _CLASEA_H_
+#ifndef _CLASEA_HPP_
+#define _CLASEA_HPP_
 
 
 #include <iostream>
 #include <stdio.h>
 
-#include "ClaseB.h"
-#include "ClaseC.h"
+#include "ClaseB.hpp"
+#include "ClaseC.hpp"
 using namespace std;
 
 

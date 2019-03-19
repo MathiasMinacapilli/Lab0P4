@@ -20,7 +20,7 @@ ODIR    = obj
 MODULOS = ClaseA ClaseB ClaseC
 
 # cadena de archivos, con directorio y extensión
-HS   = $(MODULOS:%=$(HDIR)/%.h)
+HS   = $(MODULOS:%=$(HDIR)/%.hpp)
 CPPS = $(MODULOS:%=$(CPPDIR)/%.cpp)
 OS   = $(MODULOS:%=$(ODIR)/%.o)
 
@@ -40,7 +40,7 @@ $(ODIR)/$(PRINCIPAL).o:$(PRINCIPAL).cpp
 # cada .o depende de su .cpp
 # $@ se expande para tranformarse en el objetivo
 # $< se expande para tranformarse en la primera dependencia
-$(ODIR)/%.o: $(CPPDIR)/%.cpp $(HDIR)/%.h
+$(ODIR)/%.o: $(CPPDIR)/%.cpp $(HDIR)/%.hpp
 	$(CC) $(CCFLAGS) -c $< -o $@
 
 # $^ se expande para tranformarse en todas las dependencias

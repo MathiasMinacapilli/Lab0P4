@@ -45,10 +45,10 @@ DtMonopatin::~DtMonopatin() {
 ostream &operator<< (ostream& o, DtMonopatin dtm) {
     std::string luces;
     if (dtm.getTieneLuces)
-        luces = 'Si';
+        luces = "Si";
     else
-        luces = 'No';
-    o << '- Numero Serie: ' << dtm.getNroSerie() << '/n' << '- Porcentaje Bateria: ' << dtm.getPorcentaje() << '/n' << '- Precio Base: $' << dtm.getPrecioBase() << '.' << '/n' << '- Tiene luces: ' << luces;
+        luces = "No";
+    o << "- Numero Serie: " << dtm.getNroSerie() << "\n" << "- Porcentaje Bateria: " << dtm.getPorcentaje() << "\n" << "- Precio Base: $" << dtm.getPrecioBase() << "." << "\n" << "- Tiene luces: " << luces;
 }
 
 //DtBicicleta, subclase de DtVehiculo
@@ -72,10 +72,10 @@ DtBicicleta::~DtBicicleta() {
 ostream &operator<< (ostream& o, DtBicicleta dtb) {
     std::string tipo;
     if (dtb.getTipo == Paseo)
-        tipo = 'Paseo';
+        tipo = "Paseo";
     else
-        tipo = 'Montaña';
-    o << '- Numero Serie: ' << dtb.getNroSerie() << '/n' << '- Porcentaje Bateria: ' << dtb.getPorcentaje() << '/n' << '- Precio Base: $' << dtb.getPrecioBase() << '.' << '/n' << '- Tipo de Bicicleta: ' << tipo << '/n' << '- Cantidad de cambios: ' << dtb.getCantCambios();
+        tipo = "Montaña";
+    o << "- Numero Serie: " << dtb.getNroSerie() << "\n" << "- Porcentaje Bateria: " << dtb.getPorcentaje() << "\n" << "- Precio Base: $" << dtb.getPrecioBase() << "." << "\n" << "- Tipo de Bicicleta: " << tipo << "\n" << "- Cantidad de cambios: " << dtb.getCantCambios();
 }
 
 

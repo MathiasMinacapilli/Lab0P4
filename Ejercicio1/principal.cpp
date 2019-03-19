@@ -90,8 +90,10 @@ De no ser así, se levanta una excepción std::invalid_argument.
 */
 void agregarVehiculo(const DtVehiculo& vehiculo) {
     if ((buscar_vehiculo(vehiculo.getNroSerie()) == -1) && (0 <= vehiculo.getPorcentaje()) && (vehiculo.getPorcentaje() <= 100) && (vehiculo.getPrecioBase() >= 0)) {
-        arreglo_vehiculos[tope_vehiculo] = new Vehiculo(
-            //como agrego si en realidad no puedo instanciarlo??
+        Vehiculo* v = &vehiculo;
+        if (DtBicicleta *dtb = dynamic_cast<DtBicicleta*>(v)) {
+            arreglo_vehiculos[tope_vehiculo] = dtb;
+           
     }
 
 }

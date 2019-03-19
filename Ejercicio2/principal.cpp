@@ -65,5 +65,15 @@ int main(){
     //Probamos la sobrecarga del operador <<
     cout << obA2 << "\n";
     
+    cout<<"ingrese un numero"; 
+    int numero; 
+    cin>>numero; 
+    int num2= 0;
+    try{
+    num2 = hola(numero);
+    cout<<num2;
+    }catch(exception *e){
+        cout<<e->what();
+    }
     return 0;
 }

@@ -14,7 +14,7 @@ public:
     ~DtVehiculo();
 };
 
-ostream &operator<< (ostream&, DtVehiculo);//?? con o sin virtual
+
 
 //DtMonopatin, subclase de DtVehiculo
 class DtMonopatin: public DtVehiculo {

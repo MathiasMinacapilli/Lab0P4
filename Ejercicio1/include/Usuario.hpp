@@ -10,7 +10,7 @@ private:
     std::string ci, nombre;
     DtFecha fecha_ingreso;
     int cant_viajes; //tope del arreglo viajes[100]
-    std::vector<Viaje> viajes;
+    Viaje *viajes[100];
 public:
     //Constructor
     Usuario(string, string, DtFecha, int = 0);
@@ -25,8 +25,13 @@ public:
     void setNombre(std::string);
     void setFechaIngreso(DtFecha);
 
-    /* ¿Getter y setter de viajes y cant_viajes? */
-
+    //Getters Viaje
+    int getCantViajes();
+    Viaje** getViajes();
+    
+    //Setter Viaje
+    void setCantViajes
+    
     /* Agrega un viaje al usuario. De tener 100 viajes, no hace nada. */
     void agregarViaje(Viaje);
 

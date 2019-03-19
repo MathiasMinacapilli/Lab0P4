@@ -20,8 +20,8 @@ using namespace std;
 
 int tope_usuario, tope_vehiculo;
 Usuario *arreglo_usuarios[MAX_USUARIOS];
-//arreglo de punteros a vehiculos?
-Vehiculo* arreglo_vehiculos[MAX_VEHICULOS];
+//arreglo de punteros a vehiculos
+Vehiculo *arreglo_vehiculos[MAX_VEHICULOS];
 
 /*
 Busca si existe la cedula cid en el arreglo_usuarios.
@@ -89,13 +89,26 @@ Controlar que se cumplen:
 De no ser así, se levanta una excepción std::invalid_argument.
 */
 void agregarVehiculo(const DtVehiculo& vehiculo) {
-    if ((buscar_vehiculo(vehiculo.getNroSerie()) == -1) && (0 <= vehiculo.getPorcentaje()) && (vehiculo.getPorcentaje() <= 100) && (vehiculo.getPrecioBase() >= 0)) {
-        Vehiculo* v = &vehiculo;
-        if (DtBicicleta *dtb = dynamic_cast<DtBicicleta*>(v)) {
-            arreglo_vehiculos[tope_vehiculo] = dtb;
-           
+    if (tope_vehiculo == MAX_VEHICULOS)
+        throw new invalid_argument("No hay mas lugar para vehiculos");
+    
+    else 
+        
+        if ((buscar_vehiculo(vehiculo.getNroSerie()) == -1) && (0 <= vehiculo.getPorcentaje()) && (vehiculo.getPorcentaje() <= 100) && (vehiculo.getPrecioBase() >= 0)) {
+            DtVehiculo* v = &vehiculo;
+            DtBicicleta *dtb = dynamic_cast<DtBicicleta*>(v)
+            if (dtb) {
+                Bicicleta *bici = new Bicicleta(dtb->getNroSerie(), dtb->getPorcentaje(), dtb->getPrecioBase(), dtb->getTipo(), dtb->getCantCambios());
+                arreglo_vehiculos[tope_vehiculo] = bici;
+            }
+            else //es monopatin 
+                { DtMonopatin* dtm = dynamic_cast<DtMonopatin*>(v);
+                Monopatin *mono = new Monopatin(dtm->getNroSerie(), dtm->getPorcentaje(), dtm->getPrecioBase(), dtm->getTieneLuces());
+                arreglo_vehiculos[tope_vehiculo] = mono;
+                }
+             tope_vehiculo++;   
     }
-
+    else throw new invalid_argument("verifique parametros")
 }
 
 /*
@@ -107,7 +120,14 @@ Controlar que se cumplen:
 (4) fecha del viaje posterior o igual a la fecha de ingreso del usuario.
 De no ser así, se levanta una excepción std::invalid_argument.
 */
-void ingresarViaje(string ci, int nroSerieVehiculo, const DtViajeBase& viaje) {
+void ingresarViaje(string ci, int nroSerieVehint hola(int num){
+    if(num<0)
+        throw new invalid_argument("El numero es negativo");
+    else if (num ==0) 
+            throw new invalid_argument("El numero es 0");
+        else 
+            return num;
+}iculo, const DtViajeBase& viaje) {
   int posicion_usuario = buscar_usuario(ci);
   int posicion_vehiculo = buscar_vehiculo(nroSerieVehiculo);
   if ((posicion_usuario != -1) && (posicion_vehiculo != -1) &&
@@ -151,7 +171,7 @@ void eliminarViajes(string ci, const DtFecha& fecha) {
 
 /*
 Modifica el porcentaje de carga de la bateria del vehículo identificado por nroSerieVehiculo.
-En caso de que el vehículo no exista,
+En caso de que( el vehículo no exista,
 o la carga ingresada no se encuentre entre 0 y 100 se levanta una excepción std::invalid_argument.
 */
 void cambiarBateriaVehiculo(int nroSerieVehiculo, float cargaVehiculo) {

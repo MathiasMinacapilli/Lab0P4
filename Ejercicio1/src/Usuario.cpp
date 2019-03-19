@@ -39,6 +39,19 @@ void Usuario::setFechaIngreso(DtFecha fecha_ingreso) {
     this->fecha_ingreso = fecha_ingreso;
 }
 
+void Usuario::agregarViaje(Viaje viaje) {
+    /* Agrega un viaje al usuario en el vector viajes[100], en caso de ya haber
+    100 viajes no hace nada (o sobreescribe alguno???) */
+    if(viajes.size() < 100) {
+        // Si el vector no está lleno agrego el viaje al final
+        viajes.push_back(viaje);
+    }
+    else {
+        // Si el vector está lleno
+        
+    }
+}
+
 Usuario::~Usuario() {
     // destructor
 }

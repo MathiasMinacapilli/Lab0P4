@@ -120,14 +120,7 @@ Controlar que se cumplen:
 (4) fecha del viaje posterior o igual a la fecha de ingreso del usuario.
 De no ser así, se levanta una excepción std::invalid_argument.
 */
-void ingresarViaje(string ci, int nroSerieVehint hola(int num){
-    if(num<0)
-        throw new invalid_argument("El numero es negativo");
-    else if (num ==0) 
-            throw new invalid_argument("El numero es 0");
-        else 
-            return num;
-}iculo, const DtViajeBase& viaje) {
+void ingresarViaje(string ci, int nroSerieVehiculo, const DtViajeBase& viaje) {
   int posicion_usuario = buscar_usuario(ci);
   int posicion_vehiculo = buscar_vehiculo(nroSerieVehiculo);
   if ((posicion_usuario != -1) && (posicion_vehiculo != -1) &&
@@ -209,6 +202,7 @@ int main() {
     tope_vehiculo = 0;
     int i = 0;
     bool salir = false;
+	//Hay que fijarse que se ingrese todo bien?
     while(!salir) {
         cout << "Bienvenido. Elija la opción deseada. \n"
             << "1) Registrar un Usuario \n"
@@ -237,7 +231,7 @@ int main() {
 	        	cout << e->what();
 	        	break;
 	        }
-	        cout << "Usuario agregado.";
+	        cout << "Usuario agregado. \n ";
             break;
         case 2: //
         	try {
@@ -247,8 +241,57 @@ int main() {
         		if (V == M) {
         			cout << "Ingrese el numero de serie \n "
         				<< "Nº de serie: ";
+        			int nro_serie;
+        			cin >> nro_serie;
+        			cout << "Ingrese el porcentaje de bateria \n "
+        				<< "% bateria: ";
+        			float porcentaje;
+        			cin >> porcentaje;
+        			cout << "Ingrese el precio base del Monopatin \n "
+        				<< "Precio base: ";
+        			float precio_base;
+        			cin >> precio_base;
+        			cout << "Indique con 1 si tiene luces, de lo contrario, 0: \n "
+        			int luz;
+        			cin >> luz;
+        			bool tieneLuces;
+        			if (luz == 1)
+        				tieneLuces = true
+        			else
+        				tieneLuces = false;
+        			DtMonopatin dtm(nro_serie, porcentaje, precio_base, tieneLuces);
+        			DtVehiculo& dtv = dtm;
+        			agregarVehiculo(dtv); 
+        		} else {
+        			cout << "Ingrese el numero de serie \n "
+        				<< "Nº de serie: ";
+        			int nro_serie;
+        			cin >> nro_serie;
+        			cout << "Ingrese el porcentaje de bateria \n "
+        				<< "% bateria: ";
+        			float porcentaje;
+        			cin >> porcentaje;
+        			cout << "Ingrese el precio base de la Bicicleta \n "
+        				<< "Precio base: ";
+        			float precio_base;
+        			cin >> precio_base;
+        			cout << "Ingrese el tipo de Bicicleta, Paseo o Montaña \n "
+        				<< "Tipo de Bici: ";
+        			TipoBici tipo;
+        			cin >> tipo;
+        			cout << "Ingrese la cantidad de cambios \n "
+        				<< "Cantidad de cambios: ";
+        			int cant_cambios;
+        			cin >> cant_cambios;
+        			DtBicicleta dtb(nro_serie, porcentaje, precio_base, tipo, cant_cambios);
+        			DtVehiculo& dtv = dtb;
+        			agregarVehiculo(dtv);
         		}
+        	} catch(exception* e) {
+        		cout << e->what();
+        		break;
         	}
+        	cout << "Vehiculo agregado. \n ";
             break;
         case 3:
             break;

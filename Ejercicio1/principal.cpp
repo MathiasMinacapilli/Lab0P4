@@ -215,7 +215,7 @@ int main() {
         cout << "Bienvenido. Elija la opción deseada. \n"
             << "1) Registrar un Usuario \n"
             << "2) Agregar un Vehiculo \n"
-            << "3) Agregar un Viaje \n"
+            << "3) Ingresar un Viaje \n"
             << "4) Ver viajes de un Usuario \n"
             << "5) Eliminar viajes de un Usuario \n"
             << "6) Cambiar bateria de un Vehiculo \n"
@@ -239,7 +239,6 @@ int main() {
 	        	cout << e->what();
 	        	break;
 	        }
-	        tope_usuario++;
 	        cout << "Usuario agregado. \n ";
             break;
         case 2: //
@@ -300,7 +299,6 @@ int main() {
         		cout << e->what();
         		break;
         	}
-        	tope_vehiculo++;
         	cout << "Vehiculo agregado. \n ";
             break;
         case 3:
@@ -311,20 +309,35 @@ int main() {
                 cin >> cedula;
                 cout << "Ingrese el numero de serie del Vehiculo \n "
                     << "Nº de serie: ";
-                int nro_serie;
-                cin >> nro_serie;
+                int nro_serie_vehiculo;
+                cin >> nro_serie_vehiculo;
                 cout << "Ingrese la fecha del viaje \n "
-                    << "DD/MM/AAAA:   /  /    "
+                    << "DD/MM/AAAA:   /  /    ";
                 int dia, mes, anio;
                 cin >> dia;
                 cin.get();
                 cin >> mes;
                 cin.get();
                 cin >> anio;
-                DtFecha fecha(dia, mes, anio)
+                DtFecha fecha(dia, mes, anio);
+                cout << "Ingrese la duracion del viaje \n "
+                    << "Duracion: ";
+                int duracion;
+                cin >> duracion;
+                cout << "Ingrese la distancia del viaje \n "
+                    << "Distancia: ";
+                int distancia;
+                cin >> distancia;
+                DtViajeBase viaje(fecha, duracion, distancia);
+                ingresarViaje(cedula, nro_serie_vehiculo, viaje);
+            } catch(exception* e) {
+                cout << e->what();
+                break;
             }
+            cout << "Viaje ingresado. \n ";
             break;
         case 4:
+            
             break;
         case 5:
             break;

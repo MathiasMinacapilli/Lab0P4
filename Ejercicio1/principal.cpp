@@ -55,7 +55,7 @@ static int buscar_vehiculo(int numserie) {
     bool encontre = false;
     int i=0;
     while (!encontre && i<tope_vehiculo){
-        if (arreglo_vehiculod[i]->nro_serie == numserie)
+        if (arreglo_vehiculos[i]->nro_serie == numserie)
             encontre = true;
         else i++;
     }
@@ -158,10 +158,13 @@ Si no existe un usuario registrado con esa cédula,
 se levanta una excepción std::invalid_argument.
 */
 void eliminarViajes(string ci, const DtFecha& fecha) {
-    int pos_usuario = buscar_usuario(ci);
-    if (pos_usario!=-1){
-        int total_viajes = arreglo_usuarios[pos_usuario]->cant_viajes;
-
+    int posicion_usuario = buscar_usuario(ci);
+    if (posicion_usario != -1) {
+        Viajes* viajes = arreglo_usuarios[posicion_usario].getViajes();
+        for (int i = 0; i <=  arreglo_usuarios[posicion_usuario] -> cant_viajes; i++) {
+            if (a
+            int total_viajes = arreglo_usuarios[posicion_usuario] -> cant_viajes;
+        
     }
     else
         throw new invalid_argument ("No existe el usuario ingresado");

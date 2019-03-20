@@ -229,13 +229,14 @@ int main() {
 	            cin >> nombre;
 	            cout << "Ingrese la cedula del Usuario \n "
 	            	<< "Cedula: ";
-	            int ci
+	            string ci
 	            cin >> ci;
-	            registrarUsuario(nombre, ci)
+	            registrarUsuario(ci, nombre)
 	        } catch(exception* e) {
 	        	cout << e->what();
 	        	break;
 	        }
+	        tope_usuario++;
 	        cout << "Usuario agregado. \n ";
             break;
         case 2: //
@@ -296,9 +297,29 @@ int main() {
         		cout << e->what();
         		break;
         	}
+        	tope_vehiculo++;
         	cout << "Vehiculo agregado. \n ";
             break;
         case 3:
+            try {
+                cout << "Ingrese la cedula del usuario \n "
+                    << "Cedula: ";
+                string cedula;
+                cin >> cedula;
+                cout << "Ingrese el numero de serie del Vehiculo \n "
+                    << "Nº de serie: ";
+                int nro_serie;
+                cin >> nro_serie;
+                cout << "Ingrese la fecha del viaje \n "
+                    << "DD/MM/AAAA:   /  /    "
+                int dia, mes, anio;
+                cin >> dia;
+                cin.get();
+                cin >> mes;
+                cin.get();
+                cin >> anio;
+                DtFecha fecha(dia, mes, anio)
+            }
             break;
         case 4:
             break;

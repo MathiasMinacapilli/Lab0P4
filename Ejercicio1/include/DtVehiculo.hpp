@@ -21,6 +21,7 @@ class DtMonopatin: public DtVehiculo {
 private:
     bool tieneLuces;
 public:
+    DtMonopatin(int=0, float=0, float=0, bool=false);
     bool getTieneLuces();
     DtMonopatin operator<<();
     ~DtMonopatin();
@@ -34,7 +35,7 @@ private:
     TipoBici tipo;
     int cant_cambios;
 public:
-    DtBicicleta(TipoBici , int);
+    DtBicicleta(int=0, float=0, float=0, TipoBici, int=0);
     TipoBici getTipo();
     int getCantCambios();
     DtBicicleta operator<<();

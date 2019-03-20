@@ -31,7 +31,7 @@ DtVehiculo::~DtVehiculo() {
 
 
 //DtMonopatin, subclase de DtVehiculo
-DtMonopatin::DtMonopatin(bool tieneLuces) {
+DtMonopatin::DtMonopatin(int nro_serie, float porcentaje, float precio_base, bool tieneLuces) : DtVehiculo(nro_serie, porcentaje, precio_base) {
     this -> tieneLuces = tieneLuces;
 }
 
@@ -52,9 +52,9 @@ ostream &operator<< (ostream& o, DtMonopatin dtm) {
 }
 
 //DtBicicleta, subclase de DtVehiculo
-DtBicicleta::DtBicicleta(int nro_serie, float porcentaje, float precio_base, TipoBici tipo, int cant_cambios) {
-    DtVehiculo(nro_serie, porcentaje, precio_base);
+DtBicicleta::DtBicicleta(int nro_serie, float porcentaje, float precio_base, TipoBici tipo, int cant_cambios) : DtVehiculo(nro_serie, porcentaje, precio_base) {
     this -> tipo = tipo;
+    this -> cant_cambios = cant_cambios;
 }
 
 TipoBici DtBicicleta::getTipo() {

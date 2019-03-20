@@ -223,13 +223,32 @@ int main() {
         cin >> i;
         switch(i) {
         case 1:
-            cout << "Introduzca el nombre del Usuario: \n "
-                    << "Nombre: ";
-            string nombre;
-            cin << nombre;
-            cout << "
+        	try {
+	            cout << "Ingrese el nombre del Usuario \n "
+	                << "Nombre: ";
+	            string nombre;
+	            cin >> nombre;
+	            cout << "Ingrese la cedula del Usuario \n "
+	            	<< "Cedula: ";
+	            int ci
+	            cin >> ci;
+	            registrarUsuario(nombre, ci)
+	        } catch(exception* e) {
+	        	cout << e->what();
+	        	break;
+	        }
+	        cout << "Usuario agregado.";
             break;
-        case 2:
+        case 2: //
+        	try {
+        		cout << "Indique ingresando M o B si ingresa un Monopatin o Bicicleta respectivamente: \n ";
+        		char V;
+        		cin >> V;
+        		if (V == M) {
+        			cout << "Ingrese el numero de serie \n "
+        				<< "Nº de serie: ";
+        		}
+        	}
             break;
         case 3:
             break;

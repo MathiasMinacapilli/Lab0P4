@@ -50,6 +50,12 @@ void Usuario::setFechaIngreso(DtFecha fecha_ingreso) {
     this->fecha_ingreso = fecha_ingreso;
 }
 
+void Usuario::setCantViajes(int cant_viajes) {
+    /* Le asigna al atributo cant_viajes del usuario el parametro cant_viajes */
+    this cant_viajes = cant_viajes;
+}
+
+
 int Usuario::agregarViaje(Viaje &viaje) {
     /* Agrega un viaje al usuario en el arreglo viajes[100] y devuelve 1, en caso de ya haber
     100 viajes no hace nada y devuelve 0 */

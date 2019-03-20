@@ -1,9 +1,13 @@
 /*** Laboratorio 0 de Programacion 4 ***/
 /*** Ejercicio 1 ***/
 
+#include "include/Bicicleta.hpp"
+#include "DtBicicleta.hpp"
 #include "include/DtFecha.hpp"
+#include "include/DtMonopatin.hpp"
 #include "include/DtVehiculo.hpp"
 #include "include/DtViajeBase"
+#include "include/Monopatin.hpp"
 #include "include/TipoBici.hpp"
 #include "include/Usuario.hpp"
 #include "include/Vehiculo.hpp"
@@ -29,8 +33,8 @@ Si existe, devuelve el numero de posicion del arreglo.
 Sino, devuelve -1.
 */
 static int buscar_usuario(string cid) {
-    bool encontre = false; 
-    int i=0; 
+    bool encontre = false;
+    int i=0;
     while (!encontre && i<tope_usuario){
         if (arreglo_usuarios[i]->ci.compare(cid)==0)
             encontre = true;
@@ -47,8 +51,8 @@ Si existe, devuelve el numero de posicion de ese vehiculo.
 Sino, devuelve -1.
 */
 static int buscar_vehiculo(int numserie) {
-    bool encontre = false; 
-    int i=0; 
+    bool encontre = false;
+    int i=0;
     while (!encontre && i<tope_vehiculo){
         if (arreglo_vehiculod[i]->nro_serie == numserie)
             encontre = true;
@@ -91,9 +95,9 @@ De no ser así, se levanta una excepción std::invalid_argument.
 void agregarVehiculo(const DtVehiculo& vehiculo) {
     if (tope_vehiculo == MAX_VEHICULOS)
         throw new invalid_argument("No hay mas lugar para vehiculos");
-    
-    else 
-        
+
+    else
+
         if ((buscar_vehiculo(vehiculo.getNroSerie()) == -1) && (0 <= vehiculo.getPorcentaje()) && (vehiculo.getPorcentaje() <= 100) && (vehiculo.getPrecioBase() >= 0)) {
             DtVehiculo* v = &vehiculo;
             DtBicicleta *dtb = dynamic_cast<DtBicicleta*>(v)
@@ -101,12 +105,12 @@ void agregarVehiculo(const DtVehiculo& vehiculo) {
                 Bicicleta *bici = new Bicicleta(dtb->getNroSerie(), dtb->getPorcentaje(), dtb->getPrecioBase(), dtb->getTipo(), dtb->getCantCambios());
                 arreglo_vehiculos[tope_vehiculo] = bici;
             }
-            else //es monopatin 
+            else //es monopatin
                 { DtMonopatin* dtm = dynamic_cast<DtMonopatin*>(v);
                 Monopatin *mono = new Monopatin(dtm->getNroSerie(), dtm->getPorcentaje(), dtm->getPrecioBase(), dtm->getTieneLuces());
                 arreglo_vehiculos[tope_vehiculo] = mono;
                 }
-             tope_vehiculo++;   
+             tope_vehiculo++;
     }
     else throw new invalid_argument("verifique parametros")
 }
@@ -129,7 +133,7 @@ void ingresarViaje(string ci, int nroSerieVehiculo, const DtViajeBase& viaje) {
         Viaje trip(viaje.getFecha(), viaje.getDuracion(), viaje.getDistancia(), arreglo_vehiculos[posicion_vehiculo]);
         arreglo_usuarios[posicion_usuario] -> agregarViaje(trip);
   }
-  else 
+  else
       throw new invalid_argument ("No se pudo ingresar el viaje");
 }
 
@@ -155,10 +159,10 @@ se levanta una excepción std::invalid_argument.
 void eliminarViajes(string ci, const DtFecha& fecha) {
     int pos_usuario = buscar_usuario(ci);
     if (pos_usario!=-1){
-        int total_viajes = arreglo_usuarios[pos_usuario]->cant_viajes; 
+        int total_viajes = arreglo_usuarios[pos_usuario]->cant_viajes;
 
     }
-    else 
+    else
         throw new invalid_argument ("No existe el usuario ingresado");
 }
 
@@ -184,15 +188,15 @@ devuelve la cantidad de vehículos (corresponde a la cantidad de valores DtVehi
 DtVehiculo** obtenerVehiculos(int& cantVehiculos) {
     if (tope_vehiculo>0){
         DtVehiculo* arreglo_dtv = new DtVehiculo[tope_vehiculo]
-        //creo puntero al arreglo de DTVehiculos 
+        //creo puntero al arreglo de DTVehiculos
         DtVehiculo** puntero_dtv =  &arreglo_dtv;
         for (int i=0; i<tope_vehiculo; i++){
-            
+
             *arreglo_dtv[i]->DtVehiculo()
         }
-    
+
     }
-    else 
+    else
         return nullptr;
 }
 
@@ -261,7 +265,7 @@ int main() {
         				tieneLuces = false;
         			DtMonopatin dtm(nro_serie, porcentaje, precio_base, tieneLuces);
         			DtVehiculo& dtv = dtm;
-        			agregarVehiculo(dtv); 
+        			agregarVehiculo(dtv);
         		} else {
         			cout << "Ingrese el numero de serie \n "
         				<< "Nº de serie: ";

@@ -1,4 +1,3 @@
-
 #include "TipoBici.hpp"
 
 class Vehiculo {
@@ -20,41 +19,3 @@ public:
 	float get_precio_base();
     virtual float darPrecioViaje(int, int) = 0;
 };
-
-// Monopatin es subclase de Vehiculo
-class Monopatin: public Vehiculo {
-private:
-    bool tieneLuces;
-public:
-	//constructor y destructor
-	Monopatin(int, float, float, bool=false);
-	~Monopatin();
-	//getter
-	bool get_luces();
-	//setter
-	void set_tieneLuces(bool);
-
-    float darPrecioViaje(int, int);
-    
-};
-
-// Bicicleta subclase de Vehiculo
-class Bicicleta: public Vehiculo {
-private:
-    TipoBici tipo;
-    int cant_cambios;
-public:
-	//constructor y destructor
-	Bicicleta(int, float, float, TipoBici, int);
-	~Bicicleta();
-	//getters
-	TipoBici get_tipo();
-	int get_cant_cambios();
-	//setters
-	void set_tipo(TipoBici);
-	void set_cant_cambios(int);
-
-    float darPrecioViaje(int, int);
-    
-};
-

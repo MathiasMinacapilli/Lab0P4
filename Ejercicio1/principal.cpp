@@ -2,11 +2,12 @@
 /*** Ejercicio 1 ***/
 
 #include "include/Bicicleta.hpp"
-#include "DtBicicleta.hpp"
+#include "include/DtBicicleta.hpp"
 #include "include/DtFecha.hpp"
 #include "include/DtMonopatin.hpp"
 #include "include/DtVehiculo.hpp"
-#include "include/DtViajeBase"
+#include "include/DtViajeBase.hpp"
+#include "include/DtViaje.hpp"
 #include "include/Monopatin.hpp"
 #include "include/TipoBici.hpp"
 #include "include/Usuario.hpp"

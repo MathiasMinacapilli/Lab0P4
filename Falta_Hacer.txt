@@ -2,7 +2,6 @@
  
  FALTA:
     -  Cambiar en las funciones del main, los objetos estaticos a dinamicos. [principal.cpp] 
-    -  Separa cada subclase en distintos archivos.
     -  Verificar cada destructor, para ver si hay que hacer delete[] o no de una asociacion.
     -  Verificar sobrecarga de DtFecha. [DtFecha]
  

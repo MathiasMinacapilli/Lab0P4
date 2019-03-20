@@ -18,17 +18,3 @@ int DtViajeBase::getDuracion() {
 int DtViajeBase::getDistancia() {
     return this->distancia;
 }
-
-//Clase DtViaje
-DtViaje::DtViaje(float precio_total, DtVehiculo vehiculo) {
-    this->precio_total = precio_total;
-    this->vehiculo = vehiculo;
-}
-
-float DtViaje::getPrecioTotal() {
-    return this->precio_total
-}
-
-DtVehiculo DtViaje::getVehiculo() {
-    return this->vehiculo
-}

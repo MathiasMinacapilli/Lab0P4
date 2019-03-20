@@ -19,21 +19,17 @@ public:
     std::string getCi();
     std::string getNombre();
     DtFecha getFechaIngreso();
+    int getCantViajes();
+    Viaje** getViajes();
 
     //Setters
     void setCi(std::string);
     void setNombre(std::string);
     void setFechaIngreso(DtFecha);
-
-    //Getters Viaje
-    int getCantViajes();
-    Viaje** getViajes();
     
-    //Setter Viaje
-    void setCantViajes
-    
-    /* Agrega un viaje al usuario. De tener 100 viajes, no hace nada. */
-    void agregarViaje(Viaje);
+    //Agrega un viaje al usuario
+    int agregarViaje(Viaje&);
 
+    //Destructor
     ~Usuario();
 };

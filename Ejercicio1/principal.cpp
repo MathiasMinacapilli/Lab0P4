@@ -29,6 +29,12 @@ Usuario *arreglo_usuarios[MAX_USUARIOS];
 Vehiculo *arreglo_vehiculos[MAX_VEHICULOS];
 
 /*
+Retorna true si y solo si str esta compuesto solamente por digitos
+*/
+static bool son_digitos(string ci) {
+    return all_of(ci.begin(), ci.end(), ::isdigit);
+}
+/*
 Busca si existe la cedula cid en el arreglo_usuarios.
 Si existe, devuelve el numero de posicion del arreglo.
 Sino, devuelve -1.
@@ -230,10 +236,15 @@ int main() {
 	                << "Nombre: ";
 	            string nombre;
 	            cin >> nombre;
-	            cout << "Ingrese la cedula del Usuario \n "
+	            cout << "Ingrese la cedula del Usuario sin guion ni digito y con verificador \n "
 	            	<< "Cedula: ";
 	            string ci
 	            cin >> ci;
+                while ((ci.size() != 8) && (!son_digitos(ci))) {
+                    cout << "Cedula no valida. Ingrese la cedula del Usuario sin guion y con digito verificador \n "
+                        << "Cedula: ";
+                    cin >> ci;
+                }
 	            registrarUsuario(ci, nombre)
 	        } catch(exception* e) {
 	        	cout << e->what();
@@ -246,6 +257,10 @@ int main() {
         		cout << "Indique ingresando M o B si ingresa un Monopatin o Bicicleta respectivamente: \n ";
         		char V;
         		cin >> V;
+                while ((V != M) && (V != B)) {
+                    cout << "Caracter no valido. Indique ingresando M o B si ingresa un Monopatin o Bicicleta respectivamente: \n ";
+                    cin >> V;
+                }
         		if (V == M) {
         			cout << "Ingrese el numero de serie \n "
         				<< "Nº de serie: ";
@@ -259,9 +274,13 @@ int main() {
         				<< "Precio base: ";
         			float precio_base;
         			cin >> precio_base;
-        			cout << "Indique con 1 si tiene luces, de lo contrario, 0: \n "
+        			cout << "Indique ingresando 1 si tiene luces, de lo contrario, 0: \n ";
         			int luz;
         			cin >> luz;
+                    while ((luz != 1) && (luz != 0)) {
+                        cout << "Numero no valido. Indique ingresando 1 si tiene luces, de lo contrario, 0: \n ";
+                        cin >> luz;
+                    }
         			bool tieneLuces;
         			if (luz == 1)
         				tieneLuces = true
@@ -283,6 +302,7 @@ int main() {
         				<< "Precio base: ";
         			float precio_base;
         			cin >> precio_base;
+                    // Como hacer el chequeo aca
         			cout << "Ingrese el tipo de Bicicleta, Paseo o Montaña \n "
         				<< "Tipo de Bici: ";
         			TipoBici tipo;
@@ -291,6 +311,11 @@ int main() {
         				<< "Cantidad de cambios: ";
         			int cant_cambios;
         			cin >> cant_cambios;
+                    while (cant_cambios <= 0) {
+                        cout << "Numero no valido. Ingrese la cantidad de cambios \n "
+                            << "Cantidad de cambios: ";
+                        cin >> cant_cambios;
+                    }
         			DtBicicleta dtb(nro_serie, porcentaje, precio_base, tipo, cant_cambios);
         			DtVehiculo& dtv = dtb;
         			agregarVehiculo(dtv);
@@ -303,14 +328,20 @@ int main() {
             break;
         case 3:
             try {
-                cout << "Ingrese la cedula del usuario \n "
+                cout << "Ingrese la cedula del Usuario sin guion y con digito verificador \n "
                     << "Cedula: ";
                 string cedula;
                 cin >> cedula;
+                while ((ci.size() != 8) && (!son_digitos(ci))) {
+                    cout << "Cedula no valida. Ingrese la cedula del Usuario sin guion y con digito verificador \n "
+                        << "Cedula: ";
+                    cin >> ci;
+                }
                 cout << "Ingrese el numero de serie del Vehiculo \n "
                     << "Nº de serie: ";
                 int nro_serie_vehiculo;
                 cin >> nro_serie_vehiculo;
+                // Tendria que hacer chequeo aca tambien, mod de 10 y 1000?
                 cout << "Ingrese la fecha del viaje \n "
                     << "DD/MM/AAAA:   /  /    ";
                 int dia, mes, anio;
@@ -337,28 +368,124 @@ int main() {
             cout << "Viaje ingresado. \n ";
             break;
         case 4:
-            
+            cout << "Ingrese la cedula del Usuario sin guion y con digito verificador \n "
+                << "Cedula: ";
+            string cedula;
+            cin >> cedula;
+            while ((ci.size() != 8) && (!son_digitos(ci))) {
+                cout << "Cedula no valida. Ingrese la cedula del Usuario sin guion y con digito verificador \n "
+                << "Cedula: ";
+                cin >> ci;
+            }
+            // Tendria que hacer chequeo aca tambien, mod de 10 y 1000?
+            cout << "Ingrese la fecha del viaje \n "
+                << "DD/MM/AAAA:   /  /    ";
+            int dia, mes, anio;
+            cin >> dia;
+            cin.get();
+            cin >> mes;
+            cin.get();
+            cin >> anio;
+            DtFecha fecha(dia, mes, anio);
+            int cantViajes = 0;
+            DtViaje** viajes = verViajesAntesDeFecha(fecha, cedula, cantViajes);
+            if (cantViajes == 0) {
+                cout << "No hay viajes del Usuario con cedula "
+                    << cedula
+                    << " antes del " << dia << "/" << mes << "/" << anio;
+            } else {
+                DtViaje* unViaje;
+                while (cantViajes != 0) {
+                    unViaje = &viajes[cantViajes - 1];
+                    cout << "Informacion del viaje nº " << cantViajes << ": \n "
+                        << "Fecha: " << unViaje->getFecha().getDia() << "/" << unViaje->getFecha().getMes() << "/" << unViaje->getFecha().getAnio() << "\n"
+                        << "Duracion: " << unViaje->getDuracion() << "\n"
+                        << "Distancia: " << unViaje->getDistancia() << "\n"
+                        << "Nº de serie del Vehiculo: " << unViaje->getVehiculo().getNroSerie() << "\n"
+                        << "Precio total: " << unViaje->getPrecioTotal() << "\n";
+                    cantViajes--;
+                }
+            }
             break;
         case 5:
+            try {
+                cout << "Ingrese la cedula del Usuario sin guion y con digito verificador \n "
+                    << "Cedula: ";
+                string cedula;
+                cin >> cedula;
+                while ((ci.size() != 8) && (!son_digitos(ci))) {
+                    cout << "Cedula no valida. Ingrese la cedula del Usuario sin guion y con digito verificador \n "
+                        << "Cedula: ";
+                    cin >> ci;
+                }
+                // Tendria que hacer chequeo aca tambien, mod de 10 y 1000?
+                cout << "Ingrese la fecha del viaje \n "
+                    << "DD/MM/AAAA:   /  /    ";
+                int dia, mes, anio;
+                cin >> dia;
+                cin.get();
+                cin >> mes;
+                cin.get();
+                cin >> anio;
+                DtFecha fecha(dia, mes, anio);
+                eliminarViajes(cedula, fecha);
+            } catch(exception* e) {
+                cout << e->what();
+                break;
+            }
+            cout << "Viajes eliminados. \n ";
             break;
         case 6:
+            try {
+                cout << "Ingrese el numero de serie del Vehiculo \n "
+                    << "Nº de serie: ";
+                int nro_serie_vehiculo;
+                cin >> nro_serie_vehiculo;
+                cout << "Ingrese el nuevo porcentaje de carga de la bateria del Vehiculo \n "
+                    << "% bateria: ";
+                float cargaVehiculo;
+                cin >> cargaVehiculo;
+                cambiarBateriaVehiculo(nro_serie_vehiculo, cargaVehiculo);
+            } catch(exception* e) {
+                cout << e->what();
+                break;
+            }
+            cout << "Porcentaje de Bateria cambiado. \n ";
             break;
         case 7:
+            int cantVehiculos = 0;
+            DtVehiculo** vehiculos = obtenerVehiculos(cantVehiculos);
+            if (cantVehiculos == 0) {
+                cout << "No hay vehiculos registrados en el sistema. \n";
+            } else {
+                DtVehiculo* unVehiculo;
+                while (cantVehiculos != 0) {
+                    unVehiculo = &vehiculos[cantVehiculos - 1];
+                    cout << "Informacion del vehiculo nº " << cantVehiculos << ": \n "
+                        << "Nº de serie: " << unVehiculo->getNroSerie() << "\n"
+                        << "% bateria: " << unVehiculo->getPorcentaje() << "\n"
+                        << "Precio base: " << unVehiculo->getPrecioBase() << "\n";
+                    DtBicicleta *dtb = dynamic_cast<DtBicicleta*>(unVehiculo);
+                    if (dtb != nullptr) {
+                        cout << "Tipo de Bicicleta: " << dtb->getTipo() << "\n"
+                            << "Cantidad de cambios: " << dtb->getCantCambios() << "\n";
+                    } else {
+                        DtMonopatin *dtm = dynamic_cast<DtMonopatin*>(unVehiculo);
+                        cout << "Tiene luces: ";
+                        if (dtm->getTieneLuces)
+                            cout << "Si \n";
+                        else
+                            cout << "No \n";
+                    }
+                    cantVehiculos--;
+                }
+            }
             break;
         case 0:
             salir = true;
             break;
         }
     }
-
-
-
-
-
-
-
-
-
 
     return 0;
 }

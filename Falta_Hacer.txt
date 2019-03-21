@@ -4,11 +4,10 @@
     -  Cambiar en las funciones del main, los objetos estaticos a dinamicos. [principal.cpp] 
     -  Verificar cada destructor, para ver si hay que hacer delete[] o no de una asociacion.
     -  Verificar sobrecarga de DtFecha. [DtFecha]
-    -  Agregar sobrecarga "operador ==) de DtFecha. [DtFecha]
+    -  Agregar sobrecarga "operador ==" de DtFecha. [DtFecha]
  
  
  TERMINAR:
-    -  Todos los "Cases" del menu. [principal.cpp]
     -  Funcion verViajesAntesDeFecha. [principal.cpp]
     -  Funcion eliminarViajes. [principal.cpp]
     -  Funcion obtenerVehiculos. [principal.cpp]

@@ -154,28 +154,45 @@ cantViajes es un parámetro de salida donde se devuelve la cantidad
 de viajes encontrados (corresponde a la cantidad de valores DtViaje que se devuelven).
 */
 DtViaje** verViajesAntesDeFecha(const DtFecha& fecha, string ci, int& cantViajes) {
-    DtViaje* arreglo_dtv; //= new DtViaje[2];
+    
     DtViaje** vaf = nullptr;
+    int j=0;
 
     int posicion_usuario = buscar_usuario(ci);
-    if(posicion_usuario != -1) {
-        // Si encontre (o existe) el usuario con esa ci
-        Viaje** viajes_usuario = arreglo_usuarios[posicion_usuario]->getViajes();
-        int j=0;
+    if(posicion_usuario != -1) { // Si encontre el usuario con esa ci
         for(int i = 0; i < arreglo_usuarios[posicion_usuario]->getCantViajes(); i++) {
             //Cuento la cantidad de viajes que hay con menor fecha que la recibida por parametro
-            //y voy agregando a mi arreglo para devolver
-            if(!((*viajes_usuario)[i].getFecha() >= fecha)) {
-                //agregar al arreglo de alguna forma y de algun tamaño
+            if(!((*viajes_usuario)[i].getFecha() >= f))
                 j++;
-            }
         }
+        
         cantViajes = j;
+        if (j!=0){
+            DtViaje* arreglo_dtv = new DtViaje[j];
+            int k=0; 
+            for (int i = 0; i<j; i++){
+                if (!((viajes_usuario)[i]->getFecha() >= f)){
+                    
+                    Vehiculo* v = &(viajes_usuario[i]->getVehiculo);
+                    
+                    Bicicleta* bici = dynamic_cast<Bicicleta*>(v);
+                    if (bici != nullptr) {
+                        DtBicicleta veh(bici->get_nro_serie(), bici->)
+                    }
+                    
+                    arreglo_dtv[k] = new DtViaje(viajes_usuario[i]->getFecha(), viajes_usuario[i]->getDuracion, viajes_usuario[i]->getDistancia(), viajes_usuario[i]->getVehiculo().darPrecioViaje()) 
+                }
+                    
+            } 
+            
+        }
+        
+        else return nullptr;
 
     }
-    DtViaje** vaf =  &arreglo_dtv;
-
-    return vaf;
+    //DtViaje** vaf =  &arreglo_dtv;
+    cant_viajes=0;
+    return nullptr;;
 }
 
 /*

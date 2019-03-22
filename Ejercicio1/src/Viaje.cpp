@@ -24,6 +24,11 @@ int Viaje::getDistancia() {
     /* Retorna la distancia del Viaje */
     return this->distancia;
 }
+
+
+Vehiculo Viaje::getVehiculo() {
+    return this->vehiculo;
+}
     
 void Viaje::setFecha(DtFecha fecha) {
     /* Le asigna al atributo fecha de Viaje el parametro fecha */

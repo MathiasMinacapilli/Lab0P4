@@ -15,6 +15,7 @@ public:
     DtFecha getFecha();
     int getDuracion();
     int getDistancia();
+    Vehiculo getVehiculo();
 
     //Getters
     void setFecha(DtFecha);

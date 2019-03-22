@@ -7,7 +7,7 @@ private:
     float precio_total;
     DtVehiculo vehiculo;
 public:
-    DtViaje(float, DtVehiculo);
+    DtViaje(DtFecha, int, int, float, DtVehiculo);
     float getPrecioTotal();
     DtVehiculo getVehiculo();
     ~DtViaje();

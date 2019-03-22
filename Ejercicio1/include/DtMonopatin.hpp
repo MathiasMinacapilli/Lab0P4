@@ -11,7 +11,7 @@ private:
     bool tieneLuces;
 public:
     DtMonopatin(int=0, float=0, float=0, bool=false);
-    bool getTieneLuces();
+    bool getTieneLuces() const;
     ~DtMonopatin();
 };
 

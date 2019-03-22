@@ -33,6 +33,6 @@ float Bicicleta::darPrecioViaje(int duracion, int distancia){
 
 //destructor
 Bicicleta::~Bicicleta()
-	:~Vehiculo {
+	{
 		
 }

@@ -14,16 +14,16 @@ private:
 public:
     //constructor
     Viaje(DtFecha, int, int, Vehiculo*);
-    //Setters
-    DtFecha getFecha();
-    int getDuracion();
-    int getDistancia();
-    Vehiculo* getVehiculo();
-
     //Getters
-    void setFecha(DtFecha) const;
-    void setDuracion(int) const;
-    void setDistancia(int) const;
+    DtFecha getFecha() const;
+    int getDuracion() const;
+    int getDistancia() const;
+    Vehiculo* getVehiculo() const;
+
+    //Setters
+    void setFecha(DtFecha);
+    void setDuracion(int);
+    void setDistancia(int);
     
     ~Viaje();
 };

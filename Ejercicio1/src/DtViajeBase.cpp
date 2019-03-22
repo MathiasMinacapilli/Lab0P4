@@ -18,3 +18,5 @@ int DtViajeBase::getDuracion() const{
 int DtViajeBase::getDistancia() const{
     return this->distancia;
 }
+
+DtViajeBase:: ~DtViajeBase(){}

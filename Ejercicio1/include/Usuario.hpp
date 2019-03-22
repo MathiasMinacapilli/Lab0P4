@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <string>
+using namespace std;
 
 class Usuario {
 private:
@@ -23,7 +24,7 @@ public:
     std::string getNombre() const;
     DtFecha getFechaIngreso() const;
     int getCantViajes() const;
-    Viaje** getViajes() const;
+    Viaje** getViajes();
 
     //Setters
     void setCi(std::string);

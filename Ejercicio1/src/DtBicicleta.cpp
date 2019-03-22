@@ -20,9 +20,10 @@ DtBicicleta::~DtBicicleta() {
 
 ostream &operator<< (ostream& o, DtBicicleta dtb) {
     std::string tipo;
-    if (dtb.getTipo == Paseo)
+    if (dtb.getTipo() == Paseo)
         tipo = "Paseo";
     else
         tipo = "Montaña";
     o << "- Numero Serie: " << dtb.getNroSerie() << "\n" << "- Porcentaje Bateria: " << dtb.getPorcentaje() << "\n" << "- Precio Base: $" << dtb.getPrecioBase() << "." << "\n" << "- Tipo de Bicicleta: " << tipo << "\n" << "- Cantidad de cambios: " << dtb.getCantCambios();
+    return o;
 }

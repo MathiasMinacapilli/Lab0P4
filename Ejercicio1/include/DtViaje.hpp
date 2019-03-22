@@ -8,12 +8,12 @@
 class DtViaje: public DtViajeBase {
 private:
     float precio_total;
-    DtVehiculo vehiculo;
+    DtVehiculo* vehiculo;
 public:
-    DtViaje(DtFecha, int, int, float, DtVehiculo);
+    DtViaje(DtFecha, int, int, float, DtVehiculo*);
     
     float getPrecioTotal() const;
-    DtVehiculo getVehiculo() const;
+    DtVehiculo* getVehiculo() const;
 
     ~DtViaje();
 };

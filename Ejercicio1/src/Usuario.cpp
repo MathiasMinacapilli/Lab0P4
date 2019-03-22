@@ -1,5 +1,7 @@
 
 #include "../include/Usuario.hpp"
+#include <stdlib.h>
+
 
 Usuario::Usuario(string ci, string nombre, DtFecha fecha_ingreso, int cant_viajes) {
     this->ci = ci;
@@ -29,7 +31,7 @@ int Usuario::getCantViajes() const{
     /* Retorna la cantidad de viajes a los que está linkeado el usuario */
     return this->cant_viajes;
 }
-Viaje** Usuario::getViajes() const{
+Viaje** Usuario::getViajes() {
     /* Retorna el array de viajes linkeado al usuario */
    return this->viajes;
 }
@@ -52,7 +54,7 @@ void Usuario::setFechaIngreso(DtFecha fecha_ingreso) {
 
 void Usuario::setCantViajes(int cant_viajes) {
     /* Le asigna al atributo cant_viajes del usuario el parametro cant_viajes */
-    this cant_viajes = cant_viajes;
+    this ->cant_viajes = cant_viajes;
 }
 
 

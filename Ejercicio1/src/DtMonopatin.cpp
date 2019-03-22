@@ -14,9 +14,10 @@ DtMonopatin::~DtMonopatin() {
 
 ostream &operator<< (ostream& o, DtMonopatin dtm) {
     std::string luces;
-    if (dtm.getTieneLuces)
+    if (dtm.getTieneLuces())
         luces = "Si";
     else
         luces = "No";
     o << "- Numero Serie: " << dtm.getNroSerie() << "\n" << "- Porcentaje Bateria: " << dtm.getPorcentaje() << "\n" << "- Precio Base: $" << dtm.getPrecioBase() << "." << "\n" << "- Tiene luces: " << luces;
+    return o;
 }

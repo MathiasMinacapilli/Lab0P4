@@ -155,7 +155,7 @@ cantViajes es un parámetro de salida donde se devuelve la cantidad
 de viajes encontrados (corresponde a la cantidad de valores DtViaje que se devuelven).
 */
 DtViaje** verViajesAntesDeFecha(const DtFecha& fecha, string ci, int& cantViajes) {
-    DtViaje** arreglo_dtv;
+    DtViaje** arreglo_dtv = nullptr;
     int j=0;
     int posicion_usuario = buscar_usuario(ci);
     if(posicion_usuario != -1) { // Si encontre el usuario con esa ci
@@ -177,13 +177,13 @@ DtViaje** verViajesAntesDeFecha(const DtFecha& fecha, string ci, int& cantViajes
                     
                     Bicicleta* bici = dynamic_cast<Bicicleta*>(v);
                     if (bici != nullptr) {
-                        DtBicicleta b(bici->get_nro_serie(), bici->get_porcentaje_bateria(), bici->get_precio_base(), bici->get_tipo(), bici->get_cant_cambios());
+                        DtBicicleta* b = new DtBicicleta(bici->get_nro_serie(), bici->get_porcentaje_bateria(), bici->get_precio_base(), bici->get_tipo(), bici->get_cant_cambios());
                     
                          arreglo_dtv[k] = new DtViaje(viajes_usuario[i]->getFecha(), viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia(), viajes_usuario[i]->getVehiculo()->darPrecioViaje(viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia()), b); 
                     }    
                     else {
                         Monopatin* mono=dynamic_cast<Monopatin*>(v);
-                        DtMonopatin m(mono->get_nro_serie(), mono->get_porcentaje_bateria(), mono->get_precio_base(), mono->get_luces());
+                        DtMonopatin* m = new DtMonopatin(mono->get_nro_serie(), mono->get_porcentaje_bateria(), mono->get_precio_base(), mono->get_luces());
                     
                          arreglo_dtv[k] = new DtViaje(viajes_usuario[i]->getFecha(), viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia(), viajes_usuario[i]->getVehiculo()->darPrecioViaje(viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia()), m); 
                     }
@@ -326,31 +326,30 @@ int main() {
         		cout << "Indique ingresando M o B si ingresa un Monopatin o Bicicleta respectivamente: \n ";
         		string V;
         		cin >> V;
-                while ((V != "M") || (V != "B")) { // debe ser un || porque al cumplirse una de las dos ya ingresa
+                while ((V != "M") && (V != "B")) {
                     cout << "Caracter no valido. Indique ingresando M o B si ingresa un Monopatin o Bicicleta respectivamente: \n ";
                     cin >> V;
                 }
+                int nro_serie, luz;
+                float porcentaje, precio_base;
+                bool tieneLuces;
+                TipoBici tb;
         		if (V == "M") {
         			cout << "Ingrese el numero de serie \n "
         				<< "Nº de serie: ";
-        			int nro_serie;
         			cin >> nro_serie;
         			cout << "Ingrese el porcentaje de bateria \n "
         				<< "% bateria: ";
-        			float porcentaje;
         			cin >> porcentaje;
         			cout << "Ingrese el precio base del Monopatin \n "
         				<< "Precio base: ";
-        			float precio_base;
         			cin >> precio_base;
         			cout << "Indique ingresando 1 si tiene luces, de lo contrario, 0: \n ";
-        			int luz;
         			cin >> luz;
                     while ((luz != 1) && (luz != 0)) {
                         cout << "Numero no valido. Indique ingresando 1 si tiene luces, de lo contrario, 0: \n ";
                         cin >> luz;
                     }
-        			bool tieneLuces;
         			if (luz == 1)
         				tieneLuces = true;
         			else
@@ -361,21 +360,28 @@ int main() {
         		} else {
         			cout << "Ingrese el numero de serie \n "
         				<< "Nº de serie: ";
-        			int nro_serie;
         			cin >> nro_serie;
         			cout << "Ingrese el porcentaje de bateria \n "
         				<< "% bateria: ";
-        			float porcentaje;
         			cin >> porcentaje;
         			cout << "Ingrese el precio base de la Bicicleta \n "
         				<< "Precio base: ";
-        			float precio_base;
         			cin >> precio_base;
                     // Como hacer el chequeo aca
-        			cout << "Ingrese el tipo de Bicicleta, Paseo o Montaña \n "
+        			cout << "Ingrese el tipo de Bicicleta, (Paseo o Montana) \n "
         				<< "Tipo de Bici: ";
-        			TipoBici tipo;
+        			string tipo;
         			cin >> tipo;
+                    while(tipo != "Paseo" && tipo != "Montana") {
+                        cout << "Ingrese un tipo valido (Paseo o Montana) \n";
+                        cin >> tipo;
+                    }
+                    if(tipo == "Paseo")
+                        tb = Paseo;
+                    else
+                        tb = Montana;
+                            
+                }
         			cout << "Ingrese la cantidad de cambios \n "
         				<< "Cantidad de cambios: ";
         			int cant_cambios;
@@ -385,11 +391,10 @@ int main() {
                             << "Cantidad de cambios: ";
                         cin >> cant_cambios;
                     }
-        			DtBicicleta dtb(nro_serie, porcentaje, precio_base, tipo, cant_cambios);
+        			DtBicicleta dtb(nro_serie, porcentaje, precio_base, tb, cant_cambios);
         			DtVehiculo& dtv = dtb;
         			agregarVehiculo(dtv);
-        		}
-        	} catch(exception* e) {
+            }catch(exception* e) {
         		cout << e->what();
         		break;
         	}
@@ -401,10 +406,10 @@ int main() {
                     << "Cedula: ";
                 string cedula;
                 cin >> cedula;
-                while ((ci.size() != 8) && (!son_digitos(ci))) {
+                while ((cedula.size() != 8) || (!son_digitos(cedula))) {
                     cout << "Cedula no valida. Ingrese la cedula del Usuario sin guion y con digito verificador \n "
                         << "Cedula: ";
-                    cin >> ci;
+                    cin >> cedula;
                 }
                 cout << "Ingrese el numero de serie del Vehiculo \n "
                     << "Nº de serie: ";
@@ -436,15 +441,15 @@ int main() {
             }
             cout << "Viaje ingresado. \n ";
             break;
-        case 4:
+        case 4: {
             cout << "Ingrese la cedula del Usuario sin guion y con digito verificador \n "
                 << "Cedula: ";
             string cedula;
             cin >> cedula;
-            while ((ci.size() != 8) && (!son_digitos(ci))) {
+            while ((cedula.size() != 8) || (!son_digitos(cedula))) {
                 cout << "Cedula no valida. Ingrese la cedula del Usuario sin guion y con digito verificador \n "
                 << "Cedula: ";
-                cin >> ci;
+                cin >> cedula;
             }
             // Tendria que hacer chequeo aca tambien, mod de 10 y 1000?
             int dia, mes, anio;
@@ -465,27 +470,28 @@ int main() {
             } else {
                 DtViaje* unViaje;
                 while (cantViajes != 0) {
-                    unViaje = &viajes[cantViajes - 1];
+                    unViaje = viajes[cantViajes - 1];
                     cout << "Informacion del viaje nº " << cantViajes << ": \n "
                         << "Fecha: " << unViaje->getFecha().getDia() << "/" << unViaje->getFecha().getMes() << "/" << unViaje->getFecha().getAnio() << "\n"
                         << "Duracion: " << unViaje->getDuracion() << "\n"
                         << "Distancia: " << unViaje->getDistancia() << "\n"
-                        << "Nº de serie del Vehiculo: " << unViaje->getVehiculo().getNroSerie() << "\n"
+                        << "Nº de serie del Vehiculo: " << unViaje->getVehiculo()->getNroSerie() << "\n"
                         << "Precio total: " << unViaje->getPrecioTotal() << "\n";
                     cantViajes--;
                 }
             }
-            break;
+        }
+        break;
         case 5:
             try {
                 cout << "Ingrese la cedula del Usuario sin guion y con digito verificador \n "
                     << "Cedula: ";
                 string cedula;
                 cin >> cedula;
-                while ((ci.size() != 8) && (!son_digitos(ci))) {
+                while ((cedula.size() != 8) || (!son_digitos(cedula))) {
                     cout << "Cedula no valida. Ingrese la cedula del Usuario sin guion y con digito verificador \n "
                         << "Cedula: ";
-                    cin >> ci;
+                    cin >> cedula;
                 }
                 // Tendria que hacer chequeo aca tambien, mod de 10 y 1000?
                 int dia, mes, anio;
@@ -521,7 +527,7 @@ int main() {
             }
             cout << "Porcentaje de Bateria cambiado. \n ";
             break;
-        case 7:
+        case 7: {
             int cantVehiculos = 0;
             DtVehiculo** vehiculos = obtenerVehiculos(cantVehiculos);
             if (cantVehiculos == 0) {
@@ -529,19 +535,19 @@ int main() {
             } else {
                 DtVehiculo* unVehiculo;
                 while (cantVehiculos != 0) {
-                    unVehiculo = &vehiculos[cantVehiculos - 1];
+                    unVehiculo = vehiculos[cantVehiculos - 1];
                     cout << "Informacion del vehiculo nº " << cantVehiculos << ": \n "
                         << "Nº de serie: " << unVehiculo->getNroSerie() << "\n"
                         << "% bateria: " << unVehiculo->getPorcentaje() << "\n"
                         << "Precio base: " << unVehiculo->getPrecioBase() << "\n";
-                    DtBicicleta *dtb = dynamic_cast<DtBicicleta*>(unVehiculo);
+                    DtBicicleta *dtb = static_cast<DtBicicleta*>(unVehiculo);
                     if (dtb != nullptr) {
                         cout << "Tipo de Bicicleta: " << dtb->getTipo() << "\n"
                             << "Cantidad de cambios: " << dtb->getCantCambios() << "\n";
                     } else {
-                        DtMonopatin *dtm = dynamic_cast<DtMonopatin*>(unVehiculo);
+                        DtMonopatin *dtm = static_cast<DtMonopatin*>(unVehiculo);
                         cout << "Tiene luces: ";
-                        if (dtm->getTieneLuces)
+                        if (dtm->getTieneLuces())
                             cout << "Si \n";
                         else
                             cout << "No \n";
@@ -549,8 +555,9 @@ int main() {
                     cantVehiculos--;
                 }
             }
-            break;
-        case 0:
+        }
+        break;
+        case 0: 
             salir = true;
             break;
         }

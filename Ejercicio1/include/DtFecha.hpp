@@ -7,12 +7,14 @@ public:
     DtFecha(int=1, int=1, int=0);
 
     //Getters
-    int getDia();
-    int getMes();
-    int getAnio();
+    int getDia() const;
+    int getMes() const;
+    int getAnio() const;
 
     //~DtFecha()??
-};
 
-//Sobrecarga el operador >=
-bool operator>= (DtFecha, DtFecha);
+    //Sobrecarga de operadoradores
+    bool operator>=(const DtFecha&);
+
+    bool operator==(const DtFecha&);
+};

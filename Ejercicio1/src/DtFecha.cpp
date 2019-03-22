@@ -10,28 +10,34 @@ DtFecha::DtFecha(int dia, int mes, int anio) {
     this->anio = anio;
 }
 
-//Getters
-int DtFecha::getDia() {
+// Getters
+int DtFecha::getDia() const {
     /* Retorna el dia del datavalue DtFecha */
     return this->dia;
 }
    
-int DtFecha::getMes() {
+int DtFecha::getMes() const {
     /* Retorna el mes del datavalue DtFecha */
     return this->mes;
 }
     
-int DtFecha::getAnio() {
+int DtFecha::getAnio() const {
     /* Retorna el anio del datavalue DtFecha */
     return this->anio;
 }
 
-//Sobrecarga el operador >=
-bool operator>=(DtFecha fecha1, DtFecha fecha2) {
-    if(fecha1.getAnio() != fecha2.getAnio())
-        return fecha1.getAnio() >= fecha2.getAnio();
-    else if(fecha1.getMes() != fecha2.getMes())
-        return fecha1.getMes() >= fecha2.getMes();
+// Sobrecarga de operadores
+bool DtFecha::operator>=(const DtFecha &fecha2) {
+    if(this->getAnio() != fecha2.getAnio())
+        return this->getAnio() >= fecha2.getAnio();
+    else if(this->getMes() != fecha2.getMes())
+        return this->getMes() >= fecha2.getMes();
     else 
-        return fecha1.getDia() >= fecha2.getDia();
+        return this->getDia() >= fecha2.getDia();
+}
+
+bool DtFecha::operator==(const DtFecha &f2) {
+    return (this->getAnio() == f2.getAnio()) && 
+        (this->getMes() == f2.getMes()) && 
+        (this->getDia() == f2.getDia());
 }

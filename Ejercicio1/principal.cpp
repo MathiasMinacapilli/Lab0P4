@@ -154,7 +154,11 @@ cantViajes es un parámetro de salida donde se devuelve la cantidad
 de viajes encontrados (corresponde a la cantidad de valores DtViaje que se devuelven).
 */
 DtViaje** verViajesAntesDeFecha(const DtFecha& fecha, string ci, int& cantViajes) {
-    return nullptr;
+    
+    DtViaje* arreglo_dtv = new DtViaje[2];
+    DtViaje** vaf =  &arreglo_dtv;
+    
+    return vaf;
 }
 
 /*
@@ -342,9 +346,9 @@ int main() {
                 int nro_serie_vehiculo;
                 cin >> nro_serie_vehiculo;
                 // Tendria que hacer chequeo aca tambien, mod de 10 y 1000?
-                cout << "Ingrese la fecha del viaje \n "
-                    << "DD/MM/AAAA:   /  /    ";
                 int dia, mes, anio;
+                cout << "Ingrese la fecha del viaje \n"
+                    << "DD/MM/AAAA: ";
                 cin >> dia;
                 cin.get();
                 cin >> mes;
@@ -378,15 +382,15 @@ int main() {
                 cin >> ci;
             }
             // Tendria que hacer chequeo aca tambien, mod de 10 y 1000?
-            cout << "Ingrese la fecha del viaje \n "
-                << "DD/MM/AAAA:   /  /    ";
             int dia, mes, anio;
-            cin >> dia;
-            cin.get();
-            cin >> mes;
-            cin.get();
-            cin >> anio;
-            DtFecha fecha(dia, mes, anio);
+                cout << "Ingrese la fecha del viaje \n"
+                    << "DD/MM/AAAA: ";
+                cin >> dia;
+                cin.get();
+                cin >> mes;
+                cin.get();
+                cin >> anio;
+                DtFecha fecha(dia, mes, anio);
             int cantViajes = 0;
             DtViaje** viajes = verViajesAntesDeFecha(fecha, cedula, cantViajes);
             if (cantViajes == 0) {
@@ -419,9 +423,9 @@ int main() {
                     cin >> ci;
                 }
                 // Tendria que hacer chequeo aca tambien, mod de 10 y 1000?
-                cout << "Ingrese la fecha del viaje \n "
-                    << "DD/MM/AAAA:   /  /    ";
                 int dia, mes, anio;
+                cout << "Ingrese la fecha del viaje \n"
+                    << "DD/MM/AAAA: ";
                 cin >> dia;
                 cin.get();
                 cin >> mes;

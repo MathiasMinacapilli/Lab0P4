@@ -3,7 +3,7 @@
 //clase Bicicleta
 
 //constructor con parametros
-Bicicleta::Bicicleta(int num, int bateria, int pb, TipoBici bici, int cambios)
+Bicicleta::Bicicleta(int num, float bateria, float pb, TipoBici bici, int cambios)
 	:Vehiculo(num, bateria, pb) {
 		this->tipo=bici;
 		this->cant_cambios=cambios;
@@ -28,10 +28,11 @@ void Bicicleta::set_cant_cambios(int cambios){
 
 //operacion polimorfica
 float Bicicleta::darPrecioViaje(int duracion, int distancia){
-	return (get_precio_base()*distancia)
+	return (get_precio_base()*distancia);
 }
 
-
-
 //destructor
-Bicicleta::~Bicicleta() {}
+Bicicleta::~Bicicleta()
+	:~Vehiculo {
+		
+}

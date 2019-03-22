@@ -77,5 +77,5 @@ Usuario::~Usuario() {
     while(i<this->cant_viajes) {
         delete this->viajes[i];
     }
-    
+    delete[] this->viajes;
 }

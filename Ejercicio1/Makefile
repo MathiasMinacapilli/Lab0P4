@@ -1,7 +1,5 @@
 # --------------------------------------------------------------------
 # Makefile Laboratorio0 - Programacion 4 2019 - Ejercicio 1
-
-
 # --------------------------------------------------------------------
 
 # Objetivo predeterminado, es decir make = make principal

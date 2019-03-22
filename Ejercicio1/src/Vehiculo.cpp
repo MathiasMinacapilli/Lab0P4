@@ -27,14 +27,14 @@ void Vehiculo::set_precio_base(float pb){
 }
 
 //getters
-int Vehiculo::get_nro_serie(){
+int Vehiculo::get_nro_serie() const{
 	return this->nro_serie;
 }
 
-float Vehiculo::get_porcentaje_bateria(){
+float Vehiculo::get_porcentaje_bateria() const{
 	return this->porcentaje_bateria;
 }
 
-float Vehiculo::get_precio_base(){
+float Vehiculo::get_precio_base() const{
 	return this->precio_base;
 }

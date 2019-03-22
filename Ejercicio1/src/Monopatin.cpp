@@ -10,7 +10,7 @@ Monopatin::Monopatin(int num, float bateria, float pb, bool luces)
 }
 
 //getter
-bool Monopatin::get_luces(){
+bool Monopatin::get_luces() const{
 	return this->tieneLuces;
 }
 

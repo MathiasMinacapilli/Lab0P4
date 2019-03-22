@@ -13,8 +13,8 @@ public:
 	Bicicleta(int, float, float, TipoBici, int);
 	~Bicicleta();
 	//getters
-	TipoBici get_tipo();
-	int get_cant_cambios();
+	TipoBici get_tipo() const;
+	int get_cant_cambios() const;
 	//setters
 	void set_tipo(TipoBici);
 	void set_cant_cambios(int);

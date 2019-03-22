@@ -17,11 +17,12 @@
 #include <iostream>
 #include <ctime>
 #include <stdio.h>
+#include <algorithm>
 
 using namespace std;
 
-#define MAX_USUARIOS ... //AGREGAR NUMERO
-#define MAX_VEHICULOS ... //AGREGAR NUMERO
+#define MAX_USUARIOS 100 //AGREGAR NUMERO
+#define MAX_VEHICULOS 100 //AGREGAR NUMERO
 
 int tope_usuario, tope_vehiculo;
 Usuario *arreglo_usuarios[MAX_USUARIOS];
@@ -43,7 +44,7 @@ static int buscar_usuario(string cid) {
     bool encontre = false;
     int i=0;
     while (!encontre && i<tope_usuario){
-        if (arreglo_usuarios[i]->ci.compare(cid)==0)
+        if (arreglo_usuarios[i]->getCi().compare(cid)==0)
             encontre = true;
         else i++;
     }

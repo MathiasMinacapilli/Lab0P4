@@ -5,7 +5,7 @@ DtMonopatin::DtMonopatin(int nro_serie, float porcentaje, float precio_base, boo
     this -> tieneLuces = tieneLuces;
 }
 
-bool DtMonopatin::getTieneLuces() {
+bool DtMonopatin::getTieneLuces() const{
     return tieneLuces;
 }
 

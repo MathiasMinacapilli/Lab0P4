@@ -13,25 +13,25 @@ Usuario::Usuario(string ci, string nombre, DtFecha fecha_ingreso, int cant_viaje
 }
 
 // --------Getters--------
-std::string Usuario::getCi() {
+std::string Usuario::getCi() const {
     /* Retorna la cedula del usuario de tipo string */
     return this->ci;
 }
-std::string Usuario::getNombre() {
+std::string Usuario::getNombre() const{
     /* Retorna el nombre del usuario de tipo string */
     return this->nombre;
 }
-DtFecha Usuario::getFechaIngreso() {
+DtFecha Usuario::getFechaIngreso() const{
     /* Retorna la fecha de ingreso del usuario de tipo DtFecha */
     return this->fecha_ingreso;
 }
-int Usuario::getCantViajes() {
+int Usuario::getCantViajes() const{
     /* Retorna la cantidad de viajes a los que está linkeado el usuario */
     return this->cant_viajes;
 }
-Viaje** Usuario::getViajes() {
+Viaje** Usuario::getViajes() const{
     /* Retorna el array de viajes linkeado al usuario */
-    return this->viajes;
+   return this->viajes;
 }
 
 // --------Setters--------
@@ -56,13 +56,12 @@ void Usuario::setCantViajes(int cant_viajes) {
 }
 
 
-int Usuario::agregarViaje(Viaje &viaje) {
+int Usuario::agregarViaje(Viaje* viaje) {
     /* Agrega un viaje al usuario en el arreglo viajes[100] y devuelve 1, en caso de ya haber
     100 viajes no hace nada y devuelve 0 */
     if (this->cant_viajes < 100) {
         // Si el arreglo no está lleno agrego el viaje al final
-        Viaje *v = &viaje;
-        this->viajes[cant_viajes] = v;
+        this->viajes[cant_viajes] = viaje;
         this->cant_viajes++;
         return 1;
     }

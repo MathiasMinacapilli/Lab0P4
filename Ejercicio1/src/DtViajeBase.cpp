@@ -7,14 +7,14 @@ DtViajeBase::DtViajeBase(DtFecha fecha, int duracion, int distancia) {
     this->distancia = distancia;
 }
 
-DtFecha DtViajeBase::getFecha() {
+DtFecha DtViajeBase::getFecha() const{
     return this->fecha;
 }
 
-int DtViajeBase::getDuracion() {
+int DtViajeBase::getDuracion() const{
     return this->duracion;
 }
 
-int DtViajeBase::getDistancia() {
+int DtViajeBase::getDistancia() const{
     return this->distancia;
 }

@@ -7,10 +7,10 @@ DtViaje::DtViaje(DtFecha fecha, int duracion, int distancia, float precio_total,
         this->vehiculo = vehiculo;
 }
 
-float DtViaje::getPrecioTotal() {
+float DtViaje::getPrecioTotal() const{
     return this->precio_total;
 }
 
-DtVehiculo DtViaje::getVehiculo() {
+DtVehiculo DtViaje::getVehiculo() const{
     return this->vehiculo;
 }

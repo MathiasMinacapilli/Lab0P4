@@ -9,16 +9,16 @@ class Viaje {
 private:
     DtFecha fecha;
     int duracion, distancia;
-    Vehiculo vehiculo; //porque Vehiculo no es instanciable
+    Vehiculo* vehiculo; //porque Vehiculo no es instanciable
     //Obs: ver como linkear con un tipo de vehiculo determinado
 public:
     //constructor
-    Viaje(DtFecha, int, int, Vehiculo);
+    Viaje(DtFecha, int, int, Vehiculo*);
     //Setters
     DtFecha getFecha();
     int getDuracion();
     int getDistancia();
-    Vehiculo getVehiculo();
+    Vehiculo* getVehiculo();
 
     //Getters
     void setFecha(DtFecha) const;

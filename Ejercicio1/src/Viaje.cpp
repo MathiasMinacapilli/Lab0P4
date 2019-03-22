@@ -2,7 +2,7 @@
 #include "../include/Viaje.hpp"
 
 //constructor
-Viaje::Viaje(DtFecha fecha, int duracion, int distancia, Vehiculo vehiculo){
+Viaje::Viaje(DtFecha fecha, int duracion, int distancia, Vehiculo* vehiculo){
     this->fecha = fecha;
     this->duracion = duracion;
     this->distancia = distancia;
@@ -10,23 +10,23 @@ Viaje::Viaje(DtFecha fecha, int duracion, int distancia, Vehiculo vehiculo){
 }
 
 
-DtFecha Viaje::getFecha() {
+DtFecha Viaje::getFecha() const{
     /* Retorna la fecha del Viaje */
     return this->fecha;
 }
     
-int Viaje::getDuracion() {
+int Viaje::getDuracion() const{
     /* Retorna la duracion del Viaje */
     return this->duracion;
 }
     
-int Viaje::getDistancia() {
+int Viaje::getDistancia() const{
     /* Retorna la distancia del Viaje */
     return this->distancia;
 }
 
 
-Vehiculo Viaje::getVehiculo() {
+Vehiculo* Viaje::getVehiculo() const{
     return this->vehiculo;
 }
     

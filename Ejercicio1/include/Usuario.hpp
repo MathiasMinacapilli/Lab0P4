@@ -32,7 +32,7 @@ public:
     void setCantViajes(int);
     
     //Agrega un viaje al usuario
-    int agregarViaje(Viaje&);
+    int agregarViaje(Viaje*);
 
     //Destructor
     ~Usuario();

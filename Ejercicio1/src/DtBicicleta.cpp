@@ -6,11 +6,11 @@ DtBicicleta::DtBicicleta(int nro_serie, float porcentaje, float precio_base, Tip
     this -> cant_cambios = cant_cambios;
 }
 
-TipoBici DtBicicleta::getTipo() {
+TipoBici DtBicicleta::getTipo() const{
     return tipo;
 }
 
-int DtBicicleta::getCantCambios() {
+int DtBicicleta::getCantCambios() const{
     return cant_cambios;
 }
 

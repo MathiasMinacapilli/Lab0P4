@@ -10,11 +10,11 @@ Bicicleta::Bicicleta(int num, float bateria, float pb, TipoBici bici, int cambio
 }
 
 //getters
-TipoBici Bicicleta::get_tipo(){
+TipoBici Bicicleta::get_tipo() const{
 	return this->tipo;
 }
 
-int Bicicleta::get_cant_cambios(){
+int Bicicleta::get_cant_cambios() const{
 	return this->cant_cambios;
 }
 

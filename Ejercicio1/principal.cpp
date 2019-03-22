@@ -62,7 +62,7 @@ static int buscar_vehiculo(int numserie) {
     bool encontre = false;
     int i=0;
     while (!encontre && i<tope_vehiculo){
-        if (arreglo_vehiculos[i]->nro_serie == numserie)
+        if (arreglo_vehiculos[i]->get_nro_serie() == numserie)
             encontre = true;
         else i++;
     }
@@ -103,24 +103,24 @@ De no ser así, se levanta una excepción std::invalid_argument.
 void agregarVehiculo(const DtVehiculo& vehiculo) {
     if (tope_vehiculo == MAX_VEHICULOS)
         throw new invalid_argument("No hay mas lugar para vehiculos");
-
-    else
-
+    else {
         if ((buscar_vehiculo(vehiculo.getNroSerie()) == -1) && (0 <= vehiculo.getPorcentaje()) && (vehiculo.getPorcentaje() <= 100) && (vehiculo.getPrecioBase() >= 0)) {
-            DtVehiculo* v = &vehiculo;
-            DtBicicleta *dtb = dynamic_cast<DtBicicleta*>(v)
+            const DtVehiculo* v = &vehiculo;
+            const DtBicicleta *dtb = static_cast<DtBicicleta*>(const_cast<DtVehiculo*>(v));
             if (dtb) {
                 Bicicleta *bici = new Bicicleta(dtb->getNroSerie(), dtb->getPorcentaje(), dtb->getPrecioBase(), dtb->getTipo(), dtb->getCantCambios());
                 arreglo_vehiculos[tope_vehiculo] = bici;
             }
             else //es monopatin
-                { DtMonopatin* dtm = dynamic_cast<DtMonopatin*>(v);
+                { DtMonopatin* dtm = static_cast<DtMonopatin*>(const_cast<DtVehiculo*>(v));
                 Monopatin *mono = new Monopatin(dtm->getNroSerie(), dtm->getPorcentaje(), dtm->getPrecioBase(), dtm->getTieneLuces());
                 arreglo_vehiculos[tope_vehiculo] = mono;
                 }
              tope_vehiculo++;
+        }
+        else 
+            throw new invalid_argument("verifique parametros");
     }
-    else throw new invalid_argument("verifique parametros")
 }
 
 /*
@@ -138,7 +138,7 @@ void ingresarViaje(string ci, int nroSerieVehiculo, const DtViajeBase& viaje) {
   if ((posicion_usuario != -1) && (posicion_vehiculo != -1) &&
       (viaje.getDuracion() > 0) && (viaje.getDistancia() > 0) &&
       (viaje.getFecha() >= arreglo_usuarios[posicion_usuario] -> getFechaIngreso())) {
-        Viaje trip(viaje.getFecha(), viaje.getDuracion(), viaje.getDistancia(), arreglo_vehiculos[posicion_vehiculo]);
+        Viaje* trip= new Viaje(viaje.getFecha(), viaje.getDuracion(), viaje.getDistancia(), arreglo_vehiculos[posicion_vehiculo]);
         arreglo_usuarios[posicion_usuario] -> agregarViaje(trip);
   }
   else
@@ -155,48 +155,51 @@ cantViajes es un parámetro de salida donde se devuelve la cantidad
 de viajes encontrados (corresponde a la cantidad de valores DtViaje que se devuelven).
 */
 DtViaje** verViajesAntesDeFecha(const DtFecha& fecha, string ci, int& cantViajes) {
-    
-    DtViaje** vaf = nullptr;
+     DtViaje** arreglo_dtv;
     int j=0;
-
     int posicion_usuario = buscar_usuario(ci);
     if(posicion_usuario != -1) { // Si encontre el usuario con esa ci
+        Viaje** viajes_usuario = (arreglo_usuarios[posicion_usuario]->getViajes());
         for(int i = 0; i < arreglo_usuarios[posicion_usuario]->getCantViajes(); i++) {
             //Cuento la cantidad de viajes que hay con menor fecha que la recibida por parametro
-            if(!((*viajes_usuario)[i].getFecha() >= f))
+            if(!(viajes_usuario[i]->getFecha() >= fecha))
                 j++;
         }
         
         cantViajes = j;
         if (j!=0){
-            DtViaje* arreglo_dtv = new DtViaje[j];
+           
             int k=0; 
             for (int i = 0; i<j; i++){
-                if (!((viajes_usuario)[i]->getFecha() >= f)){
+                if (!(viajes_usuario[i]->getFecha() >= fecha)){
                     
-                    Vehiculo* v = &(viajes_usuario[i]->getVehiculo);
+                    Vehiculo* v = (viajes_usuario[i]->getVehiculo());
                     
                     Bicicleta* bici = dynamic_cast<Bicicleta*>(v);
-                    if (bici != nullptr) 
-                        DtBicicleta veh(bici->get_nro_serie(), bici->get_porcentaje_bateria(), bici->get_precio_base(), bici->get_tipo(), bici->get_cant_cambios());
+                    if (bici != nullptr) {
+                        DtBicicleta b(bici->get_nro_serie(), bici->get_porcentaje_bateria(), bici->get_precio_base(), bici->get_tipo(), bici->get_cant_cambios());
+                    
+                         arreglo_dtv[k] = new DtViaje(viajes_usuario[i]->getFecha(), viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia(), viajes_usuario[i]->getVehiculo()->darPrecioViaje(viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia()), b); 
+                    }    
                     else {
                         Monopatin* mono=dynamic_cast<Monopatin*>(v);
-                        DtMonopatin veh(mono->get_nro_serie(), mono->get_porcentaje_bateria(), mono->get_precio_base(), mono->get_luces());
+                        DtMonopatin m(mono->get_nro_serie(), mono->get_porcentaje_bateria(), mono->get_precio_base(), mono->get_luces());
+                    
+                         arreglo_dtv[k] = new DtViaje(viajes_usuario[i]->getFecha(), viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia(), viajes_usuario[i]->getVehiculo()->darPrecioViaje(viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia()), m); 
                     }
                     
-                    arreglo_dtv[k] = new DtViaje(viajes_usuario[i]->getFecha(), viajes_usuario[i]->getDuracion, viajes_usuario[i]->getDistancia(), viajes_usuario[i]->getVehiculo().darPrecioViaje(), veh); 
             
                     k++;
                 }
             }
                     
         } 
-            
+        return arreglo_dtv;
     }
         
     else {
         cantViajes = 0;
-        return nullptr
+        return nullptr;
     }
 
 }

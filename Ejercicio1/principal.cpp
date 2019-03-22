@@ -187,12 +187,20 @@ se levanta una excepción std::invalid_argument.
 void eliminarViajes(string ci, const DtFecha& fecha) {
     int posicion_usuario = buscar_usuario(ci);
     if (posicion_usario != -1) {
-        Viajes* viajes = arreglo_usuarios[posicion_usario].getViajes();
-        int j = arreglo_usuarios[posicion_usuario] -> cant_viajes;
-        for (int i = arreglo_usuarios[posicion_usuario] -> cant_viajes; i >= 0; i--) {
-            if (viajes[i].getFecha == fecha) {
-              if (j != i)
-                viajes[i] = viajes[j];
+        Viajes** viajes = arreglo_usuarios[posicion_usario]->getViajes();
+        int j = (arreglo_usuarios[posicion_usuario] -> cant_viajes)-1;
+        for (int i = arreglo_usuarios[posicion_usuario] -> cant_viajes)-1; i >= 0; i--) {
+            if (*viajes[i]->getFecha == fecha) {
+                if (j == i){
+                    delete viajes[i];
+                    *viajes[i]=nullptr;
+                }
+                else {
+                    delete (viajes[i]);
+                    *viajes[i]=*viajes[j];
+                    *viajes[j]=nullptr;
+                } 
+                  
               j--;
             }
         }
@@ -228,7 +236,7 @@ DtVehiculo** obtenerVehiculos(int& cantVehiculos) {
         DtVehiculo** puntero_dtv =  &arreglo_dtv;
         for (int i=0; i<tope_vehiculo; i++){
 
-            *arreglo_dtv[i]->DtVehiculo()
+            arreglo_dtv[i]= DtVehiculo()
         }
 
     }

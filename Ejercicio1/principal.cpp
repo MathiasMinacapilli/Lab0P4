@@ -171,10 +171,10 @@ DtViaje** verViajesAntesDeFecha(const DtFecha& fecha, string ci, int& cantViajes
             }
         }
         cantViajes = j;
-        
+
     }
     DtViaje** vaf =  &arreglo_dtv;
-    
+
     return vaf;
 }
 
@@ -188,10 +188,15 @@ void eliminarViajes(string ci, const DtFecha& fecha) {
     int posicion_usuario = buscar_usuario(ci);
     if (posicion_usario != -1) {
         Viajes* viajes = arreglo_usuarios[posicion_usario].getViajes();
-        for (int i = 0; i <=  arreglo_usuarios[posicion_usuario] -> cant_viajes; i++) {
-            if (a
-            int total_viajes = arreglo_usuarios[posicion_usuario] -> cant_viajes;
-        
+        int j = arreglo_usuarios[posicion_usuario] -> cant_viajes;
+        for (int i = arreglo_usuarios[posicion_usuario] -> cant_viajes; i >= 0; i--) {
+            if (viajes[i].getFecha == fecha) {
+              if (j != i)
+                viajes[i] = viajes[j];
+              j--;
+            }
+        }
+        arreglo_usuarios[posicion_usario] -> setCantViajes(j);
     }
     else
         throw new invalid_argument ("No existe el usuario ingresado");

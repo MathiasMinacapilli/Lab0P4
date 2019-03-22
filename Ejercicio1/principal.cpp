@@ -154,8 +154,25 @@ cantViajes es un parámetro de salida donde se devuelve la cantidad
 de viajes encontrados (corresponde a la cantidad de valores DtViaje que se devuelven).
 */
 DtViaje** verViajesAntesDeFecha(const DtFecha& fecha, string ci, int& cantViajes) {
-    
-    DtViaje* arreglo_dtv = new DtViaje[2];
+    DtViaje* arreglo_dtv; //= new DtViaje[2];
+    DtViaje** vaf = nullptr;
+
+    int posicion_usuario = buscar_usuario(ci);
+    if(posicion_usuario != -1) {
+        // Si encontre (o existe) el usuario con esa ci
+        Viaje** viajes_usuario = arreglo_usuarios[posicion_usuario]->getViajes();
+        int j=0;
+        for(int i = 0; i < arreglo_usuarios[posicion_usuario]->getCantViajes(); i++) {
+            //Cuento la cantidad de viajes que hay con menor fecha que la recibida por parametro
+            //y voy agregando a mi arreglo para devolver
+            if(!((*viajes_usuario)[i].getFecha() >= fecha)) {
+                //agregar al arreglo de alguna forma y de algun tamaño
+                j++;
+            }
+        }
+        cantViajes = j;
+        
+    }
     DtViaje** vaf =  &arreglo_dtv;
     
     return vaf;

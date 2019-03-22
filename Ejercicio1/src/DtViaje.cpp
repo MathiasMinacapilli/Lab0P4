@@ -7,9 +7,9 @@ DtViaje::DtViaje(float precio_total, DtVehiculo vehiculo) {
 }
 
 float DtViaje::getPrecioTotal() {
-    return this->precio_total
+    return this->precio_total;
 }
 
 DtVehiculo DtViaje::getVehiculo() {
-    return this->vehiculo
+    return this->vehiculo;
 }

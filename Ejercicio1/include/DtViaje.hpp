@@ -10,5 +10,5 @@ public:
     DtViaje(float, DtVehiculo);
     float getPrecioTotal();
     DtVehiculo getVehiculo();
-    ~DtViajeBase();
+    ~DtViaje();
 };

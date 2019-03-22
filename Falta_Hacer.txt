@@ -6,6 +6,6 @@
  
  
  TERMINAR:
-    -  Funcion verViajesAntesDeFecha. [principal.cpp]
+    -  Funcion verViajesAntesDeFecha. [principal.cpp] //Falta por ver el tamaño del arreglo a devolver
     -  Funcion eliminarViajes. [principal.cpp]
     -  Funcion obtenerVehiculos. [principal.cpp]

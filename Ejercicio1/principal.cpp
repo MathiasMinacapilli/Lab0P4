@@ -176,24 +176,30 @@ DtViaje** verViajesAntesDeFecha(const DtFecha& fecha, string ci, int& cantViajes
                     Vehiculo* v = &(viajes_usuario[i]->getVehiculo);
                     
                     Bicicleta* bici = dynamic_cast<Bicicleta*>(v);
-                    if (bici != nullptr) {
-                        DtBicicleta veh(bici->get_nro_serie(), bici->)
+                    if (bici != nullptr) 
+                        DtBicicleta veh(bici->get_nro_serie(), bici->get_porcentaje_bateria(), bici->get_precio_base(), bici->get_tipo(), bici->get_cant_cambios());
+                    else {
+                        Monopatin* mono=dynamic_cast<Monopatin*>(v);
+                        DtMonopatin veh(mono->get_nro_serie(), mono->get_porcentaje_bateria(), mono->get_precio_base(), mono->get_luces());
                     }
                     
-                    arreglo_dtv[k] = new DtViaje(viajes_usuario[i]->getFecha(), viajes_usuario[i]->getDuracion, viajes_usuario[i]->getDistancia(), viajes_usuario[i]->getVehiculo().darPrecioViaje()) 
-                }
-                    
-            } 
+                    arreglo_dtv[k] = new DtViaje(viajes_usuario[i]->getFecha(), viajes_usuario[i]->getDuracion, viajes_usuario[i]->getDistancia(), viajes_usuario[i]->getVehiculo().darPrecioViaje(), veh); 
             
-        }
-        
-        else return nullptr;
-
+                    k++;
+                }
+            }
+                    
+        } 
+            
     }
-    //DtViaje** vaf =  &arreglo_dtv;
-    cant_viajes=0;
-    return nullptr;;
+        
+    else {
+        cantViajes = 0;
+        return nullptr
+    }
+
 }
+    
 
 /*
 Elimina los viajes del usuario identificado por ci,

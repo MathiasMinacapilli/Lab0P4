@@ -1,10 +1,10 @@
-#ifndef _VEHICULO_HPP
-#define _VEHICULO_HPP
+#ifndef _BICICLETA_HPP
+#define _BICICLETA_HPP
 
 #include "Vehiculo.hpp"
 
 // Bicicleta subclase de Vehiculo
-class Bicicleta: public Vehiculo {
+class Bicicleta : public Vehiculo {
 private:
     TipoBici tipo;
     int cant_cambios;

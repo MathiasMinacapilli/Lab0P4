@@ -381,7 +381,7 @@ int main() {
                     else
                         tb = Montana;
                             
-                }
+                
         			cout << "Ingrese la cantidad de cambios \n "
         				<< "Cantidad de cambios: ";
         			int cant_cambios;
@@ -394,6 +394,7 @@ int main() {
         			DtBicicleta dtb(nro_serie, porcentaje, precio_base, tb, cant_cambios);
         			DtVehiculo& dtv = dtb;
         			agregarVehiculo(dtv);
+                } 
             }catch(exception* e) {
         		cout << e->what();
         		break;

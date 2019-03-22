@@ -17,7 +17,7 @@ HDIR    = include
 CPPDIR  = src
 ODIR    = obj
 
-MODULOS = ClaseA ClaseB ClaseC
+MODULOS = Bicicleta DtBicicleta DtFecha DtMonopatin DtVehiculo DtViaje DtViajeBase Monopatin TipoBici Usuario Vehiculo Viaje
 
 # variables que contienen la cadena de archivos para los .h, .cpp y .o
 HS   = $(MODULOS:%=$(HDIR)/%.hpp)

@@ -155,7 +155,7 @@ cantViajes es un parámetro de salida donde se devuelve la cantidad
 de viajes encontrados (corresponde a la cantidad de valores DtViaje que se devuelven).
 */
 DtViaje** verViajesAntesDeFecha(const DtFecha& fecha, string ci, int& cantViajes) {
-     DtViaje** arreglo_dtv;
+    DtViaje** arreglo_dtv;
     int j=0;
     int posicion_usuario = buscar_usuario(ci);
     if(posicion_usuario != -1) { // Si encontre el usuario con esa ci
@@ -214,18 +214,18 @@ se levanta una excepción std::invalid_argument.
 void eliminarViajes(string ci, const DtFecha& fecha) {
     int posicion_usuario = buscar_usuario(ci);
     if (posicion_usuario != -1) {
-        Viajes** viajes = arreglo_usuarios[posicion_usario]->getViajes();
-        int j = (arreglo_usuarios[posicion_usuario] -> cant_viajes)-1;
-        for (int i = arreglo_usuarios[posicion_usuario] -> cant_viajes)-1; i >= 0; i--) {
-            if (*viajes[i]->getFecha == fecha) {
+        Viaje** viajes = arreglo_usuarios[posicion_usuario]->getViajes();
+        int j = (arreglo_usuarios[posicion_usuario] -> getCantViajes())-1;
+        for (int i = arreglo_usuarios[posicion_usuario] -> getCantViajes()-1; i >= 0; i--) {
+            if (viajes[i]->getFecha() == fecha) {
                 if (j == i){
                     delete viajes[i];
-                    *viajes[i]=nullptr;
+                    viajes[i]=nullptr;
                 }
                 else {
                     delete (viajes[i]);
-                    *viajes[i]=*viajes[j];
-                    *viajes[j]=nullptr;
+                    viajes[i]=viajes[j];
+                    viajes[j]=nullptr;
                 } 
                   
               j--;
@@ -245,7 +245,7 @@ o la carga ingresada no se encuentre entre 0 y 100 se levanta una excepción st
 void cambiarBateriaVehiculo(int nroSerieVehiculo, float cargaVehiculo) {
     int posicion_vehiculo = buscar_vehiculo(nroSerieVehiculo);
     if ((posicion_vehiculo != -1) && (0 <= cargaVehiculo) && (cargaVehiculo <= 100))
-        arreglo_vehiculos[posicion_vehiculo].set_porcentaje_bateria(cargaVehiculo);
+        arreglo_vehiculos[posicion_vehiculo]->set_porcentaje_bateria(cargaVehiculo);
     else
         throw new invalid_argument ("No se pudo cambiar la bateria del vehiculo");
 
@@ -262,7 +262,7 @@ DtVehiculo** obtenerVehiculos(int& cantVehiculos) {
         for (int i=0; i<tope_vehiculo; i++){
             Bicicleta *bici = dynamic_cast<Bicicleta*>(arreglo_vehiculos[i]);
             if (bici != nullptr) //arreglo_vehiculos[i] es bici {
-                arreglo_dtv[i] = new DtBicicleta(bici->get_nto_serie(), bici->get_porcentaje_bateria(), bici->get_precio_base(), bici->get_tipo(), bici->get_cant_cambios());
+                arreglo_dtv[i] = new DtBicicleta(bici->get_nro_serie(), bici->get_porcentaje_bateria(), bici->get_precio_base(), bici->get_tipo(), bici->get_cant_cambios());
             else {
                 Monopatin* mono = dynamic_cast<Monopatin*>(arreglo_vehiculos[i]);
                 if (mono != nullptr) //arreglo_vehiculos[i] es monopatin
@@ -303,17 +303,18 @@ int main() {
         	try {
 	            cout << "Ingrese el nombre del Usuario \n "
 	                << "Nombre: ";
-	            cin >> nombre;
+                string nombre1;
+	            cin >> nombre1;
 	            cout << "Ingrese la cedula del Usuario sin guion ni digito y con verificador \n "
 	            	<< "Cedula: ";
-	            string ci;
-	            cin >> ci;
-                while ((ci.size() != 8) && (!son_digitos(ci))) {
+	            string ci1;
+	            cin >> ci1;
+                while ((ci1.size() != 8) && (!son_digitos(ci1))) {
                     cout << "Cedula no valida. Ingrese la cedula del Usuario sin guion y con digito verificador \n "
                         << "Cedula: ";
-                    cin >> ci;
+                    cin >> ci1;
                 }
-	            registrarUsuario(ci, nombre)
+	            registrarUsuario(ci1, nombre1);
 	        } catch(exception* e) {
 	        	cout << e->what();
 	        	break;
@@ -323,13 +324,13 @@ int main() {
         case 2: //
         	try {
         		cout << "Indique ingresando M o B si ingresa un Monopatin o Bicicleta respectivamente: \n ";
-        		char V;
+        		string V;
         		cin >> V;
-                while ((V != M) && (V != B)) {
+                while ((V != "M") || (V != "B")) { // debe ser un || porque al cumplirse una de las dos ya ingresa
                     cout << "Caracter no valido. Indique ingresando M o B si ingresa un Monopatin o Bicicleta respectivamente: \n ";
                     cin >> V;
                 }
-        		if (V == M) {
+        		if (V == "M") {
         			cout << "Ingrese el numero de serie \n "
         				<< "Nº de serie: ";
         			int nro_serie;

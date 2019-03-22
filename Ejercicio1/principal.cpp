@@ -279,6 +279,8 @@ int main() {
     tope_vehiculo = 0;
     int i = 0;
     bool salir = false;
+    
+    
 	//Hay que fijarse que se ingrese todo bien?
     while(!salir) {
         cout << "Bienvenido. Elija la opción deseada. \n"
@@ -297,11 +299,10 @@ int main() {
         	try {
 	            cout << "Ingrese el nombre del Usuario \n "
 	                << "Nombre: ";
-	            string nombre;
 	            cin >> nombre;
 	            cout << "Ingrese la cedula del Usuario sin guion ni digito y con verificador \n "
 	            	<< "Cedula: ";
-	            string ci
+	            string ci;
 	            cin >> ci;
                 while ((ci.size() != 8) && (!son_digitos(ci))) {
                     cout << "Cedula no valida. Ingrese la cedula del Usuario sin guion y con digito verificador \n "
@@ -346,7 +347,7 @@ int main() {
                     }
         			bool tieneLuces;
         			if (luz == 1)
-        				tieneLuces = true
+        				tieneLuces = true;
         			else
         				tieneLuces = false;
         			DtMonopatin dtm(nro_serie, porcentaje, precio_base, tieneLuces);

@@ -19,11 +19,11 @@ public:
     Usuario(string, string, DtFecha, int = 0);
 
     //Getters
-    std::string getCi();
-    std::string getNombre();
-    DtFecha getFechaIngreso();
-    int getCantViajes();
-    Viaje** getViajes();
+    std::string getCi() const;
+    std::string getNombre() const;
+    DtFecha getFechaIngreso() const;
+    int getCantViajes() const;
+    Viaje** getViajes() const;
 
     //Setters
     void setCi(std::string);

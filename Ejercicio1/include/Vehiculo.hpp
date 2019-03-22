@@ -18,9 +18,10 @@ public:
 	void set_porcentaje_bateria(float);
 	void set_precio_base(float);
 	//getters
-	int get_nro_serie();
-	float get_porcentaje_bateria();
-	float get_precio_base();
+	int get_nro_serie() const;
+	float get_porcentaje_bateria() const;
+	float get_precio_base() const;
+	
     virtual float darPrecioViaje(int, int) = 0;
 };
 

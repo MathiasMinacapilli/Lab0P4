@@ -10,9 +10,11 @@ private:
     int duracion, distancia;
 public:
     DtViajeBase(DtFecha, int, int);
-    DtFecha getFecha();
-    int getDuracion();
-    int getDistancia();
+
+    DtFecha getFecha() const;
+    int getDuracion() const;
+    int getDistancia() const;
+    
     ~DtViajeBase();
 };
 #endif

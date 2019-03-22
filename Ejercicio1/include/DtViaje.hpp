@@ -11,8 +11,10 @@ private:
     DtVehiculo vehiculo;
 public:
     DtViaje(DtFecha, int, int, float, DtVehiculo);
-    float getPrecioTotal();
-    DtVehiculo getVehiculo();
+    
+    float getPrecioTotal() const;
+    DtVehiculo getVehiculo() const;
+
     ~DtViaje();
 };
 

@@ -12,7 +12,7 @@ public:
 	Monopatin(int, float, float, bool=false);
 	~Monopatin();
 	//getter
-	bool get_luces();
+	bool get_luces() const;
 	//setter
 	void set_tieneLuces(bool);
 

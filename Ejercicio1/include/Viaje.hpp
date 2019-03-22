@@ -21,9 +21,9 @@ public:
     Vehiculo getVehiculo();
 
     //Getters
-    void setFecha(DtFecha);
-    void setDuracion(int);
-    void setDistancia(int);
+    void setFecha(DtFecha) const;
+    void setDuracion(int) const;
+    void setDistancia(int) const;
     
     ~Viaje();
 };

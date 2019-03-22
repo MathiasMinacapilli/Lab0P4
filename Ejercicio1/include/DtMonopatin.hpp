@@ -1,8 +1,9 @@
 #ifndef _DTMONOPATIN_HPP
 #define _DTMONOPATIN_HPP
 
-#include "DtVehiculo.hpp";
+#include "DtVehiculo.hpp"
 
+using namespace std;
 
 //DtMonopatin, subclase de DtVehiculo
 class DtMonopatin: public DtVehiculo {
@@ -11,7 +12,6 @@ private:
 public:
     DtMonopatin(int=0, float=0, float=0, bool=false);
     bool getTieneLuces();
-    DtMonopatin operator<<();
     ~DtMonopatin();
 };
 

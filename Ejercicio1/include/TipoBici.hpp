@@ -1,2 +1,2 @@
 
-enum TipoBici {Paseo, Montaña}; 
+enum TipoBici {Paseo, Montana}; 

@@ -1,3 +1,6 @@
+#ifndef _DTVIAJE_HPP
+#define _DTVIAJE_HPP
+
 #include "DtViajeBase.hpp"
 #include "DtFecha.hpp"
 #include "DtVehiculo.hpp"
@@ -12,3 +15,5 @@ public:
     DtVehiculo getVehiculo();
     ~DtViaje();
 };
+
+#endif

@@ -1,4 +1,7 @@
 
+#ifndef _USUARIO_HPP
+#define _USUARIO_HPP
+
 #include "DtFecha.hpp"
 #include "Viaje.hpp"
 
@@ -34,3 +37,4 @@ public:
     //Destructor
     ~Usuario();
 };
+#endif

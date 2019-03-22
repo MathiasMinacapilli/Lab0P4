@@ -1,3 +1,6 @@
+#ifndef _DTBICICLETA_HPP
+#define _DTBICICLETA_HPP
+
 #include "DtVehiculo.hpp"
 
 //DtBicicleta, subclase de DtVehiculo
@@ -14,3 +17,5 @@ public:
 };
 
 ostream &operator<< (ostream&, DtBicicleta);
+
+#endif

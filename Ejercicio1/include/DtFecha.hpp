@@ -1,3 +1,5 @@
+#ifndef _DTFECHA_HPP
+#define _DTFECHA_HPP
  
 class DtFecha {
 private:
@@ -18,3 +20,5 @@ public:
 
     bool operator==(const DtFecha&);
 };
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef _DTVEHICULO_HPP
+#define _DTVEHICULO_HPP
+
 #include "TipoBici.hpp"
 #include <iostream>
 
@@ -13,3 +16,5 @@ public:
 protected: 
     DtVehiculo(int=0, float=0, float=0);
 };
+
+#endif

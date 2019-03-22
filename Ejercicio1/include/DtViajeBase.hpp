@@ -1,3 +1,6 @@
+#ifndef _DTVIAJEBASE_HPP
+#define _DTVIAJEBASE_HPP
+
 #include "DtFecha.hpp"
 #include "DtVehiculo.hpp"
  
@@ -12,3 +15,4 @@ public:
     int getDistancia();
     ~DtViajeBase();
 };
+#endif

@@ -1,3 +1,7 @@
+#ifndef _VEHICULO_HPP
+#define _VEHICULO_HPP
+
+
 #include "TipoBici.hpp"
 
 class Vehiculo {
@@ -19,3 +23,5 @@ public:
 	float get_precio_base();
     virtual float darPrecioViaje(int, int) = 0;
 };
+
+#endif

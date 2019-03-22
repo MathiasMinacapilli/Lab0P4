@@ -1,3 +1,6 @@
+#ifndef _DTMONOPATIN_HPP
+#define _DTMONOPATIN_HPP
+
 #include "DtVehiculo.hpp";
 
 
@@ -13,3 +16,5 @@ public:
 };
 
 ostream &operator<< (ostream&, DtMonopatin);
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef _VIAJE_HPP
+#define _VIAJE_HPP
+
 
 #include "DtFecha.hpp"
 #include "Vehiculo.hpp"
@@ -24,3 +27,5 @@ public:
     
     ~Viaje();
 };
+
+#endif

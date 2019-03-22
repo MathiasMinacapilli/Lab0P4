@@ -1,3 +1,6 @@
+#ifndef _MONOPATIN_HPP
+#define _MONOPATIN_HPP
+
 #include "Vehiculo.hpp"
 
 // Monopatin es subclase de Vehiculo
@@ -16,3 +19,5 @@ public:
     float darPrecioViaje(int, int);
 
 };
+
+#endif

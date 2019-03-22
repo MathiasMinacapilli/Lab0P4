@@ -1,3 +1,6 @@
+#ifndef _VEHICULO_HPP
+#define _VEHICULO_HPP
+
 #include "Vehiculo.hpp"
 
 // Bicicleta subclase de Vehiculo
@@ -19,3 +22,5 @@ public:
     float darPrecioViaje(int, int);
 
 };
+
+#endif

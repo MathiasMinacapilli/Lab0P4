@@ -186,7 +186,7 @@ se levanta una excepción std::invalid_argument.
 */
 void eliminarViajes(string ci, const DtFecha& fecha) {
     int posicion_usuario = buscar_usuario(ci);
-    if (posicion_usario != -1) {
+    if (posicion_usuario != -1) {
         Viajes** viajes = arreglo_usuarios[posicion_usario]->getViajes();
         int j = (arreglo_usuarios[posicion_usuario] -> cant_viajes)-1;
         for (int i = arreglo_usuarios[posicion_usuario] -> cant_viajes)-1; i >= 0; i--) {
@@ -204,7 +204,7 @@ void eliminarViajes(string ci, const DtFecha& fecha) {
               j--;
             }
         }
-        arreglo_usuarios[posicion_usario] -> setCantViajes(j);
+        arreglo_usuarios[posicion_usuario] -> setCantViajes(j);
     }
     else
         throw new invalid_argument ("No existe el usuario ingresado");
@@ -231,14 +231,20 @@ devuelve la cantidad de vehículos (corresponde a la cantidad de valores DtVehi
 */
 DtVehiculo** obtenerVehiculos(int& cantVehiculos) {
     if (tope_vehiculo>0){
-        DtVehiculo* arreglo_dtv = new DtVehiculo[tope_vehiculo]
-        //creo puntero al arreglo de DTVehiculos
-        DtVehiculo** puntero_dtv =  &arreglo_dtv;
+        DtVehiculo** arreglo_dtv =  new DtVehiculo*[tope_vehiculo];
         for (int i=0; i<tope_vehiculo; i++){
-
-            arreglo_dtv[i]= DtVehiculo()
+            Bicicleta *bici = dynamic_cast<Bicicleta*>(arreglo_vehiculos[i]);
+            if (bici != nullptr) //arreglo_vehiculos[i] es bici {
+                arreglo_dtv[i] = new DtBicicleta(bici->get_nto_serie(), bici->get_porcentaje_bateria(), bici->get_precio_base(), bici->get_tipo(), bici->get_cant_cambios());
+            else {
+                Monopatin* mono = dynamic_cast<Monopatin*>(arreglo_vehiculos[i]);
+                if (mono != nullptr) //arreglo_vehiculos[i] es monopatin
+                    arreglo_dtv[i] = new DtMonopatin(mono->get_nro_serie(), mono->get_porcentaje_bateria(), mono->get_precio_base(), mono->get_luces());
+                
+            } 
+            
         }
-
+        return arreglo_dtv;    
     }
     else
         return nullptr;

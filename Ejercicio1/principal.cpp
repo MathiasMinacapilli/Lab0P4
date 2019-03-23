@@ -39,40 +39,39 @@ static bool son_digitos(string ci) {
 }
 
 static string conseguir_cedula() {
-    cout << "Ingrese la cedula del Usuario sin guion ni digito y con verificador \n "
-        << "Cedula: ";
+    cout << "Ingrese la cédula del usuario sin guión y con dígito verificador. \n"
+        << " Cedula: ";
     string ci;
     cin >> ci;
     while ((ci.size() != 8) || (!son_digitos(ci))) {
-        cout << "Cedula no valida. Ingrese la cedula del Usuario sin guion y con digito verificador \n "
-            << "Cedula: ";
+        cout << "Cédula no válida. Ingrese la cédula del usuario sin guión y con dígito verificador. \n"
+            << " Cedula: ";
         cin >> ci;
     }
     return ci;
 }
 
 static void conseguir_datos_vehiculo(int &nro_serie, float &porcentaje, float &precio_base) {
-    cout << "Ingrese el numero de serie \n "
-        << "Nº de serie: ";
+    cout << "Ingrese el número de serie. \n"
+        << " Nº de serie: ";
     cin >> nro_serie;
-    cout << "Ingrese el porcentaje de bateria \n "
-        << "% bateria: ";
+    cout << "Ingrese el porcentaje de batería. \n"
+        << " Porcentaje (%) batería: ";
     cin >> porcentaje;
-    cout << "Ingrese el precio base del Vehiculo \n "
-        << "Precio base: ";
+    cout << "Ingrese el precio base del vehículo. \n"
+        << " Precio base: ";
     cin >> precio_base;
 }
 
 static DtFecha conseguir_fecha() {
     int dia, mes, anio;
-    cout << "Ingrese la fecha del viaje \n"
-        << "Dia: ";
+    cout << "Ingrese la fecha del viaje. \n"
+        << " dd/mm/aaaa :";
     cin >> dia;
-    cout << "Mes: ";
-    cin >> mes;
-    cout << "Anio: ";
-    cin >> anio;
     cin.get();
+    cin >> mes;
+    cin.get();
+    cin >> anio;
     return DtFecha(dia, mes, anio);
 }
 
@@ -83,15 +82,17 @@ Sino, devuelve -1.
 */
 static int buscar_usuario(string cid) {
     bool encontre = false;
-    int i=0;
-    while (!encontre && i<tope_usuario){
-        if (arreglo_usuarios[i]->getCi().compare(cid)==0)
+    int i = 0;
+    while (!encontre && i<tope_usuario) {
+        if (arreglo_usuarios[i] -> getCi().compare(cid) == 0)
             encontre = true;
-        else i++;
+        else
+            i++;
     }
     if (encontre)
         return i;
-    else return -1;
+    else
+        return -1;
 }
 
 /*
@@ -101,16 +102,17 @@ Sino, devuelve -1.
 */
 static int buscar_vehiculo(int numserie) {
     bool encontre = false;
-    int i=0;
-    while (!encontre && i<tope_vehiculo){
-        if (arreglo_vehiculos[i]->get_nro_serie() == numserie)
+    int i = 0;
+    while (!encontre && i<tope_vehiculo) {
+        if (arreglo_vehiculos[i] -> get_nro_serie() == numserie)
             encontre = true;
-        else i++;
+        else
+            i++;
     }
     if (encontre)
         return i;
-    else return -1;
-
+    else
+        return -1;
 }
 
 
@@ -130,7 +132,7 @@ void registrarUsuario(std::string ci, std::string nombre) {
     tope_usuario++;
   }
   else
-      throw new invalid_argument ("Ya existe un Usuario con esa ci");
+      throw new invalid_argument ("Ya existe un usuario con esa cédula de identidad");
 }
 
 /*
@@ -143,30 +145,24 @@ De no ser así, se levanta una excepción std::invalid_argument.
 */
 void agregarVehiculo(const DtVehiculo& vehiculo) {
     if (tope_vehiculo == MAX_VEHICULOS)
-        throw new invalid_argument("No hay mas lugar para vehiculos");
+        throw new invalid_argument ("No hay más lugar para vehículos");
     else {
         if ((buscar_vehiculo(vehiculo.getNroSerie()) == -1) && (0 <= vehiculo.getPorcentaje()) && (vehiculo.getPorcentaje() <= 100) && (vehiculo.getPrecioBase() >= 0)) {
             const DtVehiculo* v = &vehiculo;
-
             const DtBicicleta* dtb = dynamic_cast<DtBicicleta*>(const_cast<DtVehiculo*>(v));
             if (dtb != nullptr) {
                 Bicicleta *bici = new Bicicleta(dtb->getNroSerie(), dtb->getPorcentaje(), dtb->getPrecioBase(), dtb->getTipo(), dtb->getCantCambios());
                 arreglo_vehiculos[tope_vehiculo] = bici;
             }
-
-            else //es monopatin
-                {
-
+            else { //Es monopatin
                 const DtMonopatin* dtm = dynamic_cast<DtMonopatin*>(const_cast<DtVehiculo*>(v));
                 Monopatin *mono = new Monopatin(dtm->getNroSerie(), dtm->getPorcentaje(), dtm->getPrecioBase(), dtm->getTieneLuces());
                 arreglo_vehiculos[tope_vehiculo] = mono;
-                }
+              }
              tope_vehiculo++;
-
-
         }
         else
-            throw new invalid_argument("Verifique Parametros");
+            throw new invalid_argument ("Verifique los datos ingresados");
     }
 }
 
@@ -185,13 +181,12 @@ void ingresarViaje(string ci, int nroSerieVehiculo, const DtViajeBase& viaje) {
   if ((posicion_usuario != -1) && (posicion_vehiculo != -1) &&
       (viaje.getDuracion() > 0) && (viaje.getDistancia() > 0) &&
       (viaje.getFecha() >= arreglo_usuarios[posicion_usuario] -> getFechaIngreso())) {
-        Viaje* trip= new Viaje(viaje.getFecha(), viaje.getDuracion(), viaje.getDistancia(), arreglo_vehiculos[posicion_vehiculo]);
+        Viaje* trip = new Viaje(viaje.getFecha(), viaje.getDuracion(), viaje.getDistancia(), arreglo_vehiculos[posicion_vehiculo]);
         arreglo_usuarios[posicion_usuario] -> agregarViaje(trip);
   }
   else
       throw new invalid_argument ("No se pudo ingresar el viaje");
 }
-
 
 /*
 Devuelve un arreglo con información detallada de los viajes
@@ -202,8 +197,8 @@ cantViajes es un parámetro de salida donde se devuelve la cantidad
 de viajes encontrados (corresponde a la cantidad de valores DtViaje que se devuelven).
 */
 DtViaje** verViajesAntesDeFecha(const DtFecha& fecha, string ci, int& cantViajes) {
-    int j=0;
-    cantViajes=0;
+    int j = 0;
+    cantViajes = 0;
     int posicion_usuario = buscar_usuario(ci);
     if(posicion_usuario != -1) { // Si encontre el usuario con esa ci
         Viaje** viajes_usuario = (arreglo_usuarios[posicion_usuario]->getViajes());
@@ -213,35 +208,34 @@ DtViaje** verViajesAntesDeFecha(const DtFecha& fecha, string ci, int& cantViajes
                 j++;
         }
         cantViajes = j;
-        if (j!=0) {
+        if (j != 0) {
             DtViaje *arreglo_dtv[j];
-            int k=0;
+            int k = 0;
                 for (int i = 0; i<j; i++){
-                    if (!(viajes_usuario[i]->getFecha() >= fecha)){
-                        Vehiculo* v = (viajes_usuario[i]->getVehiculo());;
+                    if (!(viajes_usuario[i] -> getFecha() >= fecha)){
+                        Vehiculo* v = (viajes_usuario[i] -> getVehiculo());;
                         Bicicleta* bici = dynamic_cast<Bicicleta*>(v);
                         if (bici != nullptr) {
-                            DtBicicleta* b = new DtBicicleta(bici->get_nro_serie(), bici->get_porcentaje_bateria(), bici->get_precio_base(), bici->get_tipo(), bici->get_cant_cambios());
-                            arreglo_dtv[k] = new DtViaje(viajes_usuario[i]->getFecha(), viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia(), viajes_usuario[i]->getVehiculo()->darPrecioViaje(viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia()), b);
+                            DtBicicleta* b = new DtBicicleta(bici -> get_nro_serie(), bici -> get_porcentaje_bateria(), bici -> get_precio_base(), bici -> get_tipo(), bici -> get_cant_cambios());
+                            arreglo_dtv[k] = new DtViaje(viajes_usuario[i] -> getFecha(), viajes_usuario[i] -> getDuracion(), viajes_usuario[i] -> getDistancia(), viajes_usuario[i] -> getVehiculo() -> darPrecioViaje(viajes_usuario[i] -> getDuracion(), viajes_usuario[i] -> getDistancia()), b);
                         }
                         else {
-                            Monopatin* mono=dynamic_cast<Monopatin*>(v);
-                            DtMonopatin* m = new DtMonopatin(mono->get_nro_serie(), mono->get_porcentaje_bateria(), mono->get_precio_base(), mono->get_luces());
-                            arreglo_dtv[k] = new DtViaje(viajes_usuario[i]->getFecha(), viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia(), viajes_usuario[i]->getVehiculo()->darPrecioViaje(viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia()), m);
+                            Monopatin* mono = dynamic_cast<Monopatin*>(v);
+                            DtMonopatin* m = new DtMonopatin(mono -> get_nro_serie(), mono -> get_porcentaje_bateria(), mono -> get_precio_base(), mono -> get_luces());
+                            arreglo_dtv[k] = new DtViaje(viajes_usuario[i] -> getFecha(), viajes_usuario[i] -> getDuracion(), viajes_usuario[i] -> getDistancia(), viajes_usuario[i] -> getVehiculo() -> darPrecioViaje(viajes_usuario[i] -> getDuracion(), viajes_usuario[i] -> getDistancia()), m);
                         }
                         k++;
                     }
                 }
-                    DtViaje** ptr = arreglo_dtv;
-                    return ptr;
-        } else
+                DtViaje** ptr = arreglo_dtv;
+                return ptr;
+        }
+        else
             return nullptr;
-    } else {
-        return nullptr;
     }
-
+    else
+        return nullptr;
 }
-
 
 /*
 Elimina los viajes del usuario identificado por ci,
@@ -252,27 +246,26 @@ se levanta una excepción std::invalid_argument.
 void eliminarViajes(string ci, const DtFecha& fecha) {
     int posicion_usuario = buscar_usuario(ci);
     if (posicion_usuario != -1) {
-        Viaje** viajes = arreglo_usuarios[posicion_usuario]->getViajes();
+        Viaje** viajes = arreglo_usuarios[posicion_usuario] -> getViajes();
         int j = (arreglo_usuarios[posicion_usuario] -> getCantViajes())-1;
         for (int i = arreglo_usuarios[posicion_usuario] -> getCantViajes()-1; i >= 0; i--) {
-            if (viajes[i]->getFecha() == fecha) {
-                if (j == i){
+            if (viajes[i] -> getFecha() == fecha) {
+                if (j == i) {
                     delete viajes[i];
-                    viajes[i]=nullptr;
+                    viajes[i] = nullptr;
                 }
                 else {
                     delete (viajes[i]);
-                    viajes[i]=viajes[j];
-                    viajes[j]=nullptr;
+                    viajes[i] = viajes[j];
+                    viajes[j] = nullptr;
                 }
-
-              j--;
+                j--;
             }
         }
         arreglo_usuarios[posicion_usuario] -> setCantViajes(j);
     }
     else
-        throw new invalid_argument ("No existe el Usuario ingresado");
+        throw new invalid_argument ("No existe el usuario ingresado");
 }
 
 /*
@@ -283,10 +276,9 @@ o la carga ingresada no se encuentre entre 0 y 100 se levanta una excepción st
 void cambiarBateriaVehiculo(int nroSerieVehiculo, float cargaVehiculo) {
     int posicion_vehiculo = buscar_vehiculo(nroSerieVehiculo);
     if ((posicion_vehiculo != -1) && (0 <= cargaVehiculo) && (cargaVehiculo <= 100))
-        arreglo_vehiculos[posicion_vehiculo]->set_porcentaje_bateria(cargaVehiculo);
+        arreglo_vehiculos[posicion_vehiculo] -> set_porcentaje_bateria(cargaVehiculo);
     else
-        throw new invalid_argument ("No se pudo cambiar la bateria del vehiculo");
-
+        throw new invalid_argument ("No se pudo cambiar la batería del vehículo ingresado");
 }
 
 /*
@@ -296,19 +288,17 @@ devuelve la cantidad de vehículos (corresponde a la cantidad de valores DtVehi
 */
 DtVehiculo** obtenerVehiculos(int& cantVehiculos) {
     cantVehiculos = tope_vehiculo;
-    if (tope_vehiculo>0) {
-        DtVehiculo** arreglo_dtv =  new DtVehiculo*[tope_vehiculo];
-        for (int i=0; i<tope_vehiculo; i++){
+    if (tope_vehiculo > 0) {
+        DtVehiculo** arreglo_dtv = new DtVehiculo*[tope_vehiculo];
+        for (int i=0; i<tope_vehiculo; i++) {
             Bicicleta *bici = dynamic_cast<Bicicleta*>(arreglo_vehiculos[i]);
-            if (bici != nullptr) //arreglo_vehiculos[i] es bici {
-                arreglo_dtv[i] = new DtBicicleta(bici->get_nro_serie(), bici->get_porcentaje_bateria(), bici->get_precio_base(), bici->get_tipo(), bici->get_cant_cambios());
+            if (bici != nullptr) //arreglo_vehiculos[i] es Bicicleta
+                arreglo_dtv[i] = new DtBicicleta(bici -> get_nro_serie(), bici -> get_porcentaje_bateria(), bici -> get_precio_base(), bici -> get_tipo(), bici -> get_cant_cambios());
             else {
                 Monopatin* mono = dynamic_cast<Monopatin*>(arreglo_vehiculos[i]);
                 if (mono != nullptr) //arreglo_vehiculos[i] es monopatin
                     arreglo_dtv[i] = new DtMonopatin(mono->get_nro_serie(), mono->get_porcentaje_bateria(), mono->get_precio_base(), mono->get_luces());
-
             }
-
         }
         return arreglo_dtv;
     }
@@ -316,116 +306,116 @@ DtVehiculo** obtenerVehiculos(int& cantVehiculos) {
         return nullptr;
 }
 
-// main
 int main() {
     tope_usuario = 0;
     tope_vehiculo = 0;
     int i = 0;
     bool salir = false;
-
-    string msj;
+    string msj = "";
+    system("clear");
     while(!salir) {
-        //system("clear");
-        cout << "Bienvenido. Elija la opción deseada. \n"
-            << "------------- " << msj << " -------------" << "\n"
-            << "1) Registrar un Usuario \n"
-            << "2) Agregar un Vehiculo \n"
-            << "3) Ingresar un Viaje \n"
-            << "4) Ver viajes de un Usuario \n"
-            << "5) Eliminar viajes de un Usuario \n"
-            << "6) Cambiar bateria de un Vehiculo \n"
-            << "7) Obtener Vehiculos \n"
-            << "0) Salir \n"
-            << "Opción: ";
+        cout << "------------------" << msj << "------------------ \n \n"
+            << "Bienvenido. Elija la opción deseada. \n"
+            << " 1) Registrar un Usuario \n"
+            << " 2) Agregar un Vehiculo \n"
+            << " 3) Ingresar un Viaje \n"
+            << " 4) Ver viajes de un Usuario \n"
+            << " 5) Eliminar viajes de un Usuario \n"
+            << " 6) Cambiar bateria de un Vehiculo \n"
+            << " 7) Obtener Vehiculos \n"
+            << " 0) Salir \n"
+            << " Opción: ";
         cin >> i;
         switch(i) {
+
         /* 1) Registrar un Usuario */
         case 1:
         	try {
-                system("clear");
-	            cout << "Ingrese el nombre del Usuario \n "
-	                << "Nombre: ";
-                string nombre1;
+              system("clear");
+	            cout << "Ingrese el nombre del usuario. \n"
+                  << " Nombre: ";
+              string nombre1;
 	            cin >> nombre1;
 	            string ci1 = conseguir_cedula();
 	            registrarUsuario(ci1, nombre1);
-	        } catch(exception* e) {
-	        	msj =  e->what();
+	        }
+          catch(exception* e) {
+
+            msj =  e -> what();
 	        	break;
 	        }
+            system("clear");
             msj = "Usuario agregado correctamente.";
             break;
 
         /* 2) Agregar un Vehiculo */
-        case 2: //
+        case 2:
         	try {
-                system("clear");
-        		cout << "Indique ingresando M o B si ingresa un Monopatin o Bicicleta respectivamente: \n ";
+            system("clear");
+        		cout << "Indique ingresando M o B si ingresa un Monopatín o una Bicicleta respectivamente: \n ";
         		string V;
         		cin >> V;
                 while ((V != "M") && (V != "B")) {
-                    cout << "Caracter no valido. Indique ingresando M o B si ingresa un Monopatin o Bicicleta respectivamente: \n ";
+                    cout << "Caracter no válido. Indique ingresando M o B si ingresa un Monopatín o una Bicicleta respectivamente: \n ";
                     cin >> V;
                 }
                 int nro_serie;
                 float porcentaje, precio_base;
-        		if (V == "M") {
+        		    if (V == "M") {
                     int luz;
                     bool tieneLuces;
                     conseguir_datos_vehiculo(nro_serie, porcentaje, precio_base);
-        			cout << "Indique ingresando 1 si tiene luces, de lo contrario, 0: \n ";
-        			cin >> luz;
+        			      cout << "Indique ingresando 1 si tiene luces, de lo contrario, 0: \n ";
+        			      cin >> luz;
                     while ((luz != 1) && (luz != 0)) {
-                        cout << "Numero no valido. Indique ingresando 1 si tiene luces, de lo contrario, 0: \n ";
+                        cout << "Número no válido. Indique ingresando 1 si tiene luces, de lo contrario, 0: \n ";
                         cin >> luz;
                     }
-        			if (luz == 1)
-        				tieneLuces = true;
-        			else
-        				tieneLuces = false;
-        			DtMonopatin dtm(nro_serie, porcentaje, precio_base, tieneLuces);
-        			const DtVehiculo* dtv = &dtm;
-        			agregarVehiculo(*dtv);
-        		} else {
+        			      if (luz == 1)
+        				        tieneLuces = true;
+        			      else
+        				        tieneLuces = false;
+        			      DtMonopatin dtm(nro_serie, porcentaje, precio_base, tieneLuces);
+        			      const DtVehiculo* dtv = &dtm;
+        			      agregarVehiculo(*dtv);
+        		     }
+                 else {
                     TipoBici tb;
-        			conseguir_datos_vehiculo(nro_serie, porcentaje, precio_base);
-                    // Como hacer el chequeo aca
-        			cout << "Ingrese el tipo de Bicicleta, (Paseo o Montana) \n "
-        				<< "Tipo de Bici: ";
-        			string tipo;
-        			cin >> tipo;
+        			      conseguir_datos_vehiculo(nro_serie, porcentaje, precio_base);
+        			      cout << "Ingrese el tipo de bicicleta, (Paseo o Montana). \n"
+        				        << " Tipo de bicicleta: ";
+        			      string tipo;
+        			      cin >> tipo;
                     while(tipo != "Paseo" && tipo != "Montana") {
-                        cout << "Ingrese un tipo valido (Paseo o Montana) \n";
+                        cout << "Tpo de bicicleta inválido. Ingrese un tipo de bicicleta válido (Paseo o Montana) \n"
+                          << " Tipo de bicicleta: ";
                         cin >> tipo;
                     }
                     if(tipo == "Paseo")
                         tb = Paseo;
                     else
                         tb = Montana;
-        			cout << "Ingrese la cantidad de cambios \n "
-        				<< "Cantidad de cambios: ";
-        			int cant_cambios;
-        			cin >> cant_cambios;
+        			      cout << "Ingrese la cantidad de cambios de la bicicleta. \n"
+        				        << " Cantidad de cambios: ";
+        			      int cant_cambios;
+        			      cin >> cant_cambios;
                     while (cant_cambios <= 0) {
-                        cout << "Numero no valido. Ingrese la cantidad de cambios \n "
-                            << "Cantidad de cambios: ";
+                        cout << "Número no válido. Ingrese la cantidad de cambios (número positivo). \n"
+                            << " Cantidad de cambios: ";
                         cin >> cant_cambios;
                     }
-        			DtBicicleta dtb(nro_serie, porcentaje, precio_base, tb, cant_cambios);
+        			      DtBicicleta dtb(nro_serie, porcentaje, precio_base, tb, cant_cambios);
                     const DtVehiculo* dtv = &dtb;
-                    //const DtVehiculo* v = &dtv;
-                    //DtBicicleta* b = dynamic_cast<DtBicicleta*>(const_cast<DtVehiculo*>(dtv));
-                    //if (b == nullptr)
-                      //  cout << "no entendemos \n \n";
                     cout << "casi agregar vehiculo";
-        			agregarVehiculo(*dtv);
+        			      agregarVehiculo(*dtv);
                 }
-            }catch(exception* e) {
+          } catch(exception* e) {
         		msj = e->what();
         		break;
         	}
-        	msj = "Vehiculo agregado correctamente.";
-            break;
+          system("clear");
+        	msj = "Vehículo agregado correctamente.";
+          break;
 
         /* 3) Ingresar un Viaje */
         case 3:

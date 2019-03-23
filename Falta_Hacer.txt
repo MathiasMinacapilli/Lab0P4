@@ -1,11 +1,6 @@
  
- 
- FALTA:
-    -  Cambiar en las funciones del main, los objetos estaticos a dinamicos. [principal.cpp] 
-    -  Verificar cada destructor, para ver si hay que hacer delete[] o no de una asociacion.
-    -testinggg 
-    -separar las throw de cada excepcion
-    -ver viajes de usuario da segmentation fault; 
- 
- TERMINAR:
-  
+TESTEAR:
+
+ -EliminarViajes elimina todo (?
+ -cambiar bateria 
+ -

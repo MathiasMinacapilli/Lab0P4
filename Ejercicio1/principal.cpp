@@ -461,7 +461,7 @@ int main() {
             break;
 
         /* 4) Ver viajes de un usuario */
-        case 4:
+        case 4: {
             system("clear");
             string ci4 = conseguir_cedula();
             DtFecha fecha4 = conseguir_fecha();
@@ -489,10 +489,11 @@ int main() {
                 system("clear");
                 msj = "Lista mostrada correctamente.";
             }
-            break;
+        }
+        break;
 
         /* 5) Eliminar viajes de un usuario */
-        case 5:
+        case 5: 
             system("clear");
             try {
                 string ci5 = conseguir_cedula();
@@ -528,7 +529,7 @@ int main() {
             break;
 
         /* 7) Obtener vehículos */
-        case 7:
+        case 7: {
             system("clear");
             int cantVehiculos = 0;
             DtVehiculo** vehiculos = obtenerVehiculos(cantVehiculos);
@@ -566,10 +567,11 @@ int main() {
                 system("clear");
                 msj = "";
             }
-            break;
+        }
+        break;
 
         /* 0) Salir */
-        case 0:
+        case 0: {
             salir = true;
             if (tope_usuario != 0) {
                 for (int i=0; i<tope_usuario; i++)
@@ -580,13 +582,15 @@ int main() {
                     delete arreglo_vehiculos[i];
             }
             cout << "\nHasta pronto! :D\n \n";
-            break;
+        }
+        break;
 
         /* Número ingresado incorrecto */
-        default:
+        default: {
             system("clear");
             msj = "Número inválido. Ingrese valor entre 0 y 7.";
-            break;
+        }
+        break;
 
         } //fin switch
     } //fin while

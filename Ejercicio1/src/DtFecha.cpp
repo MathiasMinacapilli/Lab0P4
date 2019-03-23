@@ -37,7 +37,7 @@ bool DtFecha::operator>=(const DtFecha &fecha2) {
 }
 
 bool DtFecha::operator==(const DtFecha &f2) {
-    return (this->getAnio() == f2.getAnio()) && 
+    return ((this->getAnio() == f2.getAnio()) && 
         (this->getMes() == f2.getMes()) && 
-        (this->getDia() == f2.getDia());
+        (this->getDia() == f2.getDia()));
 }

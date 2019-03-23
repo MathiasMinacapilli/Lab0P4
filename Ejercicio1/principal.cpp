@@ -17,6 +17,7 @@
 #include <iostream>
 #include <ctime>
 #include <stdio.h>
+#include <typeinfo>
 #include <algorithm>
 #include <stdlib.h> //system("");
 
@@ -144,13 +145,13 @@ void agregarVehiculo(const DtVehiculo& vehiculo) {
     else {
         if ((buscar_vehiculo(vehiculo.getNroSerie()) == -1) && (0 <= vehiculo.getPorcentaje()) && (vehiculo.getPorcentaje() <= 100) && (vehiculo.getPrecioBase() >= 0)) {
             const DtVehiculo* v = &vehiculo;
-            const DtBicicleta *dtb = static_cast<DtBicicleta*>(const_cast<DtVehiculo*>(v));
-            if (dtb) {
+            const DtBicicleta *dtb = dynamic_cast<DtBicicleta*>(const_cast<DtVehiculo*>(v));
+            if (dtb != nullptr) {
                 Bicicleta *bici = new Bicicleta(dtb->getNroSerie(), dtb->getPorcentaje(), dtb->getPrecioBase(), dtb->getTipo(), dtb->getCantCambios());
                 arreglo_vehiculos[tope_vehiculo] = bici;
             }
             else //es monopatin
-                { DtMonopatin* dtm = static_cast<DtMonopatin*>(const_cast<DtVehiculo*>(v));
+                { DtMonopatin* dtm = dynamic_cast<DtMonopatin*>(const_cast<DtVehiculo*>(v));
                 Monopatin *mono = new Monopatin(dtm->getNroSerie(), dtm->getPorcentaje(), dtm->getPrecioBase(), dtm->getTieneLuces());
                 arreglo_vehiculos[tope_vehiculo] = mono;
                 }
@@ -385,7 +386,7 @@ int main() {
         			else
         				tieneLuces = false;
         			DtMonopatin dtm(nro_serie, porcentaje, precio_base, tieneLuces);
-        			DtVehiculo& dtv = dtm;
+        			DtVehiculo dtv = dtm;
         			agregarVehiculo(dtv);
         		} else {
                     TipoBici tb;
@@ -413,7 +414,7 @@ int main() {
                         cin >> cant_cambios;
                     }
         			DtBicicleta dtb(nro_serie, porcentaje, precio_base, tb, cant_cambios);
-        			DtVehiculo& dtv = dtb;
+        			DtVehiculo dtv = dtb;
         			agregarVehiculo(dtv);
                 } 
             }catch(exception* e) {
@@ -533,8 +534,10 @@ int main() {
                         << "% bateria: " << unVehiculo->getPorcentaje() << "\n"
                         << "Precio base: " << unVehiculo->getPrecioBase() << "\n";
                     // nunca va a entrar al else porque hace el casteo igual, nunca va a ser nullptr
-                    DtBicicleta *dtb = static_cast<DtBicicleta*>(unVehiculo);
-                    if (dtb != nullptr) {
+                    DtBicicleta* dummybici;
+                    // DtBicicleta *dtb = static_cast<DtBicicleta*>(unVehiculo);
+                    if (/*dtb != nullptr*/ typeid(unVehiculo).name() == typeid(dummybici).name()) {
+                        DtBicicleta *dtb = static_cast<DtBicicleta*>(unVehiculo);
                         cout << "Tipo de Bicicleta: " << dtb->getTipo() << "\n"
                             << "Cantidad de cambios: " << dtb->getCantCambios() << "\n";
                     } else {

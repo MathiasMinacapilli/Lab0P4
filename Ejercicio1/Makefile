@@ -28,7 +28,7 @@ EJECUTABLE=principal
 # compilador
 CC = g++
 # opciones de compilación
-CCFLAGS = -Wall -I$(HDIR)
+CCFLAGS = -Wall -g -I$(HDIR)
 
 # $< es una variable automatica de GNU Make que es el nombre de la primera dependencia
 # $@ es una variable automatica de GNU Make que es el nombre del archivo objetivo de la regla

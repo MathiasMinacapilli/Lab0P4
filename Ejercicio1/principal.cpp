@@ -152,7 +152,12 @@ void agregarVehiculo(const DtVehiculo& vehiculo) {
                 arreglo_vehiculos[tope_vehiculo] = bici;
                 cout << "agregue bici:)";
             }
+<<<<<<< HEAD
+            else { //es monopatin
+                DtMonopatin* dtm = static_cast<DtMonopatin*>(const_cast<DtVehiculo*>(v));
+=======
             else //es monopatin
+<<<<<<< HEAD
                 {
                 
                 const DtMonopatin* dtm = dynamic_cast<DtMonopatin*>(const_cast<DtVehiculo*>(v));
@@ -163,6 +168,14 @@ void agregarVehiculo(const DtVehiculo& vehiculo) {
                 }
              tope_vehiculo++;
             
+=======
+                { DtMonopatin* dtm = dynamic_cast<DtMonopatin*>(const_cast<DtVehiculo*>(v));
+>>>>>>> 22608a9497d2365c94f477105cb56190c5db7202
+                Monopatin *mono = new Monopatin(dtm->getNroSerie(), dtm->getPorcentaje(), dtm->getPrecioBase(), dtm->getTieneLuces());
+                arreglo_vehiculos[tope_vehiculo] = mono;
+            }
+            tope_vehiculo++;
+>>>>>>> 988f3a2288a247131fca7fd28933134189b18227
         }
         else 
             throw new invalid_argument("Verifique Parametros");

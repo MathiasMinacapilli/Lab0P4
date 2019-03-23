@@ -58,7 +58,7 @@ void conseguir_datos_vehiculo(int &nro_serie, float &porcentaje, float &precio_b
     cout << "Ingrese el porcentaje de bateria \n "
         << "% bateria: ";
     cin >> porcentaje;
-    cout << "Ingrese el precio base del Monopatin \n "
+    cout << "Ingrese el precio base del Vehiculo \n "
         << "Precio base: ";
     cin >> precio_base;
 }
@@ -145,17 +145,24 @@ void agregarVehiculo(const DtVehiculo& vehiculo) {
     else {
         if ((buscar_vehiculo(vehiculo.getNroSerie()) == -1) && (0 <= vehiculo.getPorcentaje()) && (vehiculo.getPorcentaje() <= 100) && (vehiculo.getPrecioBase() >= 0)) {
             const DtVehiculo* v = &vehiculo;
-            const DtBicicleta *dtb = dynamic_cast<DtBicicleta*>(const_cast<DtVehiculo*>(v));
+            
+            const DtBicicleta* dtb = dynamic_cast<DtBicicleta*>(const_cast<DtVehiculo*>(v));
             if (dtb != nullptr) {
                 Bicicleta *bici = new Bicicleta(dtb->getNroSerie(), dtb->getPorcentaje(), dtb->getPrecioBase(), dtb->getTipo(), dtb->getCantCambios());
                 arreglo_vehiculos[tope_vehiculo] = bici;
+                cout << "agregue bici:)";
             }
             else //es monopatin
-                { DtMonopatin* dtm = dynamic_cast<DtMonopatin*>(const_cast<DtVehiculo*>(v));
+                {
+                
+                const DtMonopatin* dtm = dynamic_cast<DtMonopatin*>(const_cast<DtVehiculo*>(v));
+                if (dtm == nullptr)
+                    cout << "peligro";
                 Monopatin *mono = new Monopatin(dtm->getNroSerie(), dtm->getPorcentaje(), dtm->getPrecioBase(), dtm->getTieneLuces());
                 arreglo_vehiculos[tope_vehiculo] = mono;
                 }
              tope_vehiculo++;
+            
         }
         else 
             throw new invalid_argument("Verifique Parametros");
@@ -327,7 +334,7 @@ int main() {
     string msj;
 	//Hay que fijarse que se ingrese todo bien?
     while(!salir) {
-        system("clear");
+        //system("clear");
         cout << "Bienvenido. Elija la opción deseada. \n"
             << "------------- " << msj << " -------------" << "\n"
             << "1) Registrar un Usuario \n"
@@ -386,8 +393,8 @@ int main() {
         			else
         				tieneLuces = false;
         			DtMonopatin dtm(nro_serie, porcentaje, precio_base, tieneLuces);
-        			DtVehiculo dtv = dtm;
-        			agregarVehiculo(dtv);
+        			const DtVehiculo* dtv = &dtm;
+        			agregarVehiculo(*dtv);
         		} else {
                     TipoBici tb;
         			conseguir_datos_vehiculo(nro_serie, porcentaje, precio_base);
@@ -414,8 +421,13 @@ int main() {
                         cin >> cant_cambios;
                     }
         			DtBicicleta dtb(nro_serie, porcentaje, precio_base, tb, cant_cambios);
-        			DtVehiculo dtv = dtb;
-        			agregarVehiculo(dtv);
+                    const DtVehiculo* dtv = &dtb;
+                    //const DtVehiculo* v = &dtv;
+                    //DtBicicleta* b = dynamic_cast<DtBicicleta*>(const_cast<DtVehiculo*>(dtv));
+                    //if (b == nullptr)
+                      //  cout << "no entendemos \n \n";
+                    cout << "casi agregar vehiculo";
+        			agregarVehiculo(*dtv);
                 } 
             }catch(exception* e) {
         		msj = e->what();

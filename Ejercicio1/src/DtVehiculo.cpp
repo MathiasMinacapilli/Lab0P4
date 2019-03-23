@@ -20,7 +20,6 @@ float DtVehiculo::getPorcentaje() const{
 float DtVehiculo::getPrecioBase() const{
     return precio_base;
 }
- void DtVehiculo::f(){}
 
 DtVehiculo::~DtVehiculo() {
 }

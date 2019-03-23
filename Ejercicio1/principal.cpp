@@ -149,12 +149,12 @@ void agregarVehiculo(const DtVehiculo& vehiculo) {
                 Bicicleta *bici = new Bicicleta(dtb->getNroSerie(), dtb->getPorcentaje(), dtb->getPrecioBase(), dtb->getTipo(), dtb->getCantCambios());
                 arreglo_vehiculos[tope_vehiculo] = bici;
             }
-            else //es monopatin
-                { DtMonopatin* dtm = static_cast<DtMonopatin*>(const_cast<DtVehiculo*>(v));
+            else { //es monopatin
+                DtMonopatin* dtm = static_cast<DtMonopatin*>(const_cast<DtVehiculo*>(v));
                 Monopatin *mono = new Monopatin(dtm->getNroSerie(), dtm->getPorcentaje(), dtm->getPrecioBase(), dtm->getTieneLuces());
                 arreglo_vehiculos[tope_vehiculo] = mono;
-                }
-             tope_vehiculo++;
+            }
+            tope_vehiculo++;
         }
         else 
             throw new invalid_argument("Verifique Parametros");

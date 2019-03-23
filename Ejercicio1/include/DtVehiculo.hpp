@@ -12,7 +12,7 @@ public:
     int getNroSerie() const;
     float getPorcentaje() const;
     float getPrecioBase() const;
-    
+    virtual void f();
     ~DtVehiculo();
 protected: 
     DtVehiculo(int=0, float=0, float=0);

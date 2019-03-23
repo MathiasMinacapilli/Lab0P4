@@ -484,6 +484,8 @@ int main() {
                         << " Precio total: " << unViaje -> getPrecioTotal() << "\n";
                     cantViajes--;
                 }
+                for (int i=0; i<cantViajes; i++)
+                    delete (viajes)[i];
                 cout << "\nPresione cualquier tecla y luego enter para continuar";
                 string enter;
                 cin >> enter;

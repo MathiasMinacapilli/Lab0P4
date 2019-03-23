@@ -57,24 +57,20 @@ void Usuario::setCantViajes(int cant_viajes) {
     this ->cant_viajes = cant_viajes;
 }
 
-
-int Usuario::agregarViaje(Viaje* viaje) {
+void Usuario::agregarViaje(Viaje* viaje) {
     /* Agrega un viaje al usuario en el arreglo viajes[100] y devuelve 1, en caso de ya haber
     100 viajes no hace nada y devuelve 0 */
     if (this->cant_viajes < 100) {
         // Si el arreglo no está lleno agrego el viaje al final
         this->viajes[cant_viajes] = viaje;
         this->cant_viajes++;
-        return 1;
-    }
-    else {
-        return 0;
+     
     }
 }
 
 Usuario::~Usuario() {
     //Libero la memoria de todos los viajes
     int i = 0;
-    while(i<this->cant_viajes)
+    while(i<cant_viajes)
         delete this->viajes[i];
 }

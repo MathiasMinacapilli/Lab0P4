@@ -14,3 +14,5 @@ float DtViaje::getPrecioTotal() const{
 DtVehiculo* DtViaje::getVehiculo() const{
     return this->vehiculo;
 }
+
+DtViaje::~DtViaje(){}

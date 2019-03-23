@@ -17,8 +17,7 @@
 #include <iostream>
 #include <ctime>
 #include <stdio.h>
-#include <typeinfo>
-#include <algorithm>
+#include <algorithm> //all_of
 #include <stdlib.h> //system("");
 
 using namespace std;

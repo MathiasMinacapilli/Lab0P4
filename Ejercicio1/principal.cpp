@@ -565,8 +565,16 @@ int main() {
         }
         break;
         case 0: 
-            salir = true;
-            cout << "Hasta pronto! :D\n";
+               salir = true;
+            if (tope_usuario != 0) {
+                for (int i=0; i<tope_usuario; i++)
+                    delete arreglo_usuarios[i];
+            }        
+            if (tope_vehiculo !=0) {
+                for (int i=0; i<tope_vehiculo; i++)
+                    delete arreglo_vehiculos[i];
+            }
+            cout << "Hasta pronto! :D\n"
             break;
         }
     }

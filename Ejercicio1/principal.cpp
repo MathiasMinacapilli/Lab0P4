@@ -150,27 +150,18 @@ void agregarVehiculo(const DtVehiculo& vehiculo) {
             if (dtb != nullptr) {
                 Bicicleta *bici = new Bicicleta(dtb->getNroSerie(), dtb->getPorcentaje(), dtb->getPrecioBase(), dtb->getTipo(), dtb->getCantCambios());
                 arreglo_vehiculos[tope_vehiculo] = bici;
-                cout << "agregue bici:)";
             }
 
-            else { //es monopatin
-                DtMonopatin* dtm = static_cast<DtMonopatin*>(const_cast<DtVehiculo*>(v));
             else //es monopatin
                 {
                 
                 const DtMonopatin* dtm = dynamic_cast<DtMonopatin*>(const_cast<DtVehiculo*>(v));
-                if (dtm == nullptr)
-                    cout << "peligro";
                 Monopatin *mono = new Monopatin(dtm->getNroSerie(), dtm->getPorcentaje(), dtm->getPrecioBase(), dtm->getTieneLuces());
                 arreglo_vehiculos[tope_vehiculo] = mono;
                 }
              tope_vehiculo++;
             
-                { DtMonopatin* dtm = dynamic_cast<DtMonopatin*>(const_cast<DtVehiculo*>(v));
-                Monopatin *mono = new Monopatin(dtm->getNroSerie(), dtm->getPorcentaje(), dtm->getPrecioBase(), dtm->getTieneLuces());
-                arreglo_vehiculos[tope_vehiculo] = mono;
-            }
-            tope_vehiculo++;
+                
         }
         else 
             throw new invalid_argument("Verifique Parametros");
@@ -342,7 +333,7 @@ int main() {
     string msj;
 	//Hay que fijarse que se ingrese todo bien?
     while(!salir) {
-        //system("clear");
+        system("clear");
         cout << "Bienvenido. Elija la opción deseada. \n"
             << "------------- " << msj << " -------------" << "\n"
             << "1) Registrar un Usuario \n"
@@ -553,13 +544,13 @@ int main() {
                         << "Nº de serie: " << unVehiculo->getNroSerie() << "\n"
                         << "% bateria: " << unVehiculo->getPorcentaje() << "\n"
                         << "Precio base: " << unVehiculo->getPrecioBase() << "\n";
-                    // nunca va a entrar al else porque hace el casteo igual, nunca va a ser nullptr
-                    DtBicicleta* dummybici;
-                    // DtBicicleta *dtb = static_cast<DtBicicleta*>(unVehiculo);
-                    if (/*dtb != nullptr*/ typeid(unVehiculo).name() == typeid(dummybici).name()) {
-                        DtBicicleta *dtb = static_cast<DtBicicleta*>(unVehiculo);
-                        cout << "Tipo de Bicicleta: " << dtb->getTipo() << "\n"
-                            << "Cantidad de cambios: " << dtb->getCantCambios() << "\n";
+                    
+                    DtBicicleta *dtb = dynamic_cast<DtBicicleta*>(unVehiculo);
+                     if (dtb != nullptr) {
+                            if (dtb->getTipo() == Paseo)
+                                cout << "Tipo de Bicicleta: Paseo \n";
+                            else cout << "Tipo de Bicicleta: Montana \n";
+                            cout << "Cantidad de cambios: " << dtb->getCantCambios() << "\n";
                     } else {
                         DtMonopatin *dtm = static_cast<DtMonopatin*>(unVehiculo);
                         cout << "Tiene luces: ";

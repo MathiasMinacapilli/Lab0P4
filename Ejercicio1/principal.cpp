@@ -35,6 +35,43 @@ Retorna true si y solo si str esta compuesto solamente por digitos
 static bool son_digitos(string ci) {
     return all_of(ci.begin(), ci.end(), ::isdigit);
 }
+
+string conseguir_cedula() {
+    cout << "Ingrese la cedula del Usuario sin guion ni digito y con verificador \n "
+        << "Cedula: ";
+    string ci;
+    cin >> ci;
+    while ((ci.size() != 8) || (!son_digitos(ci))) {
+        cout << "Cedula no valida. Ingrese la cedula del Usuario sin guion y con digito verificador \n "
+            << "Cedula: ";
+        cin >> ci;
+    }
+    return ci;
+}
+
+void conseguir_datos_vehiculo(int &nro_serie, float &porcentaje, float &precio_base) {
+    cout << "Ingrese el numero de serie \n "
+        << "Nº de serie: ";
+    cin >> nro_serie;
+    cout << "Ingrese el porcentaje de bateria \n "
+        << "% bateria: ";
+    cin >> porcentaje;
+    cout << "Ingrese el precio base del Monopatin \n "
+        << "Precio base: ";
+    cin >> precio_base;
+}
+
+DtFecha conseguir_fecha(int &dia, int &mes, int &anio) {
+    cout << "Ingrese la fecha del viaje \n"
+        << "DD/MM/AAAA: ";
+    cin >> dia;
+    cin.get();
+    cin >> mes;
+    cin.get();
+    cin >> anio;
+    return DtFecha(dia, mes, anio);
+}
+
 /*
 Busca si existe la cedula cid en el arreglo_usuarios.
 Si existe, devuelve el numero de posicion del arreglo.
@@ -89,7 +126,7 @@ void registrarUsuario(std::string ci, std::string nombre) {
     tope_usuario++;
   }
   else
-      throw new invalid_argument ("Ya existe usuario con esa ci");
+      throw new invalid_argument ("Ya existe un Usuario con esa ci");
 }
 
 /*
@@ -119,7 +156,7 @@ void agregarVehiculo(const DtVehiculo& vehiculo) {
              tope_vehiculo++;
         }
         else 
-            throw new invalid_argument("verifique parametros");
+            throw new invalid_argument("Verifique Parametros");
     }
 }
 
@@ -234,7 +271,7 @@ void eliminarViajes(string ci, const DtFecha& fecha) {
         arreglo_usuarios[posicion_usuario] -> setCantViajes(j);
     }
     else
-        throw new invalid_argument ("No existe el usuario ingresado");
+        throw new invalid_argument ("No existe el Usuario ingresado");
 }
 
 /*
@@ -257,7 +294,8 @@ cantVehiculos es un parámetro de salida donde se
 devuelve la cantidad de vehículos (corresponde a la cantidad de valores DtVehiculo que se devuelven).
 */
 DtVehiculo** obtenerVehiculos(int& cantVehiculos) {
-    if (tope_vehiculo>0){
+    cantVehiculos = tope_vehiculo;
+    if (tope_vehiculo>0) {
         DtVehiculo** arreglo_dtv =  new DtVehiculo*[tope_vehiculo];
         for (int i=0; i<tope_vehiculo; i++){
             Bicicleta *bici = dynamic_cast<Bicicleta*>(arreglo_vehiculos[i]);
@@ -305,18 +343,10 @@ int main() {
 	                << "Nombre: ";
                 string nombre1;
 	            cin >> nombre1;
-	            cout << "Ingrese la cedula del Usuario sin guion ni digito y con verificador \n "
-	            	<< "Cedula: ";
-	            string ci1;
-	            cin >> ci1;
-                while ((ci1.size() != 8) && (!son_digitos(ci1))) {
-                    cout << "Cedula no valida. Ingrese la cedula del Usuario sin guion y con digito verificador \n "
-                        << "Cedula: ";
-                    cin >> ci1;
-                }
+	            string ci1 = conseguir_cedula();
 	            registrarUsuario(ci1, nombre1);
 	        } catch(exception* e) {
-	        	cout << e->what();
+	        	cout << e->what() << ". \n";
 	        	break;
 	        }
 	        cout << "Usuario agregado. \n ";
@@ -330,20 +360,12 @@ int main() {
                     cout << "Caracter no valido. Indique ingresando M o B si ingresa un Monopatin o Bicicleta respectivamente: \n ";
                     cin >> V;
                 }
-                int nro_serie, luz;
+                int nro_serie;
                 float porcentaje, precio_base;
-                bool tieneLuces;
-                TipoBici tb;
         		if (V == "M") {
-        			cout << "Ingrese el numero de serie \n "
-        				<< "Nº de serie: ";
-        			cin >> nro_serie;
-        			cout << "Ingrese el porcentaje de bateria \n "
-        				<< "% bateria: ";
-        			cin >> porcentaje;
-        			cout << "Ingrese el precio base del Monopatin \n "
-        				<< "Precio base: ";
-        			cin >> precio_base;
+                    int luz;
+                    bool tieneLuces;
+                    conseguir_datos_vehiculo(nro_serie, porcentaje, precio_base);
         			cout << "Indique ingresando 1 si tiene luces, de lo contrario, 0: \n ";
         			cin >> luz;
                     while ((luz != 1) && (luz != 0)) {
@@ -358,15 +380,8 @@ int main() {
         			DtVehiculo& dtv = dtm;
         			agregarVehiculo(dtv);
         		} else {
-        			cout << "Ingrese el numero de serie \n "
-        				<< "Nº de serie: ";
-        			cin >> nro_serie;
-        			cout << "Ingrese el porcentaje de bateria \n "
-        				<< "% bateria: ";
-        			cin >> porcentaje;
-        			cout << "Ingrese el precio base de la Bicicleta \n "
-        				<< "Precio base: ";
-        			cin >> precio_base;
+                    TipoBici tb;
+        			conseguir_datos_vehiculo(nro_serie, porcentaje, precio_base);
                     // Como hacer el chequeo aca
         			cout << "Ingrese el tipo de Bicicleta, (Paseo o Montana) \n "
         				<< "Tipo de Bici: ";
@@ -380,8 +395,6 @@ int main() {
                         tb = Paseo;
                     else
                         tb = Montana;
-                            
-                
         			cout << "Ingrese la cantidad de cambios \n "
         				<< "Cantidad de cambios: ";
         			int cant_cambios;
@@ -396,36 +409,21 @@ int main() {
         			agregarVehiculo(dtv);
                 } 
             }catch(exception* e) {
-        		cout << e->what();
+        		cout << e->what() << ". \n";
         		break;
         	}
         	cout << "Vehiculo agregado. \n ";
             break;
         case 3:
             try {
-                cout << "Ingrese la cedula del Usuario sin guion y con digito verificador \n "
-                    << "Cedula: ";
-                string cedula;
-                cin >> cedula;
-                while ((cedula.size() != 8) || (!son_digitos(cedula))) {
-                    cout << "Cedula no valida. Ingrese la cedula del Usuario sin guion y con digito verificador \n "
-                        << "Cedula: ";
-                    cin >> cedula;
-                }
+                string ci3 = conseguir_cedula();
                 cout << "Ingrese el numero de serie del Vehiculo \n "
                     << "Nº de serie: ";
                 int nro_serie_vehiculo;
                 cin >> nro_serie_vehiculo;
                 // Tendria que hacer chequeo aca tambien, mod de 10 y 1000?
                 int dia, mes, anio;
-                cout << "Ingrese la fecha del viaje \n"
-                    << "DD/MM/AAAA: ";
-                cin >> dia;
-                cin.get();
-                cin >> mes;
-                cin.get();
-                cin >> anio;
-                DtFecha fecha(dia, mes, anio);
+                DtFecha fecha3 = conseguir_fecha(dia, mes, anio);
                 cout << "Ingrese la duracion del viaje \n "
                     << "Duracion: ";
                 int duracion;
@@ -434,40 +432,25 @@ int main() {
                     << "Distancia: ";
                 int distancia;
                 cin >> distancia;
-                DtViajeBase viaje(fecha, duracion, distancia);
-                ingresarViaje(cedula, nro_serie_vehiculo, viaje);
+                DtViajeBase viaje(fecha3, duracion, distancia);
+                ingresarViaje(ci3, nro_serie_vehiculo, viaje);
             } catch(exception* e) {
-                cout << e->what();
+                cout << e->what() << ". \n";
                 break;
             }
             cout << "Viaje ingresado. \n ";
             break;
         case 4: {
-            cout << "Ingrese la cedula del Usuario sin guion y con digito verificador \n "
-                << "Cedula: ";
-            string cedula;
-            cin >> cedula;
-            while ((cedula.size() != 8) || (!son_digitos(cedula))) {
-                cout << "Cedula no valida. Ingrese la cedula del Usuario sin guion y con digito verificador \n "
-                << "Cedula: ";
-                cin >> cedula;
-            }
+            string ci4 = conseguir_cedula();
             // Tendria que hacer chequeo aca tambien, mod de 10 y 1000?
             int dia, mes, anio;
-                cout << "Ingrese la fecha del viaje \n"
-                    << "DD/MM/AAAA: ";
-                cin >> dia;
-                cin.get();
-                cin >> mes;
-                cin.get();
-                cin >> anio;
-                DtFecha fecha(dia, mes, anio);
+            DtFecha fecha4 = conseguir_fecha(dia, mes, anio);
             int cantViajes = 0;
-            DtViaje** viajes = verViajesAntesDeFecha(fecha, cedula, cantViajes);
+            DtViaje** viajes = verViajesAntesDeFecha(fecha4, ci4, cantViajes);
             if (cantViajes == 0) {
                 cout << "No hay viajes del Usuario con cedula "
-                    << cedula
-                    << " antes del " << dia << "/" << mes << "/" << anio;
+                    << ci4
+                    << " antes del " << dia << "/" << mes << "/" << anio << "\n";
             } else {
                 DtViaje* unViaje;
                 while (cantViajes != 0) {
@@ -485,26 +468,11 @@ int main() {
         break;
         case 5:
             try {
-                cout << "Ingrese la cedula del Usuario sin guion y con digito verificador \n "
-                    << "Cedula: ";
-                string cedula;
-                cin >> cedula;
-                while ((cedula.size() != 8) || (!son_digitos(cedula))) {
-                    cout << "Cedula no valida. Ingrese la cedula del Usuario sin guion y con digito verificador \n "
-                        << "Cedula: ";
-                    cin >> cedula;
-                }
+                string ci5 = conseguir_cedula();
                 // Tendria que hacer chequeo aca tambien, mod de 10 y 1000?
                 int dia, mes, anio;
-                cout << "Ingrese la fecha del viaje \n"
-                    << "DD/MM/AAAA: ";
-                cin >> dia;
-                cin.get();
-                cin >> mes;
-                cin.get();
-                cin >> anio;
-                DtFecha fecha(dia, mes, anio);
-                eliminarViajes(cedula, fecha);
+                DtFecha fecha5 = conseguir_fecha(dia, mes, anio);
+                eliminarViajes(ci5, fecha5);
             } catch(exception* e) {
                 cout << e->what();
                 break;
@@ -523,7 +491,7 @@ int main() {
                 cin >> cargaVehiculo;
                 cambiarBateriaVehiculo(nro_serie_vehiculo, cargaVehiculo);
             } catch(exception* e) {
-                cout << e->what();
+                cout << e->what() << ". \n";
                 break;
             }
             cout << "Porcentaje de Bateria cambiado. \n ";
@@ -541,6 +509,7 @@ int main() {
                         << "Nº de serie: " << unVehiculo->getNroSerie() << "\n"
                         << "% bateria: " << unVehiculo->getPorcentaje() << "\n"
                         << "Precio base: " << unVehiculo->getPrecioBase() << "\n";
+                    // nunca va a entrar al else porque hace el casteo igual, nunca va a ser nullptr
                     DtBicicleta *dtb = static_cast<DtBicicleta*>(unVehiculo);
                     if (dtb != nullptr) {
                         cout << "Tipo de Bicicleta: " << dtb->getTipo() << "\n"

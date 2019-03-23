@@ -31,9 +31,9 @@ public:
     void setNombre(std::string);
     void setFechaIngreso(DtFecha);
     void setCantViajes(int);
-    
+
     //Agrega un viaje al usuario
-    int agregarViaje(Viaje*);
+    void agregarViaje(Viaje*);
 
     //Destructor
     ~Usuario();

@@ -325,7 +325,7 @@ int main() {
     
     string msj;
     while(!salir) {
-        system("clear");
+        //system("clear");
         cout << "Bienvenido. Elija la opción deseada. \n"
             << "------------- " << msj << " -------------" << "\n"
             << "1) Registrar un Usuario \n"
@@ -485,6 +485,7 @@ int main() {
                         << "Precio total: " << unViaje->getPrecioTotal() << "\n";
                     cantViajes--;
                 }
+                msj = "Lista mostrada correctamente.";
             }
         }
         break;

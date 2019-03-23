@@ -38,7 +38,7 @@ static bool son_digitos(string ci) {
 }
 
 static string conseguir_cedula() {
-    cout << "Ingrese la cédula del usuario sin guión y con dígito verificador. \n"
+    cout << "\nIngrese la cédula del usuario sin guión y con dígito verificador. \n"
         << " Cédula: ";
     string ci;
     cin >> ci;
@@ -278,7 +278,7 @@ void eliminarViajes(string ci, const DtFecha& fecha) {
                 j--;
             }
         }
-        arreglo_usuarios[posicion_usuario] -> setCantViajes(j);
+        arreglo_usuarios[posicion_usuario] -> setCantViajes(j+1);
     }
     else
         throw new invalid_argument ("No existe el usuario ingresado.");
@@ -436,7 +436,7 @@ int main() {
             system("clear");
             try {
                 string ci3 = conseguir_cedula();
-                cout << "\nIngrese el número de serie del vehículo. \n"
+                cout << "Ingrese el número de serie del vehículo. \n"
                     << " Nº de serie: ";
                 int nro_serie_vehiculo;
                 cin >> nro_serie_vehiculo;
@@ -464,7 +464,15 @@ int main() {
         case 4: {
             system("clear");
             string ci4 = conseguir_cedula();
-            DtFecha fecha4 = conseguir_fecha();
+            int dia, mes, anio;
+            cout << "Ingrese la fecha límite. \n"
+                << " dd/mm/aaaa: ";
+            cin >> dia;
+            cin.get();
+            cin >> mes;
+            cin.get();
+            cin >> anio;
+            DtFecha fecha4(dia, mes, anio);
             int cantViajes = 0;
             DtViaje** viajes = verViajesAntesDeFecha(fecha4, ci4, cantViajes);
             if (cantViajes == 0) {
@@ -493,11 +501,19 @@ int main() {
         break;
 
         /* 5) Eliminar viajes de un usuario */
-        case 5: 
+        case 5:
             system("clear");
             try {
                 string ci5 = conseguir_cedula();
-                DtFecha fecha5 = conseguir_fecha();
+                int dia, mes, anio;
+                cout << "Ingrese la fecha de la cual quiere eliminar los viajes. \n"
+                    << " dd/mm/aaaa: ";
+                cin >> dia;
+                cin.get();
+                cin >> mes;
+                cin.get();
+                cin >> anio;
+                DtFecha fecha5(dia, mes, anio);
                 eliminarViajes(ci5, fecha5);
             } catch(exception* e) {
                 msj = e -> what();

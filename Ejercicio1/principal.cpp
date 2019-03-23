@@ -18,6 +18,7 @@
 #include <ctime>
 #include <stdio.h>
 #include <algorithm>
+#include <stdlib.h> //system("");
 
 using namespace std;
 
@@ -322,10 +323,12 @@ int main() {
     int i = 0;
     bool salir = false;
     
-    
+    string msj;
 	//Hay que fijarse que se ingrese todo bien?
     while(!salir) {
+        system("clear");
         cout << "Bienvenido. Elija la opción deseada. \n"
+            << "------------- " << msj << " -------------" << "\n"
             << "1) Registrar un Usuario \n"
             << "2) Agregar un Vehiculo \n"
             << "3) Ingresar un Viaje \n"
@@ -337,8 +340,10 @@ int main() {
             << "Opción: ";
         cin >> i;
         switch(i) {
+        /* 1) Registrar un Usuario */
         case 1:
         	try {
+                system("clear");
 	            cout << "Ingrese el nombre del Usuario \n "
 	                << "Nombre: ";
                 string nombre1;
@@ -346,13 +351,16 @@ int main() {
 	            string ci1 = conseguir_cedula();
 	            registrarUsuario(ci1, nombre1);
 	        } catch(exception* e) {
-	        	cout << e->what() << ". \n";
+	        	msj =  e->what();
 	        	break;
 	        }
-	        cout << "Usuario agregado. \n ";
+            msj = "Usuario agregado correctamente.";
             break;
+            
+        /* 2) Agregar un Vehiculo */
         case 2: //
         	try {
+                system("clear");
         		cout << "Indique ingresando M o B si ingresa un Monopatin o Bicicleta respectivamente: \n ";
         		string V;
         		cin >> V;
@@ -409,12 +417,15 @@ int main() {
         			agregarVehiculo(dtv);
                 } 
             }catch(exception* e) {
-        		cout << e->what() << ". \n";
+        		msj = e->what();
         		break;
         	}
-        	cout << "Vehiculo agregado. \n ";
+        	msj = "Vehiculo agregado correctamente.";
             break;
+            
+        /* 3) Ingresar un Viaje */
         case 3:
+            system("clear");
             try {
                 string ci3 = conseguir_cedula();
                 cout << "Ingrese el numero de serie del Vehiculo \n "
@@ -435,12 +446,15 @@ int main() {
                 DtViajeBase viaje(fecha3, duracion, distancia);
                 ingresarViaje(ci3, nro_serie_vehiculo, viaje);
             } catch(exception* e) {
-                cout << e->what() << ". \n";
+                msj = e->what();
                 break;
             }
-            cout << "Viaje ingresado. \n ";
+            msj = "Viaje ingresado correctamente.";
             break;
+            
+        /* 4) Ver viajes de un Usuario */
         case 4: {
+            system("clear");
             string ci4 = conseguir_cedula();
             // Tendria que hacer chequeo aca tambien, mod de 10 y 1000?
             int dia, mes, anio;
@@ -466,7 +480,10 @@ int main() {
             }
         }
         break;
+        
+        /* 5) Eliminar viajes de un Usuario */
         case 5:
+            system("clear");
             try {
                 string ci5 = conseguir_cedula();
                 // Tendria que hacer chequeo aca tambien, mod de 10 y 1000?
@@ -474,12 +491,15 @@ int main() {
                 DtFecha fecha5 = conseguir_fecha(dia, mes, anio);
                 eliminarViajes(ci5, fecha5);
             } catch(exception* e) {
-                cout << e->what();
+                msj = e->what();
                 break;
             }
-            cout << "Viajes eliminados. \n ";
+            msj = "Viajes eliminados satisfactoriamente. ";
             break;
+            
+        /* 6) Cambiar bateria de un Vehiculo */
         case 6:
+            system("clear");
             try {
                 cout << "Ingrese el numero de serie del Vehiculo \n "
                     << "Nº de serie: ";
@@ -491,16 +511,19 @@ int main() {
                 cin >> cargaVehiculo;
                 cambiarBateriaVehiculo(nro_serie_vehiculo, cargaVehiculo);
             } catch(exception* e) {
-                cout << e->what() << ". \n";
+                msj = e->what();
                 break;
             }
-            cout << "Porcentaje de Bateria cambiado. \n ";
+            msj = "Porcentaje de Bateria cambiado.";
             break;
+            
+        /* 7) Obtener Vehiculos */
         case 7: {
+            system("clear");
             int cantVehiculos = 0;
             DtVehiculo** vehiculos = obtenerVehiculos(cantVehiculos);
             if (cantVehiculos == 0) {
-                cout << "No hay vehiculos registrados en el sistema. \n";
+                msj = "No hay vehiculos registrados en el sistema. \n";
             } else {
                 DtVehiculo* unVehiculo;
                 while (cantVehiculos != 0) {
@@ -524,11 +547,16 @@ int main() {
                     }
                     cantVehiculos--;
                 }
+                cout << "\nPresione cualquier tecla y luego enter para continuar";
+                string enter;
+                cin >> enter;
+                msj = "";
             }
         }
         break;
         case 0: 
             salir = true;
+            cout << "Hasta pronto! :D\n";
             break;
         }
     }

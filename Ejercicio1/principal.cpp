@@ -38,7 +38,7 @@ static bool son_digitos(string ci) {
 }
 
 static string conseguir_cedula() {
-    cout << "\nIngrese la cédula del usuario sin guión y con dígito verificador. \n"
+    cout << "Ingrese la cédula del usuario sin guión y con dígito verificador. \n"
         << " Cédula: ";
     string ci;
     cin >> ci;
@@ -435,6 +435,7 @@ int main() {
         case 3:
             system("clear");
             try {
+                cout << "\n";
                 string ci3 = conseguir_cedula();
                 cout << "Ingrese el número de serie del vehículo. \n"
                     << " Nº de serie: ";

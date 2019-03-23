@@ -115,8 +115,6 @@ static int buscar_vehiculo(int numserie) {
         return -1;
 }
 
-
-
 /*
 Registra un en el sistema.
 La fecha de ingreso se obtiene del reloj de la máquina.
@@ -186,14 +184,28 @@ De no ser así, se levanta una excepción std::invalid_argument.
 void ingresarViaje(string ci, int nroSerieVehiculo, const DtViajeBase& viaje) {
   int posicion_usuario = buscar_usuario(ci);
   int posicion_vehiculo = buscar_vehiculo(nroSerieVehiculo);
-  if ((posicion_usuario != -1) && (posicion_vehiculo != -1) &&
-      (viaje.getDuracion() > 0) && (viaje.getDistancia() > 0) &&
-      (viaje.getFecha() >= arreglo_usuarios[posicion_usuario] -> getFechaIngreso())) {
-        Viaje* trip = new Viaje(viaje.getFecha(), viaje.getDuracion(), viaje.getDistancia(), arreglo_vehiculos[posicion_vehiculo]);
-        arreglo_usuarios[posicion_usuario] -> agregarViaje(trip);
+  if (posicion_usuario != -1) {
+    if (posicion_vehiculo != -1) {
+      if (viaje.getDuracion() > 0) {
+        if (viaje.getDistancia() > 0) {
+          if (viaje.getFecha() >= arreglo_usuarios[posicion_usuario] -> getFechaIngreso()) {
+            Viaje* trip = new Viaje(viaje.getFecha(), viaje.getDuracion(), viaje.getDistancia(), arreglo_vehiculos[posicion_vehiculo]);
+            arreglo_usuarios[posicion_usuario] -> agregarViaje(trip);
+          }
+          else
+            throw new invalid_argument ("Fecha ingresada inválida.");
+        }
+        else
+          throw new invalid_argument ("Distancia ingresada inválida.");
+      }
+      else
+        throw new invalid_argument ("Duración ingresada inválida.");
+    }
+    else
+      throw new invalid_argument ("No existe vehículo ingresado");
   }
   else
-      throw new invalid_argument ("No se pudo ingresar el viaje.");
+      throw new invalid_argument ("No existe usuario ingresado.");
 }
 
 /*
@@ -357,11 +369,11 @@ int main() {
         case 2:
         	try {
             system("clear");
-        		cout << "\nIndique ingresando M o B si ingresa un Monopatín o una Bicicleta respectivamente: \n ";
+        		cout << "\nIndique ingresando M o B si ingresa un monopatín o una bicicleta respectivamente: \n ";
         		string V;
         		cin >> V;
                 while ((V != "M") && (V != "B")) {
-                    cout << "Caracter no válido. Indique ingresando M o B si ingresa un Monopatín o una Bicicleta respectivamente: \n ";
+                    cout << "Caracter no válido. Indique ingresando M o B si ingresa un monopatín o una bicicleta respectivamente: \n ";
                     cin >> V;
                 }
                 int nro_serie;
@@ -414,6 +426,7 @@ int main() {
         			      agregarVehiculo(*dtv);
                 }
           } catch(exception* e) {
+            system("clear");
         		msj = e -> what();
         		break;
         	}
@@ -426,7 +439,7 @@ int main() {
             system("clear");
             try {
                 string ci3 = conseguir_cedula();
-                cout << "Ingrese el número de serie del vehículo. \n"
+                cout << "\nIngrese el número de serie del vehículo. \n"
                     << " Nº de serie: ";
                 int nro_serie_vehiculo;
                 cin >> nro_serie_vehiculo;
@@ -442,6 +455,7 @@ int main() {
                 DtViajeBase viaje(fecha3, duracion, distancia);
                 ingresarViaje(ci3, nro_serie_vehiculo, viaje);
             } catch(exception* e) {
+                system("clear");
                 msj = e -> what();
                 break;
             }
@@ -498,7 +512,7 @@ int main() {
         case 6:
             system("clear");
             try {
-                cout << "Ingrese el número de serie del vehículo. \n"
+                cout << "\nIngrese el número de serie del vehículo. \n"
                     << " Nº de serie: ";
                 int nro_serie_vehiculo;
                 cin >> nro_serie_vehiculo;
@@ -527,16 +541,16 @@ int main() {
                 DtVehiculo* unVehiculo;
                 while (cantVehiculos != 0) {
                     unVehiculo = vehiculos[cantVehiculos - 1];
-                    cout << "Información del vehículo nº " << cantVehiculos << ": \n"
-                        << " Nº de serie: " << unVehiculo->getNroSerie() << "\n"
-                        << " Porcentaje (%) batería: " << unVehiculo->getPorcentaje() << "\n"
-                        << " Precio base: " << unVehiculo->getPrecioBase() << "\n";
+                    cout << "\nInformación del vehículo nº " << cantVehiculos << ": \n"
+                        << " Nº de serie: " << unVehiculo -> getNroSerie() << "\n"
+                        << " Porcentaje (%) batería: " << unVehiculo -> getPorcentaje() << "\n"
+                        << " Precio base: " << unVehiculo -> getPrecioBase() << "\n";
                     DtBicicleta *dtb = dynamic_cast<DtBicicleta*>(unVehiculo);
                     if (dtb != nullptr) {
-                      if (dtb->getTipo() == Paseo)
+                      if (dtb -> getTipo() == Paseo)
                         cout << " Tipo de bicicleta: Paseo \n";
                       else cout << " Tipo de bicicleta: Montaña \n";
-                        cout << " Cantidad de cambios: " << dtb->getCantCambios() << "\n";
+                        cout << " Cantidad de cambios: " << dtb -> getCantCambios() << "\n";
                     }
                     else {
                         DtMonopatin *dtm = static_cast<DtMonopatin*>(unVehiculo);
@@ -568,8 +582,15 @@ int main() {
                 for (int i=0; i<tope_vehiculo; i++)
                     delete arreglo_vehiculos[i];
             }
-            cout << "Hasta pronto! :D\n";
+            cout << "\nHasta pronto! :D\n \n";
             break;
+
+          /* Número ingresado incorrecto */
+          default:
+            system("clear");
+            msj = "Número inválido. Ingrese valor entre 0 y 7.";
+            break;
+
         } //fin switch
     } //fin while
     return 0;

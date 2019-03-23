@@ -38,7 +38,7 @@ static bool son_digitos(string ci) {
     return all_of(ci.begin(), ci.end(), ::isdigit);
 }
 
-string conseguir_cedula() {
+static string conseguir_cedula() {
     cout << "Ingrese la cedula del Usuario sin guion ni digito y con verificador \n "
         << "Cedula: ";
     string ci;
@@ -51,7 +51,7 @@ string conseguir_cedula() {
     return ci;
 }
 
-void conseguir_datos_vehiculo(int &nro_serie, float &porcentaje, float &precio_base) {
+static void conseguir_datos_vehiculo(int &nro_serie, float &porcentaje, float &precio_base) {
     cout << "Ingrese el numero de serie \n "
         << "Nº de serie: ";
     cin >> nro_serie;
@@ -63,7 +63,8 @@ void conseguir_datos_vehiculo(int &nro_serie, float &porcentaje, float &precio_b
     cin >> precio_base;
 }
 
-DtFecha conseguir_fecha(int &dia, int &mes, int &anio) {
+static DtFecha conseguir_fecha() {
+    int dia, mes, anio;
     cout << "Ingrese la fecha del viaje \n"
         << "DD/MM/AAAA: ";
     cin >> dia;
@@ -200,27 +201,34 @@ cantViajes es un parámetro de salida donde se devuelve la cantidad
 de viajes encontrados (corresponde a la cantidad de valores DtViaje que se devuelven).
 */
 DtViaje** verViajesAntesDeFecha(const DtFecha& fecha, string ci, int& cantViajes) {
+    cout << "hola0";
     DtViaje** arreglo_dtv = nullptr;
+    cout << "hola1";
     int j=0;
     int posicion_usuario = buscar_usuario(ci);
     if(posicion_usuario != -1) { // Si encontre el usuario con esa ci
+        cout << "hola2";
         Viaje** viajes_usuario = (arreglo_usuarios[posicion_usuario]->getViajes());
+        cout << "hola3";
         for(int i = 0; i < arreglo_usuarios[posicion_usuario]->getCantViajes(); i++) {
             //Cuento la cantidad de viajes que hay con menor fecha que la recibida por parametro
             if(!(viajes_usuario[i]->getFecha() >= fecha))
                 j++;
         }
-        
+        cout << "hola4";
         cantViajes = j;
         if (j!=0){
-           
+           cout << "hola5";
             int k=0; 
             for (int i = 0; i<j; i++){
                 if (!(viajes_usuario[i]->getFecha() >= fecha)){
-                    
+                    cout << "hola6";
                     Vehiculo* v = (viajes_usuario[i]->getVehiculo());
-                    
+                    cout << "hola7";
                     Bicicleta* bici = dynamic_cast<Bicicleta*>(v);
+                    if (bici == nullptr) {
+                        cout << "peligro";
+                    } else {
                     if (bici != nullptr) {
                         DtBicicleta* b = new DtBicicleta(bici->get_nro_serie(), bici->get_porcentaje_bateria(), bici->get_precio_base(), bici->get_tipo(), bici->get_cant_cambios());
                     
@@ -235,6 +243,7 @@ DtViaje** verViajesAntesDeFecha(const DtFecha& fecha, string ci, int& cantViajes
                     
             
                     k++;
+                    }
                 }
             }
                     
@@ -333,7 +342,7 @@ int main() {
     string msj;
 	//Hay que fijarse que se ingrese todo bien?
     while(!salir) {
-        system("clear");
+        //system("clear");
         cout << "Bienvenido. Elija la opción deseada. \n"
             << "------------- " << msj << " -------------" << "\n"
             << "1) Registrar un Usuario \n"
@@ -445,8 +454,7 @@ int main() {
                 int nro_serie_vehiculo;
                 cin >> nro_serie_vehiculo;
                 // Tendria que hacer chequeo aca tambien, mod de 10 y 1000?
-                int dia, mes, anio;
-                DtFecha fecha3 = conseguir_fecha(dia, mes, anio);
+                DtFecha fecha3 = conseguir_fecha();
                 cout << "Ingrese la duracion del viaje \n "
                     << "Duracion: ";
                 int duracion;
@@ -466,18 +474,23 @@ int main() {
             
         /* 4) Ver viajes de un Usuario */
         case 4: {
-            system("clear");
+            //system("clear");
+            cout << "holaantesantes0";
             string ci4 = conseguir_cedula();
+            cout << "holaantesantes1";
             // Tendria que hacer chequeo aca tambien, mod de 10 y 1000?
-            int dia, mes, anio;
-            DtFecha fecha4 = conseguir_fecha(dia, mes, anio);
+            DtFecha fecha4 = conseguir_fecha();
+            cout << "holaantesantes2";
             int cantViajes = 0;
+            cout << "holaantes0";
             DtViaje** viajes = verViajesAntesDeFecha(fecha4, ci4, cantViajes);
+            cout << "holaantes1";
             if (cantViajes == 0) {
                 cout << "No hay viajes del Usuario con cedula "
                     << ci4
-                    << " antes del " << dia << "/" << mes << "/" << anio << "\n";
+                    << " antes del " << fecha4.getDia() << "/" << fecha4.getMes() << "/" << fecha4.getAnio() << "\n";
             } else {
+                cout << "holaantes3";
                 DtViaje* unViaje;
                 while (cantViajes != 0) {
                     unViaje = viajes[cantViajes - 1];
@@ -498,9 +511,8 @@ int main() {
             system("clear");
             try {
                 string ci5 = conseguir_cedula();
-                // Tendria que hacer chequeo aca tambien, mod de 10 y 1000?
-                int dia, mes, anio;
-                DtFecha fecha5 = conseguir_fecha(dia, mes, anio);
+                // Tendria que hacer chequeo aca tambien, mod de 10 y 1000??
+                DtFecha fecha5 = conseguir_fecha();
                 eliminarViajes(ci5, fecha5);
             } catch(exception* e) {
                 msj = e->what();

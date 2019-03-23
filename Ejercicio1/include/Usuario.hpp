@@ -17,7 +17,7 @@ private:
     Viaje *viajes[100];
 public:
     //Constructor
-    Usuario(string, string, DtFecha, int = 0);
+    Usuario(string, string, DtFecha, int);
 
     //Getters
     std::string getCi() const;

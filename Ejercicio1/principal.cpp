@@ -66,12 +66,13 @@ static void conseguir_datos_vehiculo(int &nro_serie, float &porcentaje, float &p
 static DtFecha conseguir_fecha() {
     int dia, mes, anio;
     cout << "Ingrese la fecha del viaje \n"
-        << "DD/MM/AAAA: ";
+        << "Dia: ";
     cin >> dia;
-    cin.get();
+    cout << "Mes: ";
     cin >> mes;
-    cin.get();
+    cout << "Anio: ";
     cin >> anio;
+    cin.get();
     return DtFecha(dia, mes, anio);
 }
 
@@ -125,7 +126,7 @@ void registrarUsuario(std::string ci, std::string nombre) {
     time_t t = time(0); //Se obtiene la fecha del momento
     tm* now = localtime(&t);
     DtFecha fecha(now->tm_mday, now->tm_mon + 1, now->tm_year + 1900);
-    arreglo_usuarios[tope_usuario] = new Usuario(ci, nombre, fecha /*, 0*/);
+    arreglo_usuarios[tope_usuario] = new Usuario(ci, nombre, fecha , 0);
     tope_usuario++;
   }
   else
@@ -201,58 +202,41 @@ cantViajes es un parámetro de salida donde se devuelve la cantidad
 de viajes encontrados (corresponde a la cantidad de valores DtViaje que se devuelven).
 */
 DtViaje** verViajesAntesDeFecha(const DtFecha& fecha, string ci, int& cantViajes) {
-    cout << "hola0";
-    DtViaje** arreglo_dtv = nullptr;
-    cout << "hola1";
     int j=0;
+    cantViajes=0;
     int posicion_usuario = buscar_usuario(ci);
     if(posicion_usuario != -1) { // Si encontre el usuario con esa ci
-        cout << "hola2";
         Viaje** viajes_usuario = (arreglo_usuarios[posicion_usuario]->getViajes());
-        cout << "hola3";
         for(int i = 0; i < arreglo_usuarios[posicion_usuario]->getCantViajes(); i++) {
             //Cuento la cantidad de viajes que hay con menor fecha que la recibida por parametro
             if(!(viajes_usuario[i]->getFecha() >= fecha))
                 j++;
         }
-        cout << "hola4";
         cantViajes = j;
-        if (j!=0){
-           cout << "hola5";
+        if (j!=0) {
+            DtViaje *arreglo_dtv[j];
             int k=0; 
-            for (int i = 0; i<j; i++){
-                if (!(viajes_usuario[i]->getFecha() >= fecha)){
-                    cout << "hola6";
-                    Vehiculo* v = (viajes_usuario[i]->getVehiculo());
-                    cout << "hola7";
-                    Bicicleta* bici = dynamic_cast<Bicicleta*>(v);
-                    if (bici == nullptr) {
-                        cout << "peligro";
-                    } else {
-                    if (bici != nullptr) {
-                        DtBicicleta* b = new DtBicicleta(bici->get_nro_serie(), bici->get_porcentaje_bateria(), bici->get_precio_base(), bici->get_tipo(), bici->get_cant_cambios());
-                    
-                         arreglo_dtv[k] = new DtViaje(viajes_usuario[i]->getFecha(), viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia(), viajes_usuario[i]->getVehiculo()->darPrecioViaje(viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia()), b); 
-                    }    
-                    else {
-                        Monopatin* mono=dynamic_cast<Monopatin*>(v);
-                        DtMonopatin* m = new DtMonopatin(mono->get_nro_serie(), mono->get_porcentaje_bateria(), mono->get_precio_base(), mono->get_luces());
-                    
-                         arreglo_dtv[k] = new DtViaje(viajes_usuario[i]->getFecha(), viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia(), viajes_usuario[i]->getVehiculo()->darPrecioViaje(viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia()), m); 
-                    }
-                    
-            
-                    k++;
+                for (int i = 0; i<j; i++){
+                    if (!(viajes_usuario[i]->getFecha() >= fecha)){
+                        Vehiculo* v = (viajes_usuario[i]->getVehiculo());;
+                        Bicicleta* bici = dynamic_cast<Bicicleta*>(v);
+                        if (bici != nullptr) {
+                            DtBicicleta* b = new DtBicicleta(bici->get_nro_serie(), bici->get_porcentaje_bateria(), bici->get_precio_base(), bici->get_tipo(), bici->get_cant_cambios());
+                            arreglo_dtv[k] = new DtViaje(viajes_usuario[i]->getFecha(), viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia(), viajes_usuario[i]->getVehiculo()->darPrecioViaje(viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia()), b); 
+                        }    
+                        else {
+                            Monopatin* mono=dynamic_cast<Monopatin*>(v);
+                            DtMonopatin* m = new DtMonopatin(mono->get_nro_serie(), mono->get_porcentaje_bateria(), mono->get_precio_base(), mono->get_luces());
+                            arreglo_dtv[k] = new DtViaje(viajes_usuario[i]->getFecha(), viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia(), viajes_usuario[i]->getVehiculo()->darPrecioViaje(viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia()), m);
+                        }
+                        k++;
                     }
                 }
-            }
-                    
-        } 
-        return arreglo_dtv;
-    }
-        
-    else {
-        cantViajes = 0;
+                    DtViaje** ptr = arreglo_dtv;
+                    return ptr;           
+        } else
+            return nullptr;
+    } else {
         return nullptr;
     }
 
@@ -340,9 +324,8 @@ int main() {
     bool salir = false;
     
     string msj;
-	//Hay que fijarse que se ingrese todo bien?
     while(!salir) {
-        //system("clear");
+        system("clear");
         cout << "Bienvenido. Elija la opción deseada. \n"
             << "------------- " << msj << " -------------" << "\n"
             << "1) Registrar un Usuario \n"
@@ -474,23 +457,23 @@ int main() {
             
         /* 4) Ver viajes de un Usuario */
         case 4: {
-            //system("clear");
-            cout << "holaantesantes0";
+            system("clear");
             string ci4 = conseguir_cedula();
-            cout << "holaantesantes1";
             // Tendria que hacer chequeo aca tambien, mod de 10 y 1000?
-            DtFecha fecha4 = conseguir_fecha();
-            cout << "holaantesantes2";
+            int dia, mes, anio;
+            cout << "Ingrese la fecha tope \n"
+                << "Dia: ";
+            cin >> dia;
+            cout << "Mes: ";
+            cin >> mes;
+            cout << "Anio: ";
+            cin >> anio;
+            DtFecha fecha4(dia, mes, anio);
             int cantViajes = 0;
-            cout << "holaantes0";
             DtViaje** viajes = verViajesAntesDeFecha(fecha4, ci4, cantViajes);
-            cout << "holaantes1";
             if (cantViajes == 0) {
-                cout << "No hay viajes del Usuario con cedula "
-                    << ci4
-                    << " antes del " << fecha4.getDia() << "/" << fecha4.getMes() << "/" << fecha4.getAnio() << "\n";
+                msj = "No hay viajes antes de la fecha de dicho Usuario";
             } else {
-                cout << "holaantes3";
                 DtViaje* unViaje;
                 while (cantViajes != 0) {
                     unViaje = viajes[cantViajes - 1];

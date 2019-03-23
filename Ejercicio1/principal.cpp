@@ -147,7 +147,7 @@ void agregarVehiculo(const DtVehiculo& vehiculo) {
     else {
         if ((buscar_vehiculo(vehiculo.getNroSerie()) == -1) && (0 <= vehiculo.getPorcentaje()) && (vehiculo.getPorcentaje() <= 100) && (vehiculo.getPrecioBase() >= 0)) {
             const DtVehiculo* v = &vehiculo;
-            
+
             const DtBicicleta* dtb = dynamic_cast<DtBicicleta*>(const_cast<DtVehiculo*>(v));
             if (dtb != nullptr) {
                 Bicicleta *bici = new Bicicleta(dtb->getNroSerie(), dtb->getPorcentaje(), dtb->getPrecioBase(), dtb->getTipo(), dtb->getCantCambios());
@@ -156,16 +156,16 @@ void agregarVehiculo(const DtVehiculo& vehiculo) {
 
             else //es monopatin
                 {
-                
+
                 const DtMonopatin* dtm = dynamic_cast<DtMonopatin*>(const_cast<DtVehiculo*>(v));
                 Monopatin *mono = new Monopatin(dtm->getNroSerie(), dtm->getPorcentaje(), dtm->getPrecioBase(), dtm->getTieneLuces());
                 arreglo_vehiculos[tope_vehiculo] = mono;
                 }
              tope_vehiculo++;
-            
-                
+
+
         }
-        else 
+        else
             throw new invalid_argument("Verifique Parametros");
     }
 }
@@ -215,15 +215,15 @@ DtViaje** verViajesAntesDeFecha(const DtFecha& fecha, string ci, int& cantViajes
         cantViajes = j;
         if (j!=0) {
             DtViaje *arreglo_dtv[j];
-            int k=0; 
+            int k=0;
                 for (int i = 0; i<j; i++){
                     if (!(viajes_usuario[i]->getFecha() >= fecha)){
                         Vehiculo* v = (viajes_usuario[i]->getVehiculo());;
                         Bicicleta* bici = dynamic_cast<Bicicleta*>(v);
                         if (bici != nullptr) {
                             DtBicicleta* b = new DtBicicleta(bici->get_nro_serie(), bici->get_porcentaje_bateria(), bici->get_precio_base(), bici->get_tipo(), bici->get_cant_cambios());
-                            arreglo_dtv[k] = new DtViaje(viajes_usuario[i]->getFecha(), viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia(), viajes_usuario[i]->getVehiculo()->darPrecioViaje(viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia()), b); 
-                        }    
+                            arreglo_dtv[k] = new DtViaje(viajes_usuario[i]->getFecha(), viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia(), viajes_usuario[i]->getVehiculo()->darPrecioViaje(viajes_usuario[i]->getDuracion(), viajes_usuario[i]->getDistancia()), b);
+                        }
                         else {
                             Monopatin* mono=dynamic_cast<Monopatin*>(v);
                             DtMonopatin* m = new DtMonopatin(mono->get_nro_serie(), mono->get_porcentaje_bateria(), mono->get_precio_base(), mono->get_luces());
@@ -233,7 +233,7 @@ DtViaje** verViajesAntesDeFecha(const DtFecha& fecha, string ci, int& cantViajes
                     }
                 }
                     DtViaje** ptr = arreglo_dtv;
-                    return ptr;           
+                    return ptr;
         } else
             return nullptr;
     } else {
@@ -241,7 +241,7 @@ DtViaje** verViajesAntesDeFecha(const DtFecha& fecha, string ci, int& cantViajes
     }
 
 }
-    
+
 
 /*
 Elimina los viajes del usuario identificado por ci,
@@ -264,8 +264,8 @@ void eliminarViajes(string ci, const DtFecha& fecha) {
                     delete (viajes[i]);
                     viajes[i]=viajes[j];
                     viajes[j]=nullptr;
-                } 
-                  
+                }
+
               j--;
             }
         }
@@ -306,11 +306,11 @@ DtVehiculo** obtenerVehiculos(int& cantVehiculos) {
                 Monopatin* mono = dynamic_cast<Monopatin*>(arreglo_vehiculos[i]);
                 if (mono != nullptr) //arreglo_vehiculos[i] es monopatin
                     arreglo_dtv[i] = new DtMonopatin(mono->get_nro_serie(), mono->get_porcentaje_bateria(), mono->get_precio_base(), mono->get_luces());
-                
-            } 
-            
+
+            }
+
         }
-        return arreglo_dtv;    
+        return arreglo_dtv;
     }
     else
         return nullptr;
@@ -322,7 +322,7 @@ int main() {
     tope_vehiculo = 0;
     int i = 0;
     bool salir = false;
-    
+
     string msj;
     while(!salir) {
         //system("clear");
@@ -355,7 +355,7 @@ int main() {
 	        }
             msj = "Usuario agregado correctamente.";
             break;
-            
+
         /* 2) Agregar un Vehiculo */
         case 2: //
         	try {
@@ -419,14 +419,14 @@ int main() {
                       //  cout << "no entendemos \n \n";
                     cout << "casi agregar vehiculo";
         			agregarVehiculo(*dtv);
-                } 
+                }
             }catch(exception* e) {
         		msj = e->what();
         		break;
         	}
         	msj = "Vehiculo agregado correctamente.";
             break;
-            
+
         /* 3) Ingresar un Viaje */
         case 3:
             system("clear");
@@ -454,7 +454,7 @@ int main() {
             }
             msj = "Viaje ingresado correctamente.";
             break;
-            
+
         /* 4) Ver viajes de un Usuario */
         case 4: {
             system("clear");
@@ -489,7 +489,7 @@ int main() {
             }
         }
         break;
-        
+
         /* 5) Eliminar viajes de un Usuario */
         case 5:
             system("clear");
@@ -504,7 +504,7 @@ int main() {
             }
             msj = "Viajes eliminados satisfactoriamente. ";
             break;
-            
+
         /* 6) Cambiar bateria de un Vehiculo */
         case 6:
             system("clear");
@@ -524,7 +524,7 @@ int main() {
             }
             msj = "Porcentaje de Bateria cambiado.";
             break;
-            
+
         /* 7) Obtener Vehiculos */
         case 7: {
             system("clear");
@@ -540,7 +540,7 @@ int main() {
                         << "Nº de serie: " << unVehiculo->getNroSerie() << "\n"
                         << "% bateria: " << unVehiculo->getPorcentaje() << "\n"
                         << "Precio base: " << unVehiculo->getPrecioBase() << "\n";
-                    
+
                     DtBicicleta *dtb = dynamic_cast<DtBicicleta*>(unVehiculo);
                      if (dtb != nullptr) {
                             if (dtb->getTipo() == Paseo)
@@ -564,17 +564,17 @@ int main() {
             }
         }
         break;
-        case 0: 
+        case 0:
                salir = true;
             if (tope_usuario != 0) {
                 for (int i=0; i<tope_usuario; i++)
                     delete arreglo_usuarios[i];
-            }        
+            }
             if (tope_vehiculo !=0) {
                 for (int i=0; i<tope_vehiculo; i++)
                     delete arreglo_vehiculos[i];
             }
-            cout << "Hasta pronto! :D\n"
+            cout << "Hasta pronto! :D\n";
             break;
         }
     }

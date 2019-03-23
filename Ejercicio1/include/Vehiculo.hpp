@@ -11,7 +11,6 @@ private:
 protected: //protected para que no se pueda instanciar afuera de las subclases
 	//constructor y desturctor
 	Vehiculo(int=0, float=0, float=0);
-	~Vehiculo();
 public:
 	//setters
 	void set_nro_serie(int);
@@ -21,8 +20,11 @@ public:
 	int get_nro_serie() const;
 	float get_porcentaje_bateria() const;
 	float get_precio_base() const;
-	
+
     virtual float darPrecioViaje(int, int) = 0;
+
+    virtual ~Vehiculo();
+
 };
 
 #endif

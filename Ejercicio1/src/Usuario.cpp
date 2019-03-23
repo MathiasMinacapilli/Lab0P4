@@ -75,8 +75,6 @@ int Usuario::agregarViaje(Viaje* viaje) {
 Usuario::~Usuario() {
     //Libero la memoria de todos los viajes
     int i = 0;
-    while(i<this->cant_viajes) {
+    while(i<this->cant_viajes)
         delete this->viajes[i];
-    }
-    delete[] this->viajes;
 }

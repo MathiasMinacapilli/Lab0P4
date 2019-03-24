@@ -368,6 +368,7 @@ int main() {
 	            registrarUsuario(ci1, nombre1);
 	        } catch(exception* e) {
                 msj =  e -> what();
+                delete e;
 	        	break;
 	        }
             system("clear");
@@ -437,6 +438,7 @@ int main() {
           } catch(exception* e) {
                 system("clear");
         		msj = e -> what();
+                delete e;
         		break;
             }
             system("clear");
@@ -467,6 +469,7 @@ int main() {
             } catch(exception* e) {
                 system("clear");
                 msj = e -> what();
+                delete e;
                 break;
             }
             system("clear");
@@ -555,6 +558,7 @@ int main() {
                 eliminarViajes(ci5, fecha5);
             } catch(exception* e) {
                 msj = e -> what();
+                delete e;
                 break;
             }
             system("clear");
@@ -577,6 +581,7 @@ int main() {
             } catch(exception* e) {
                 system("clear");
                 msj = e -> what();
+                delete e;
                 break;
             }
             system("clear");

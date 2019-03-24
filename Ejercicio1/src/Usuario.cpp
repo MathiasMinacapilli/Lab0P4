@@ -64,13 +64,14 @@ void Usuario::agregarViaje(Viaje* viaje) {
         // Si el arreglo no está lleno agrego el viaje al final
         this->viajes[cant_viajes] = viaje;
         this->cant_viajes++;
-     
+
     }
 }
 
 Usuario::~Usuario() {
     //Libero la memoria de todos los viajes
     int i = 0;
-    while(i<cant_viajes)
+    while (i<cant_viajes) {
         delete this->viajes[i];
+        i++;
 }

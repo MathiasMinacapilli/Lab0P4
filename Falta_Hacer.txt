@@ -1,6 +1,0 @@
- 
-TESTEAR:
-
- -EliminarViajes elimina todo (?
- -cambiar bateria 
- -

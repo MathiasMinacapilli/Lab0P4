@@ -30,13 +30,22 @@ Usuario *arreglo_usuarios[MAX_USUARIOS];
 //arreglo de punteros a vehiculos
 Vehiculo *arreglo_vehiculos[MAX_VEHICULOS];
 
-/*
-Retorna true si y solo si str esta compuesto solamente por digitos
+/* 
+----------------------------------
+-------Funciones Auxiliares-------
+----------------------------------
 */
+/* Chequea que la fecha obtenida de la entrada estandar sea valida */
+static bool esValidaFecha(int dia, int mes, int anio) {
+    return ((1 <= dia) && (dia <= 31)) &&
+        ((1 <= mes) && (mes <= 12)) &&
+        (0 < anio);
+}
+/* Retorna true si y solo si str esta compuesto solamente por digitos */
 static bool son_digitos(string ci) {
     return all_of(ci.begin(), ci.end(), ::isdigit);
 }
-
+/* Obtiene la cedula de la entrada estandar */
 static string conseguir_cedula() {
     cout << "Ingrese la cédula del usuario sin guión y con dígito verificador. \n"
         << " Cédula: ";
@@ -49,7 +58,7 @@ static string conseguir_cedula() {
     }
     return ci;
 }
-
+/* Obtiene los datos (los atributos) de vehiculo de la entrada estandar */
 static void conseguir_datos_vehiculo(int &nro_serie, float &porcentaje, float &precio_base) {
     cout << "Ingrese el número de serie. \n"
         << " Nº de serie: ";
@@ -61,7 +70,7 @@ static void conseguir_datos_vehiculo(int &nro_serie, float &porcentaje, float &p
         << " Precio base: ";
     cin >> precio_base;
 }
-
+/* Obtiene la fecha de la entrada estandar */
 static DtFecha conseguir_fecha() {
     int dia, mes, anio;
     cout << "Ingrese la fecha del viaje. \n"
@@ -71,9 +80,7 @@ static DtFecha conseguir_fecha() {
     cin >> mes;
     cin.get();
     cin >> anio;
-    while ( ((dia > 31) || (dia < 1)) ||
-            ((mes > 12) || (mes < 1)) ||
-            (anio < 0 ) ) {
+    while (!esValidaFecha(dia, mes, anio)) {
         cout << "Fecha invalida. Ingrese la fecha del viaje en el formato indicado, incluyendo /. \n"
             << " DD/MM/AAAA: ";
         cin >> dia;
@@ -81,15 +88,12 @@ static DtFecha conseguir_fecha() {
         cin >> mes;
         cin.get();
         cin >> anio;
-    } 
+    }
     return DtFecha(dia, mes, anio);
 }
-
-/*
-Busca si existe la cedula cid en el arreglo_usuarios.
+/* Busca si existe la cedula cid en el arreglo_usuarios.
 Si existe, devuelve el numero de posicion del arreglo.
-Sino, devuelve -1.
-*/
+Sino, devuelve -1. */
 static int buscar_usuario(string cid) {
     bool encontre = false;
     int i = 0;
@@ -105,11 +109,9 @@ static int buscar_usuario(string cid) {
         return -1;
 }
 
-/*
-Busca si existe el vehiculo con numserie en el arreglo_vehiculos.
+/* Busca si existe el vehiculo con numserie en el arreglo_vehiculos.
 Si existe, devuelve el numero de posicion de ese vehiculo.
-Sino, devuelve -1.
-*/
+Sino, devuelve -1. */
 static int buscar_vehiculo(int numserie) {
     bool encontre = false;
     int i = 0;
@@ -124,7 +126,11 @@ static int buscar_vehiculo(int numserie) {
     else
         return -1;
 }
-
+/* 
+----------------------------------
+-------Funciones De Letra---------
+----------------------------------
+*/
 /*
 Registra un en el sistema.
 La fecha de ingreso se obtiene del reloj de la máquina.
@@ -266,7 +272,7 @@ DtViaje** verViajesAntesDeFecha(const DtFecha& fecha, string ci, int& cantViajes
 }
 
 /*
-Elimina los viajes del usuario ident479)ificado por ci,
+Elimina los viajes del usuario identificado por ci,
 realizados en la fecha ingresada.
 Si no existe un usuario registrado con esa cédula,
 se levanta una excepción std::invalid_argument.
@@ -277,7 +283,7 @@ void eliminarViajes(string ci, const DtFecha& fecha) {
         Viaje** viajes = arreglo_usuarios[posicion_usuario] -> getViajes();
         int j = (arreglo_usuarios[posicion_usuario] -> getCantViajes())-1;
         for (int i = arreglo_usuarios[posicion_usuario] -> getCantViajes()-1; i >= 0; i--) {
-            if (viajes[i] -> getFecha() == fecha) {
+            if (viajes[i]->getFecha() == fecha) {
                 if (j == i) {
                     delete viajes[i];
                     viajes[i] = nullptr;
@@ -342,6 +348,7 @@ int main() {
     string msj = "";
     system("clear");
     while(!salir) {
+        system("clear");
         cout << "--------------------" << msj << "-------------------- \n \n"
             << " - Bienvenido. Elija la opción deseada -  \n \n"
             << " 1) Registrar un usuario. \n"
@@ -371,7 +378,6 @@ int main() {
                 delete e;
 	        	break;
 	        }
-            system("clear");
             msj = "Usuario agregado correctamente.";
             break;
 
@@ -406,7 +412,7 @@ int main() {
                     const DtVehiculo* dtv = &dtm;
                     agregarVehiculo(*dtv);
                     }
-                    else {
+                    else { // V == "B"
                         TipoBici tb;
                         conseguir_datos_vehiculo(nro_serie, porcentaje, precio_base);
                         cout << "Ingrese el tipo de bicicleta, (Paseo o Montana). \n"
@@ -441,7 +447,6 @@ int main() {
                 delete e;
         		break;
             }
-            system("clear");
         	msj = "Vehículo agregado correctamente.";
             break;
 
@@ -472,7 +477,6 @@ int main() {
                 delete e;
                 break;
             }
-            system("clear");
             msj = "Viaje ingresado correctamente.";
             break;
 
@@ -481,26 +485,7 @@ int main() {
             system("clear");
             cout << "\n";
             string ci4 = conseguir_cedula();
-            int dia, mes, anio;
-            cout << "Ingrese la fecha límite. \n"
-                << " DD/MM/AAAA: ";
-            cin >> dia;
-            cin.get();
-            cin >> mes;
-            cin.get();
-            cin >> anio;
-            while ( ((dia > 31) || (dia < 1)) ||
-                        ((mes > 12) || (mes < 1)) ||
-                        (anio < 0 ) ) {
-                cout << "Fecha invalida. Ingrese la fecha del viaje en el formato indicado, incluyendo /. \n"
-                    << " DD/MM/AAAA: ";
-                cin >> dia;
-                cin.get();
-                cin >> mes;
-                cin.get();
-                cin >> anio;
-            }
-            DtFecha fecha4(dia, mes, anio);
+            DtFecha fecha4 = conseguir_fecha();
             int cantViajes = 0;
             DtViaje** viajes = verViajesAntesDeFecha(fecha4, ci4, cantViajes);
             if (cantViajes == 0) {
@@ -522,7 +507,6 @@ int main() {
                 cout << "\nPresione cualquier tecla y luego enter para continuar";
                 string enter;
                 cin >> enter;
-                system("clear");
                 msj = "Lista mostrada correctamente.";
             }
             delete[] viajes;
@@ -535,33 +519,13 @@ int main() {
             try {
                 cout << "\n";
                 string ci5 = conseguir_cedula();
-                int dia, mes, anio;
-                cout << "Ingrese la fecha de la cual quiere eliminar los viajes. \n"
-                    << " DD/MM/AAAA: ";
-                cin >> dia;
-                cin.get();
-                cin >> mes;
-                cin.get();
-                cin >> anio;
-                while ( ((dia > 31) || (dia < 1)) ||
-                        ((mes > 12) || (mes < 1)) ||
-                        (anio < 0 ) ) {
-                    cout << "Fecha invalida. Ingrese la fecha del viaje en el formato indicado, incluyendo /. \n"
-                        << " DD/MM/AAAA: ";
-                    cin >> dia;
-                    cin.get();
-                    cin >> mes;
-                    cin.get();
-                    cin >> anio;
-                }
-                DtFecha fecha5(dia, mes, anio);
+                DtFecha fecha5 = conseguir_fecha();
                 eliminarViajes(ci5, fecha5);
             } catch(exception* e) {
-                msj = e -> what();
+                msj = e->what();
                 delete e;
                 break;
             }
-            system("clear");
             msj = "Viajes eliminados satisfactoriamente.";
             break;
 
@@ -584,7 +548,6 @@ int main() {
                 delete e;
                 break;
             }
-            system("clear");
             msj = "Porcentaje de batería cambiado.";
             break;
 
@@ -615,7 +578,7 @@ int main() {
                     }
                     else {
                         DtMonopatin *dtm = static_cast<DtMonopatin*>(unVehiculo);
-                        cout << "Tiene luces: ";
+                        cout << " Tiene luces: ";
                         if (dtm -> getTieneLuces())
                             cout << "Si \n";
                         else
@@ -628,7 +591,6 @@ int main() {
                 cout << "\nPresione cualquier tecla y luego enter para continuar";
                 string enter;
                 cin >> enter;
-                system("clear");
                 msj = "";
             }
             delete[] vehiculos;
@@ -652,7 +614,6 @@ int main() {
 
         /* Número ingresado incorrecto */
         default: {
-            system("clear");
             msj = "Número inválido. Ingrese valor entre 0 y 7.";
         }
         break;

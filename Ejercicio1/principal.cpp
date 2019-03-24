@@ -480,7 +480,7 @@ int main() {
             string ci4 = conseguir_cedula();
             int dia, mes, anio;
             cout << "Ingrese la fecha límite. \n"
-                << " dd/mm/aaaa: ";
+                << " DD/MM/AAAA: ";
             cin >> dia;
             cin.get();
             cin >> mes;
@@ -534,7 +534,7 @@ int main() {
                 string ci5 = conseguir_cedula();
                 int dia, mes, anio;
                 cout << "Ingrese la fecha de la cual quiere eliminar los viajes. \n"
-                    << " dd/mm/aaaa: ";
+                    << " DD/MM/AAAA: ";
                 cin >> dia;
                 cin.get();
                 cin >> mes;

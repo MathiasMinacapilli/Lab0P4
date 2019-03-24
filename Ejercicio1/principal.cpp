@@ -65,12 +65,23 @@ static void conseguir_datos_vehiculo(int &nro_serie, float &porcentaje, float &p
 static DtFecha conseguir_fecha() {
     int dia, mes, anio;
     cout << "Ingrese la fecha del viaje. \n"
-        << " dd/mm/aaaa: ";
+        << " DD/MM/AAAA: ";
     cin >> dia;
     cin.get();
     cin >> mes;
     cin.get();
     cin >> anio;
+    while ( ((dia > 31) || (dia < 1)) ||
+            ((mes > 12) || (mes < 1)) ||
+            (anio < 0 ) ) {
+        cout << "Fecha invalida. Ingrese la fecha del viaje en el formato indicado, incluyendo /. \n"
+            << " DD/MM/AAAA: ";
+        cin >> dia;
+        cin.get();
+        cin >> mes;
+        cin.get();
+        cin >> anio;
+    } 
     return DtFecha(dia, mes, anio);
 }
 
@@ -475,6 +486,17 @@ int main() {
             cin >> mes;
             cin.get();
             cin >> anio;
+            while ( ((dia > 31) || (dia < 1)) ||
+                        ((mes > 12) || (mes < 1)) ||
+                        (anio < 0 ) ) {
+                cout << "Fecha invalida. Ingrese la fecha del viaje en el formato indicado, incluyendo /. \n"
+                    << " DD/MM/AAAA: ";
+                cin >> dia;
+                cin.get();
+                cin >> mes;
+                cin.get();
+                cin >> anio;
+            }
             DtFecha fecha4(dia, mes, anio);
             int cantViajes = 0;
             DtViaje** viajes = verViajesAntesDeFecha(fecha4, ci4, cantViajes);
@@ -491,10 +513,8 @@ int main() {
                         << " Distancia: " << unViaje -> getDistancia() << "\n"
                         << " Nº de serie del vehículo: " << unViaje -> getVehiculo() -> getNroSerie() << "\n"
                         << " Precio total: " << unViaje -> getPrecioTotal() << "\n";
+                    delete viajes[cantViajes - 1];
                     cantViajes--;
-                }
-                for (int i=0; i<cantViajes; i++) {
-                    delete viajes[i];
                 }
                 cout << "\nPresione cualquier tecla y luego enter para continuar";
                 string enter;
@@ -520,6 +540,17 @@ int main() {
                 cin >> mes;
                 cin.get();
                 cin >> anio;
+                while ( ((dia > 31) || (dia < 1)) ||
+                        ((mes > 12) || (mes < 1)) ||
+                        (anio < 0 ) ) {
+                    cout << "Fecha invalida. Ingrese la fecha del viaje en el formato indicado, incluyendo /. \n"
+                        << " DD/MM/AAAA: ";
+                    cin >> dia;
+                    cin.get();
+                    cin >> mes;
+                    cin.get();
+                    cin >> anio;
+                }
                 DtFecha fecha5(dia, mes, anio);
                 eliminarViajes(ci5, fecha5);
             } catch(exception* e) {

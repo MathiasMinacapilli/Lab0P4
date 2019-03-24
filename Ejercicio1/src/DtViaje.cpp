@@ -17,4 +17,5 @@ DtVehiculo* DtViaje::getVehiculo() const{
 }
 
 DtViaje::~DtViaje() {
+	delete vehiculo;
 }

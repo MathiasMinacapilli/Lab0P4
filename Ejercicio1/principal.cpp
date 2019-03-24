@@ -464,6 +464,7 @@ int main() {
         /* 4) Ver viajes de un usuario */
         case 4: {
             system("clear");
+            cout << "\n";
             string ci4 = conseguir_cedula();
             int dia, mes, anio;
             cout << "Ingrese la fecha límite. \n"
@@ -477,6 +478,7 @@ int main() {
             int cantViajes = 0;
             DtViaje** viajes = verViajesAntesDeFecha(fecha4, ci4, cantViajes);
             if (cantViajes == 0) {
+                system("clear");
                 msj = "No hay viajes antes de la fecha ingresada de dicho usuario.";
             } else {
                 DtViaje* unViaje;
@@ -505,6 +507,7 @@ int main() {
         case 5:
             system("clear");
             try {
+                cout << "\n";
                 string ci5 = conseguir_cedula();
                 int dia, mes, anio;
                 cout << "Ingrese la fecha de la cual quiere eliminar los viajes. \n"
@@ -549,6 +552,7 @@ int main() {
         case 7: {
             system("clear");
             int cantVehiculos = 0;
+            cout << "\n";
             DtVehiculo** vehiculos = obtenerVehiculos(cantVehiculos);
             if (cantVehiculos == 0) {
                 system("clear");

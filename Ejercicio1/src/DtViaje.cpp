@@ -15,4 +15,6 @@ DtVehiculo* DtViaje::getVehiculo() const{
     return this->vehiculo;
 }
 
-DtViaje::~DtViaje(){}
+DtViaje::~DtViaje(){
+    delete vehiculo;
+}

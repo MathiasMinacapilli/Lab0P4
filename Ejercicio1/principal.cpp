@@ -493,13 +493,14 @@ int main() {
                     cantViajes--;
                 }
                 for (int i=0; i<cantViajes; i++)
-                    delete (viajes)[i];
+                    delete viajes[i];
                 cout << "\nPresione cualquier tecla y luego enter para continuar";
                 string enter;
                 cin >> enter;
                 system("clear");
                 msj = "Lista mostrada correctamente.";
             }
+            delete[] viajes;
         }
         break;
 
@@ -541,6 +542,7 @@ int main() {
                 cin >> cargaVehiculo;
                 cambiarBateriaVehiculo(nro_serie_vehiculo, cargaVehiculo);
             } catch(exception* e) {
+                system("clear");
                 msj = e -> what();
                 break;
             }
@@ -559,6 +561,7 @@ int main() {
                 msj = "No hay vehículos registrados en el sistema.";
             } else {
                 DtVehiculo* unVehiculo;
+                int total_vehiculos = cantVehiculos;
                 while (cantVehiculos != 0) {
                     unVehiculo = vehiculos[cantVehiculos - 1];
                     cout << "\nInformación del vehículo nº " << cantVehiculos << ": \n"
@@ -582,12 +585,15 @@ int main() {
                     }
                     cantVehiculos--;
                 }
+                for (int i=0; i<total_vehiculos; i++)
+                    delete vehiculos[i];
                 cout << "\nPresione cualquier tecla y luego enter para continuar";
                 string enter;
                 cin >> enter;
                 system("clear");
                 msj = "";
             }
+            delete[] vehiculos;
         }
         break;
 

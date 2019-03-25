@@ -354,7 +354,7 @@ int main() {
             << " 1) Registrar un usuario. \n"
             << " 2) Agregar un vehículo. \n"
             << " 3) Ingresar un viaje. \n"
-            << " 4) Ver viajes de un usuario. \n"
+            << " 4) Ver los viajes antes de fecha de un usuario. \n"
             << " 5) Eliminar viajes de un usuario. \n"
             << " 6) Cambiar batería de un vehículo. \n"
             << " 7) Obtener vehículos. \n"
@@ -485,7 +485,24 @@ int main() {
             system("clear");
             cout << "\n";
             string ci4 = conseguir_cedula();
-            DtFecha fecha4 = conseguir_fecha();
+            int dia, mes, anio;
+                cout << "Ingrese la fecha límite. \n"
+                    << " DD/MM/AAAA: ";
+            cin >> dia;
+            cin.get();
+            cin >> mes;
+            cin.get();
+            cin >> anio;
+            while (!esValidaFecha(dia, mes, anio)) {
+                cout << "Fecha invalida. Ingrese la fecha en el formato indicado, incluyendo /. \n"
+                    << " DD/MM/AAAA: ";
+                cin >> dia;
+                cin.get();
+                cin >> mes;
+                cin.get();
+                cin >> anio;
+            }
+            DtFecha fecha4 = DtFecha(dia, mes, anio);
             int cantViajes = 0;
             DtViaje** viajes = verViajesAntesDeFecha(fecha4, ci4, cantViajes);
             if (cantViajes == 0) {
